@@ -16,13 +16,6 @@ document.addEventListener('DOMContentLoaded', () => {
   /* ---------------------------------------------------------------
      Search bar toggle
   --------------------------------------------------------------- */
-  const searchBtn = document.getElementById('searchBtn');
-  const searchBar = document.getElementById('searchBar');
-  searchBtn.addEventListener('click', () => {
-    const isOpen = searchBar.classList.toggle('open');
-    searchBtn.setAttribute('aria-expanded', String(isOpen));
-    if (isOpen) searchBar.querySelector('input').focus();
-  });
 
   /* ---------------------------------------------------------------
      KordiSure mega-menu (desktop dropdown)
