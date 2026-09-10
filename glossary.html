@@ -1,0 +1,1176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Glossary | Vanya Global — KordiSure Terms Explained</title>
+<meta name="description" content="A plain-language glossary of the scientific and wellness terms used across Vanya Global and KordiSure — from adaptogens to therapeutic compounds.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* ==========================================================================
+   VANYA GLOBAL / KORDISURE — responsive stylesheet
+   Breakpoints: mobile-first. Tablet ≥768px. Laptop/desktop ≥1024px.
+   ========================================================================== */
+
+:root{
+  --green-dark:   #1f3d2b;
+  --green:        #2f6b45;
+  --green-mid:    #3e7d52;
+  --cream:        #faf7f0;
+  --cream-deep:   #f4ecdc;
+  --ink:          #24291f;
+  --ink-soft:     #5b6358;
+  --line:         #e7e1d2;
+  --white:        #ffffff;
+
+  --font-display: 'Playfair Display', 'Georgia', 'Times New Roman', serif;
+  --font-body:    'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+
+  --container-w: 1240px;
+  --radius: 10px;
+  --header-h: 76px;
+}
+
+*, *::before, *::after{ box-sizing: border-box; }
+html{ scroll-behavior: smooth; }
+body{
+  margin:0;
+  font-family: var(--font-body);
+  color: var(--ink);
+  background: var(--white);
+  -webkit-font-smoothing: antialiased;
+  line-height: 1.55;
+}
+img{ max-width:100%; display:block; }
+a{ color: inherit; text-decoration: none; }
+ul{ list-style:none; margin:0; padding:0; }
+h1,h2,h3{ font-family: var(--font-display); font-weight: 700; margin:0; color: var(--ink); }
+p{ margin: 0 0 1em; color: var(--ink-soft); }
+button{ font-family: inherit; cursor:pointer; }
+
+.container{
+  width: 100%;
+  max-width: var(--container-w);
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.eyebrow{
+  text-transform: uppercase;
+  letter-spacing: .12em;
+  font-size: .72rem;
+  font-weight: 700;
+  color: var(--green);
+  margin-bottom: .6em;
+}
+.eyebrow.center{ text-align:center; }
+h2.center{ text-align:center; margin: 0 auto; }
+
+.accent{ color: var(--green); }
+
+/* ---------- buttons ---------- */
+.btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  padding: 14px 26px;
+  border-radius: 999px;
+  font-size: .92rem;
+  font-weight: 600;
+  border: 1.5px solid transparent;
+  transition: transform .15s ease, background .2s ease, color .2s ease, border-color .2s ease;
+  white-space: nowrap;
+}
+.btn:hover{ transform: translateY(-1px); }
+.btn-solid{ background: var(--green-dark); color: var(--white); }
+.btn-solid:hover{ background: var(--green); }
+.btn-outline{ background: transparent; color: var(--green-dark); border-color: var(--green-dark); }
+.btn-outline:hover{ background: var(--green-dark); color: var(--white); }
+.btn-sm{ padding: 9px 18px; font-size: .82rem; }
+
+/* ==========================================================================
+   HEADER
+   ========================================================================== */
+.site-header{
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--white);
+  border-bottom: 1px solid var(--line);
+}
+.header-inner{
+  display:flex;
+  align-items:center;
+  gap: 18px;
+  height: var(--header-h);
+}
+.logo{
+  display:flex;
+  align-items:center;
+  margin-right: auto;
+}
+.logo-img{
+  height: 34px;
+  width: auto;
+  display:block;
+}
+
+.hamburger{
+  background:none; border:none; padding:6px;
+  display:flex; flex-direction:column; gap:5px;
+  order:-1;
+}
+.hamburger span{
+  width:22px; height:2px; background: var(--ink); display:block; border-radius:2px;
+}
+
+.main-nav{ display:none; }
+
+.header-actions{
+  display:flex;
+  align-items:center;
+  gap: 6px;
+}
+.icon-btn{
+  background:none;
+  border:none;
+  color: var(--ink);
+  width: 38px; height: 38px;
+  display:flex; align-items:center; justify-content:center;
+  border-radius: 50%;
+  position: relative;
+}
+.icon-btn:hover{ background: var(--cream-deep); }
+.cart-btn{ position: relative; }
+.cart-badge{
+  position:absolute;
+  top: 2px; right: 2px;
+  background: var(--green-dark);
+  color:#fff;
+  font-size: .62rem;
+  font-weight:700;
+  min-width: 16px; height:16px;
+  border-radius: 50%;
+  display:flex; align-items:center; justify-content:center;
+  line-height:1;
+}
+.hide-mobile{ display:none; }
+
+/* search bar */
+.search-bar{
+  max-height:0;
+  overflow:hidden;
+  border-top: 0 solid var(--line);
+  transition: max-height .25s ease, padding .25s ease, border-color .25s ease;
+}
+.search-bar.open{
+  max-height: 90px;
+  border-top-width: 1px;
+}
+.search-bar-inner{
+  display:flex; gap:10px; padding: 14px 20px;
+}
+.search-bar-inner input{
+  flex:1;
+  padding: 10px 16px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  font-size: .9rem;
+  background: var(--cream);
+}
+.search-bar-inner input:focus{ outline: 2px solid var(--green); outline-offset: 1px; }
+
+/* ---- desktop dropdown (mega menu) ---- */
+.has-dropdown{ position: relative; }
+.dropdown-toggle{
+  background:none; border:none; font: inherit; font-size:.95rem; color: var(--ink);
+  display:flex; align-items:center; gap:5px; padding: 8px 2px;
+}
+.chev{ transition: transform .2s ease; }
+.dropdown-toggle[aria-expanded="true"] .chev{ transform: rotate(180deg); }
+
+.mega-menu{
+  position:absolute;
+  top: calc(100% + 10px);
+  left: 50%;
+  transform: translateX(-50%) translateY(6px);
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: 0 18px 40px rgba(20,30,20,.12);
+  min-width: 240px;
+  padding: 10px;
+  opacity:0;
+  visibility:hidden;
+  transition: opacity .18s ease, transform .18s ease, visibility .18s ease;
+  z-index: 50;
+}
+.mega-menu.open{
+  opacity:1; visibility:visible; transform: translateX(-50%) translateY(0);
+}
+.mega-menu ul{ display:flex; flex-direction:column; }
+.mega-menu > ul > li > a,
+.mega-menu .mega-label{
+  display:block;
+  padding: 10px 12px;
+  border-radius: 8px;
+  font-size: .9rem;
+  color: var(--ink);
+}
+.mega-menu > ul > li > a:hover{ background: var(--cream-deep); }
+.mega-label{ color: var(--ink-soft); font-weight:600; font-size:.78rem; text-transform:uppercase; letter-spacing:.05em; padding-bottom:2px; }
+.mega-sub{ padding-left: 6px; }
+.mega-sub a{ padding: 8px 12px; font-size: .88rem; }
+.mega-sub a:hover{ background: var(--cream-deep); border-radius:8px; }
+.mega-cta{ color: var(--green-dark) !important; font-weight:700; }
+
+/* ---- account dropdown ---- */
+.account-menu{
+  position:absolute;
+  top: calc(100% + 10px);
+  right: 0;
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: 0 18px 40px rgba(20,30,20,.12);
+  min-width: 210px;
+  padding: 12px;
+  opacity:0; visibility:hidden; transform: translateY(6px);
+  transition: opacity .18s ease, transform .18s ease, visibility .18s ease;
+  z-index: 50;
+}
+.account-menu.open{ opacity:1; visibility:visible; transform: translateY(0); }
+.account-menu-title{
+  font-size:.7rem; text-transform:uppercase; letter-spacing:.08em;
+  color: var(--ink-soft); margin: 2px 10px 8px;
+}
+.account-menu a{
+  display:block; padding: 9px 10px; border-radius:8px; font-size:.9rem;
+}
+.account-menu a:hover{ background: var(--cream-deep); }
+.account-menu .divider{ height:1px; background: var(--line); margin: 6px 4px; }
+
+/* ---------- mobile slide-out nav ---------- */
+.mobile-nav-scrim{
+  position: fixed; inset:0; background: rgba(20,25,18,.4);
+  opacity:0; visibility:hidden; transition: opacity .25s ease, visibility .25s ease;
+  z-index: 199;
+}
+.mobile-nav-scrim.open{ opacity:1; visibility:visible; }
+.mobile-nav{
+  position: fixed; top:0; left:0; bottom:0;
+  width: min(86vw, 340px);
+  background: var(--white);
+  z-index: 200;
+  transform: translateX(-100%);
+  transition: transform .28s ease;
+  overflow-y:auto;
+  padding: 18px 18px 30px;
+}
+.mobile-nav.open{ transform: translateX(0); }
+.mobile-nav-head{
+  display:flex; align-items:center; justify-content:space-between;
+  padding-bottom: 16px; border-bottom: 1px solid var(--line); margin-bottom: 10px;
+}
+.mobile-nav-list > li > a,
+.mobile-sub-toggle{
+  display:flex; align-items:center; justify-content:space-between;
+  width:100%; text-align:left; background:none; border:none;
+  padding: 14px 4px; font-size: 1rem; color: var(--ink);
+  border-bottom: 1px solid var(--line);
+}
+.mobile-nav-list .active{ color: var(--green-dark); font-weight:700; }
+.mobile-sub-toggle .chev{ transition: transform .2s ease; }
+.mobile-sub-toggle[aria-expanded="true"] .chev{ transform: rotate(180deg); }
+.mobile-sub-list{
+  max-height:0; overflow:hidden; transition: max-height .25s ease;
+  padding-left: 14px;
+}
+.mobile-sub-list.open{ max-height: 600px; }
+.mobile-sub-list a{
+  display:block; padding: 12px 4px; font-size:.92rem; color: var(--ink-soft);
+  border-bottom: 1px solid var(--line);
+}
+.mobile-nav-auth{
+  display:flex; gap:10px; margin-top:20px;
+}
+.mobile-nav-auth .btn{ flex:1; }
+
+/* ==========================================================================
+   FOOTER
+   ========================================================================== */
+.site-footer{ background: var(--cream); border-top: 1px solid var(--line); }
+.footer-top{
+  display:grid;
+  grid-template-columns: 1fr;
+  gap: 32px;
+  padding: 44px 20px 34px;
+}
+.footer-col{ text-align:left; }
+.footer-brand{ display:flex; flex-direction:column; align-items:flex-start; }
+.footer-logo-img{ height: 40px; width:auto; }
+.footer-brand p{ margin:14px 0 0; font-size:.85rem; color: var(--ink-soft); }
+.footer-heading{
+  text-transform: uppercase; letter-spacing:.08em; font-size:.74rem;
+  font-weight:700; color: var(--ink); margin: 0 0 14px;
+}
+.footer-col ul{ display:flex; flex-direction:column; gap:11px; }
+.footer-col ul a{ font-size:.88rem; color: var(--ink-soft); }
+.footer-col ul a:hover{ color: var(--green-dark); }
+.footer-social{ display:flex; gap:10px; }
+.social-icon{
+  width:36px; height:36px; border-radius:50%;
+  background: var(--white); border:1px solid var(--line);
+  color: var(--ink);
+  display:flex; align-items:center; justify-content:center;
+}
+.social-icon:hover{ background: var(--green-dark); color:#fff; border-color: var(--green-dark); }
+
+.footer-bottom{ border-top: 1px solid var(--line); }
+.footer-bottom-inner{
+  display:flex; flex-direction:column; gap:10px;
+  align-items:center; text-align:center;
+  padding: 18px 20px;
+}
+.footer-copy{ font-size: .78rem; color: var(--ink-soft); margin:0; }
+.footer-links{ display:flex; flex-wrap:wrap; justify-content:center; gap: 8px; font-size:.78rem; color: var(--ink-soft); }
+.footer-links a:hover{ color: var(--green-dark); }
+
+/* ==========================================================================
+   GLOSSARY PAGE — hero, jump nav, accordion terms, diagram
+   ========================================================================== */
+.glossary-hero{
+  background: linear-gradient(180deg, var(--cream) 0%, var(--white) 100%);
+  padding: 44px 0 34px;
+  text-align: center;
+}
+.glossary-hero-inner{ max-width: 700px; margin: 0 auto; padding: 0 20px; }
+.glossary-hero h1{
+  font-size: clamp(1.9rem, 6vw, 2.6rem);
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+  margin: 10px 0 16px;
+}
+.glossary-hero p{ font-size: 1rem; max-width: 54ch; margin: 0 auto 26px; }
+.glossary-search input{
+  width: 100%;
+  max-width: 480px;
+  padding: 14px 22px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  background: var(--white);
+  font-size: .92rem;
+}
+.glossary-search input:focus{ outline: 2px solid var(--green); outline-offset: 1px; }
+
+.glossary-jump{
+  position: sticky;
+  top: var(--header-h);
+  z-index: 40;
+  background: var(--white);
+  border-bottom: 1px solid var(--line);
+  overflow-x: auto;
+  white-space: nowrap;
+  padding: 12px 20px;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+.glossary-jump::-webkit-scrollbar{ display:none; }
+.glossary-jump a{
+  display:inline-block;
+  margin-right: 16px;
+  font-weight: 700;
+  font-size: .85rem;
+  color: var(--ink-soft);
+  padding: 4px 8px;
+  border-radius: 6px;
+}
+.glossary-jump a:hover{ color: var(--green-dark); background: var(--cream-deep); }
+
+.glossary-body{ max-width: 900px; margin: 0 auto; padding: 40px 20px 70px; }
+
+.glossary-letter{
+  font-size: 1.55rem;
+  color: var(--green-dark);
+  margin: 42px 0 12px;
+  padding-bottom: 8px;
+  border-bottom: 2px solid var(--line);
+  scroll-margin-top: calc(var(--header-h) + 56px);
+}
+.glossary-letter:first-child{ margin-top: 0; }
+.glossary-letter.hidden{ display: none; }
+
+.glossary-term{ border-bottom: 1px solid var(--line); }
+.glossary-term.hidden{ display: none; }
+
+.glossary-term-toggle{
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  background: none;
+  border: none;
+  padding: 18px 4px;
+  text-align: left;
+}
+.glossary-term-toggle span:first-child{ display: flex; align-items: baseline; gap: 14px; min-width: 0; }
+.glossary-term-toggle .num{ font-size: .78rem; font-weight: 700; color: var(--green); flex-shrink: 0; min-width: 22px; }
+.glossary-term-toggle h3{ font-size: 1.03rem; line-height: 1.35; margin: 0; }
+.glossary-term-toggle .chev{ flex-shrink: 0; color: var(--ink-soft); transition: transform .2s ease; }
+.glossary-term-toggle[aria-expanded="true"] .chev{ transform: rotate(180deg); }
+
+.glossary-term-body{
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height .3s ease;
+}
+.glossary-term-body-inner{ padding: 0 4px 20px 36px; }
+.glossary-term-body-inner p{ font-size: .92rem; margin: 0; }
+
+.glossary-diagram{ margin: 30px 0 44px; text-align: center; }
+.glossary-diagram.hidden{ display: none; }
+.glossary-diagram-caption{ font-size: .82rem; color: var(--ink-soft); max-width: 60ch; margin: 16px auto 0; }
+.glossary-diagram img{ max-width: 480px; width: 100%; height: auto; margin: 0 auto; }
+
+.glossary-no-results{
+  display: none;
+  text-align: center;
+  padding: 50px 20px;
+  color: var(--ink-soft);
+  font-size: .95rem;
+}
+.glossary-no-results.show{ display: block; }
+
+/* ==========================================================================
+   TABLET  (≥768px)
+   ========================================================================== */
+@media (min-width: 768px){
+  .footer-top{ grid-template-columns: 1.3fr 1fr 1fr 1fr; }
+  .footer-bottom-inner{ flex-direction: row; justify-content: space-between; text-align:left; }
+  .glossary-hero{ padding: 60px 0 40px; }
+}
+
+/* ==========================================================================
+   LAPTOP / DESKTOP  (≥1024px)
+   ========================================================================== */
+@media (min-width: 1024px){
+  :root{ --header-h: 84px; }
+
+  .hamburger{ display:none; }
+  .main-nav{ display:block; margin: 0 8px 0 40px; }
+  .main-nav > ul{ display:flex; align-items:center; gap: 28px; }
+  .main-nav > ul > li > a{ font-size: .95rem; padding: 8px 2px; position:relative; }
+  .main-nav > ul > li > a.active{ color: var(--green-dark); font-weight:700; }
+  .main-nav > ul > li > a:not(.active):hover{ color: var(--green); }
+  .hide-mobile{ display:inline-flex; }
+  .mobile-nav, .mobile-nav-scrim, .mobile-nav-head{ display:none !important; }
+
+  .glossary-body{ padding: 50px 20px 90px; }
+  .glossary-term-toggle h3{ font-size: 1.08rem; }
+}
+
+/* ==========================================================================
+   REDUCED MOTION
+   ========================================================================== */
+@media (prefers-reduced-motion: reduce){
+  html{ scroll-behavior:auto; }
+  *{ transition-duration: .001ms !important; animation-duration: .001ms !important; }
+}
+
+/* ==========================================================================
+   FOCUS VISIBILITY
+   ========================================================================== */
+a:focus-visible, button:focus-visible, input:focus-visible{
+  outline: 2px solid var(--green-dark);
+  outline-offset: 2px;
+}
+</style>
+</head>
+<body>
+
+<!-- ============ HEADER ============ -->
+<header class="site-header" id="siteHeader">
+  <div class="header-inner container">
+
+    <button class="hamburger" id="hamburgerBtn" aria-label="Open menu" aria-expanded="false" aria-controls="mobileNav">
+      <span></span><span></span><span></span>
+    </button>
+
+    <a href="index.html" class="logo" aria-label="Vanya Global home">
+      <img src="vanya-logo-black.png" alt="Vanya Global" class="logo-img">
+    </a>
+
+    <!-- Desktop / tablet nav -->
+    <nav class="main-nav" id="mainNav" aria-label="Primary">
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About Us</a></li>
+        <li class="has-dropdown" id="kordisureNavItem">
+          <button class="dropdown-toggle" id="kordisureToggle" aria-expanded="false" aria-controls="kordisureMenu">
+            KordiSure <svg class="chev" width="10" height="6" viewBox="0 0 10 6" fill="none"><path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <div class="mega-menu" id="kordisureMenu">
+            <ul>
+              <li><a href="kordisure.html">KordiSure Overview</a></li>
+              <li>
+  <a href="ingredients.html">Ingredients</a>
+</li>
+              <li><a href="#science">How It Works / Science</a></li>
+              <li><a href="benefits.html">Benefits</a></li>
+              <li><a href="#faqs">FAQs</a></li>
+              <li><a href="#order" class="mega-cta">Order KordiSure</a></li>
+            </ul>
+          </div>
+        </li>
+        <li><a href="shop.html">Shop</a></li>
+        <li><a href="index.html#science">Science</a></li>
+        <li><a href="index.html#testimonials">Testimonials</a></li>
+        <li><a href="blog.html">Blog</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+
+    <div class="header-actions">
+<div class="search-bar" id="searchBar"></div>
+
+      <div class="has-dropdown" id="accountNavItem">
+        <button class="icon-btn" id="accountToggle" aria-label="My account" aria-expanded="false" aria-controls="accountMenu">
+          <svg width="19" height="19" viewBox="0 0 19 19" fill="none"><circle cx="9.5" cy="5.5" r="3.3" stroke="currentColor" stroke-width="1.4"/><path d="M2.8 17c1-3.6 4-5.4 6.7-5.4S15.2 13.4 16.2 17" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+        </button>
+        <div class="account-menu" id="accountMenu">
+          <p class="account-menu-title">My Account</p>
+          <ul>
+            <li><a href="login.html">Login</a></li>
+            <li><a href="#signup">Sign Up</a></li>
+            <li class="divider" role="separator"></li>
+            <li><a href="profile.html">My Profile</a></li>
+            <li><a href="#orders">My Orders</a></li>
+            <li><a href="#order-history">Order History</a></li>
+            <li><a href="#addresses">Saved Addresses</a></li>
+            <li class="divider" role="separator"></li>
+            <li><a href="#logout">Logout</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <button class="icon-btn cart-btn" aria-label="Cart, 0 items">
+        <svg width="19" height="19" viewBox="0 0 19 19" fill="none"><path d="M2 2H3.6L5.7 12.4A1.5 1.5 0 0 0 7.2 13.6H14.4A1.5 1.5 0 0 0 15.9 12.4L17.2 5.6H4.3" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/><circle cx="7.5" cy="16.5" r="1.1" fill="currentColor"/><circle cx="14" cy="16.5" r="1.1" fill="currentColor"/></svg>
+        <span class="cart-badge">0</span>
+      </button>
+
+      <a href="#login" class="btn btn-outline btn-sm hide-mobile">Login</a>
+      <a href="#signup" class="btn btn-solid btn-sm hide-mobile">Sign Up</a>
+    </div>
+  </div>
+
+  <!-- inline search bar -->
+
+</header>
+
+<!-- Mobile slide-out nav -->
+<div class="mobile-nav-scrim" id="mobileScrim"></div>
+<nav class="mobile-nav" id="mobileNav" aria-label="Mobile">
+  <div class="mobile-nav-head">
+    <img src="vanya-logo-black.png" alt="Vanya Global" class="logo-img">
+    <button class="icon-btn" id="mobileNavClose" aria-label="Close menu">✕</button>
+  </div>
+  <ul class="mobile-nav-list">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="about.html">About Us</a></li>
+    <li class="mobile-has-sub">
+      <button class="mobile-sub-toggle" aria-expanded="false">KordiSure <svg class="chev" width="10" height="6" viewBox="0 0 10 6" fill="none"><path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+      <ul class="mobile-sub-list">
+        <li><a href="kordisure.html">KordiSure Overview</a></li>
+        <li>
+  <a href="ingredients.html">Ingredients</a>
+</li>
+        <li><a href="index.html#science">How It Works / Science</a></li>
+        <li><a href="benefits.html">Benefits</a></li>
+        <li><a href="index.html#faqs">FAQs</a></li>
+        <li><a href="index.html#order">Order KordiSure</a></li>
+      </ul>
+    </li>
+    <li><a href="shop.html">Shop</a></li>
+    <li><a href="index.html#science">Science</a></li>
+    <li><a href="index.html#testimonials">Testimonials</a></li>
+    <li><a href="blog.html">Blog</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+  <div class="mobile-nav-auth">
+    <a href="#login" class="btn btn-outline btn-sm">Login</a>
+    <a href="#signup" class="btn btn-solid btn-sm">Sign Up</a>
+  </div>
+</nav>
+
+<main>
+
+<!-- ============ GLOSSARY HERO ============ -->
+<section class="glossary-hero">
+  <div class="glossary-hero-inner container">
+    <p class="eyebrow">Glossary</p>
+    <div class="glossary-search">
+      <input type="search" id="glossarySearchInput" placeholder="Search a term (e.g. Cordyceps, Probiotics)…" aria-label="Search glossary terms">
+    </div>
+  </div>
+</section>
+
+<nav class="glossary-jump" aria-label="Jump to letter">
+  <a href="#letter-a">A</a>
+  <a href="#letter-c">C</a>
+  <a href="#letter-f">F</a>
+  <a href="#letter-g">G</a>
+  <a href="#letter-i">I</a>
+  <a href="#letter-l">L</a>
+  <a href="#letter-n">N</a>
+  <a href="#letter-o">O</a>
+  <a href="#letter-p">P</a>
+  <a href="#letter-t">T</a>
+</nav>
+
+<!-- ============ GLOSSARY LIST ============ -->
+<section class="glossary-body">
+  <div id="glossaryList">
+
+    <h2 class="glossary-letter" id="letter-a">A</h2>
+
+    <article class="glossary-term">
+      <button class="glossary-term-toggle" aria-expanded="false">
+        <span><span class="num">01</span><h3>Adaptogenic</h3></span>
+        <svg class="chev" width="12" height="7" viewBox="0 0 10 6" fill="none"><path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <div class="glossary-term-body">
+        <div class="glossary-term-body-inner">
+          <p>Adaptogens are active ingredients in certain plants and mushrooms that may impact how our body deals with stress, anxiety and fatigue.</p>
+        </div>
+      </div>
+    </article>
+
+    <article class="glossary-term">
+      <button class="glossary-term-toggle" aria-expanded="false">
+        <span><span class="num">02</span><h3>Adenosine</h3></span>
+        <svg class="chev" width="12" height="7" viewBox="0 0 10 6" fill="none"><path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <div class="glossary-term-body">
+        <div class="glossary-term-body-inner">
+          <p>Adenosine is a naturally occurring substance that relaxes and dilates blood vessels. It also affects the electrical activity of the heart. Adenosine is used to help restore normal heartbeats in people with certain heart rhythm disorders.</p>
+        </div>
+      </div>
+    </article>
+
+    <article class="glossary-term">
+      <button class="glossary-term-toggle" aria-expanded="false">
+        <span><span class="num">03</span><h3>Adenosine Triphosphate (ATP)</h3></span>
+        <svg class="chev" width="12" height="7" viewBox="0 0 10 6" fill="none"><path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <div class="glossary-term-body">
+        <div class="glossary-term-body-inner">
+          <p>Adenosine triphosphate is an organic compound and hydrotrope that provides energy to drive many processes in living cells, such as muscle contraction, nerve impulse propagation, condensate dissolution, and chemical synthesis.</p>
+        </div>
+      </div>
+    </article>
+
+    <article class="glossary-term">
+      <button class="glossary-term-toggle" aria-expanded="false">
+        <span><span class="num">04</span><h3>Adjunctive therapy</h3></span>
+        <svg class="chev" width="12" height="7" viewBox="0 0 10 6" fill="none"><path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <div class="glossary-term-body">
+        <div class="glossary-term-body-inner">
+          <p>Another treatment used together with the primary treatment. Its purpose is to assist the primary treatment.</p>
+        </div>
+      </div>
+    </article>
+
+    <article class="glossary-term">
+      <button class="glossary-term-toggle" aria-expanded="false">
+        <span><span class="num">05</span><h3>Anti-carcinogenic</h3></span>
+        <svg class="chev" width="12" height="7" viewBox="0 0 10 6" fill="none"><path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <div class="glossary-term-body">
+        <div class="glossary-term-body-inner">
+          <p>An anti-carcinogen is a substance that counteracts the effects of carcinogen — a substance, organism or agent capable of causing or inhibits the development of cancer.</p>
+        </div>
+      </div>
+    </article>
+
+    <article class="glossary-term">
+      <button class="glossary-term-toggle" aria-expanded="false">
+        <span><span class="num">06</span><h3>Anti-oxidative</h3></span>
+        <svg class="chev" width="12" height="7" viewBox="0 0 10 6" fill="none"><path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <div class="glossary-term-body">
+        <div class="glossary-term-body-inner">
+          <p>A substance that protects cells from the damage caused by free radicals (unstable molecules made by the process of oxidation during normal metabolism). Free radicals may play a part in cancer, heart disease, stroke, and other diseases of aging.</p>
+        </div>
+      </div>
+    </article>
+
+    <h2 class="glossary-letter" id="letter-c">C</h2>
+
+    <article class="glossary-term">
+      <button class="glossary-term-toggle" aria-expanded="false">
+        <span><span class="num">07</span><h3>Circadian Rhythms</h3></span>
+        <svg class="chev" width="12" height="7" viewBox="0 0 10 6" fill="none"><path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <div class="glossary-term-body">
+        <div class="glossary-term-body-inner">
+          <p>The natural cycle of physical, mental, and behaviour changes that the body goes through in a 24-hour cycle, such as the sleep-wake cycle, the body-temperature cycle, and the cycles in which a number of hormones are secreted.</p>
+        </div>
+      </div>
+    </article>
+
+    <div class="glossary-diagram">
+  <img src="images/circadian-rhythm-diagram.svg"
+       width="480" height="574"
+       alt="24-hour circadian rhythm clock showing key physiological events by time of day, from peak alertness at 10am to deepest sleep at 2am">
+  <p class="glossary-diagram-caption">A simplified overview of how alertness, body temperature, blood pressure and hormone secretion shift across the 24-hour circadian cycle.</p>
+</div>
+
+    <article class="glossary-term">
+      <button class="glossary-term-toggle" aria-expanded="false">
+        <span><span class="num">08</span><h3>Cordycepin</h3></span>
+        <svg class="chev" width="12" height="7" viewBox="0 0 10 6" fill="none"><path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <div class="glossary-term-body">
+        <div class="glossary-term-body-inner">
+          <p>A biotherapeutic molecule from medicinal mushroom.</p>
+        </div>
+      </div>
+    </article>
+
+    <article class="glossary-term">
+      <button class="glossary-term-toggle" aria-expanded="false">
+        <span><span class="num">09</span><h3>Cordyceps Militaris</h3></span>
+        <svg class="chev" width="12" height="7" viewBox="0 0 10 6" fill="none"><path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <div class="glossary-term-body">
+        <div class="glossary-term-body-inner">
+          <p>Cordyceps militaris is a species of fungus in the family Cordycipitaceae, and the type species of the genus Cordyceps.</p>
+        </div>
+      </div>
+    </article>
+
+    <article class="glossary-term">
+      <button class="glossary-term-toggle" aria-expanded="false">
+        <span><span class="num">10</span><h3>Cordyceps Sinensis</h3></span>
+        <svg class="chev" width="12" height="7" viewBox="0 0 10 6" fill="none"><path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <div class="glossary-term-body">
+        <div class="glossary-term-body-inner">
+          <p>Sinensis is an annual Ascomycetes fungus closely related to the mushroom. Although not actually a mushroom taxonomically, it has been described as an exotic medicinal mushroom in traditional Chinese and Tibetan medicine. The name Cordyceps comes from Latin words meaning club and head.</p>
+        </div>
+      </div>
+    </article>
+
+    <article class="glossary-term">
+      <button class="glossary-term-toggle" aria-expanded="false">
+        <span><span class="num">11</span><h3>Cytokines</h3></span>
+        <svg class="chev" width="12" height="7" viewBox="0 0 10 6" fill="none"><path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <div class="glossary-term-body">
+        <div class="glossary-term-body-inner">
+          <p>Cytokines are small proteins that are crucial in controlling the growth and activity of other immune system cells and blood cells. When released, they signal the immune system to do its job.</p>
+        </div>
+      </div>
+    </article>
+
+    <h2 class="glossary-letter" id="letter-f">F</h2>
+
+    <article class="glossary-term">
+      <button class="glossary-term-toggle" aria-expanded="false">
+        <span><span class="num">12</span><h3>Fibrinogen</h3></span>
+        <svg class="chev" width="12" height="7" viewBox="0 0 10 6" fill="none"><path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <div class="glossary-term-body">
+        <div class="glossary-term-body-inner">
+          <p>Fibrinogen is a protein that helps with blood clotting. It is made in the liver and forms fibrin. Fibrin is the main protein in a blood clot that helps stop bleeding and heal wounds.</p>
+        </div>
+      </div>
+    </article>
+
+    <h2 class="glossary-letter" id="letter-g">G</h2>
+
+    <article class="glossary-term">
+      <button class="glossary-term-toggle" aria-expanded="false">
+        <span><span class="num">13</span><h3>Gut biome</h3></span>
+        <svg class="chev" width="12" height="7" viewBox="0 0 10 6" fill="none"><path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <div class="glossary-term-body">
+        <div class="glossary-term-body-inner">
+          <p>The gut microbiome is made up of trillions of microorganisms and their genetic material that live in our intestinal tract. These microorganisms, mainly comprising bacteria, are involved in functions critical to our health and wellbeing.</p>
+        </div>
+      </div>
+    </article>
+
+    <h2 class="glossary-letter" id="letter-i">I</h2>
+
+    <article class="glossary-term">
+      <button class="glossary-term-toggle" aria-expanded="false">
+        <span><span class="num">14</span><h3>Immunomodulatory</h3></span>
+        <svg class="chev" width="12" height="7" viewBox="0 0 10 6" fill="none"><path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <div class="glossary-term-body">
+        <div class="glossary-term-body-inner">
+          <p>A substance that stimulates or suppresses the immune system and may help the body fight cancer, infection, or other diseases.</p>
+        </div>
+      </div>
+    </article>
+
+    <h2 class="glossary-letter" id="letter-l">L</h2>
+
+    <article class="glossary-term">
+      <button class="glossary-term-toggle" aria-expanded="false">
+        <span><span class="num">15</span><h3>Lipoproteins</h3></span>
+        <svg class="chev" width="12" height="7" viewBox="0 0 10 6" fill="none"><path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <div class="glossary-term-body">
+        <div class="glossary-term-body-inner">
+          <p>Lipoprotein is a biochemical assembly, whose primary function is to transport hydrophobic lipid molecules in water, as in blood plasma or other extracellular fluids.</p>
+        </div>
+      </div>
+    </article>
+
+    <h2 class="glossary-letter" id="letter-n">N</h2>
+
+    <article class="glossary-term">
+      <button class="glossary-term-toggle" aria-expanded="false">
+        <span><span class="num">16</span><h3>Nutraceutical</h3></span>
+        <svg class="chev" width="12" height="7" viewBox="0 0 10 6" fill="none"><path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <div class="glossary-term-body">
+        <div class="glossary-term-body-inner">
+          <p>Any substance that is a food or part of a food and provides medical or health benefits, including the prevention and treatment of disease.</p>
+        </div>
+      </div>
+    </article>
+
+    <h2 class="glossary-letter" id="letter-o">O</h2>
+
+    <article class="glossary-term">
+      <button class="glossary-term-toggle" aria-expanded="false">
+        <span><span class="num">17</span><h3>Oxidative stress</h3></span>
+        <svg class="chev" width="12" height="7" viewBox="0 0 10 6" fill="none"><path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <div class="glossary-term-body">
+        <div class="glossary-term-body-inner">
+          <p>Oxidative stress is a state that occurs when there is an excess of free radicals in the body's cells, defined as a disturbance in the balance between the production of reactive oxygen species (free radicals) and antioxidant defences.</p>
+        </div>
+      </div>
+    </article>
+
+    <h2 class="glossary-letter" id="letter-p">P</h2>
+
+    <article class="glossary-term">
+      <button class="glossary-term-toggle" aria-expanded="false">
+        <span><span class="num">18</span><h3>Probiotics</h3></span>
+        <svg class="chev" width="12" height="7" viewBox="0 0 10 6" fill="none"><path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <div class="glossary-term-body">
+        <div class="glossary-term-body-inner">
+          <p>Probiotics are live microorganisms that are intended to have health benefits when consumed or applied to the body.</p>
+        </div>
+      </div>
+    </article>
+
+    <article class="glossary-term">
+      <button class="glossary-term-toggle" aria-expanded="false">
+        <span><span class="num">19</span><h3>PSK (polysaccharide krestin) &amp; PSP (polysaccharide peptide)</h3></span>
+        <svg class="chev" width="12" height="7" viewBox="0 0 10 6" fill="none"><path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <div class="glossary-term-body">
+        <div class="glossary-term-body-inner">
+          <p>Protein bound polysaccharide extracted from the edible mushroom Trametes versicolor, working as a biological response modifier (BRM) that enhances the body's own use of macrophages (specialised cells involved in the detection and destruction of bacteria and other harmful organisms) and T-lymphocytes (part of the immune system, developed from stem cells in the bone marrow, that protect the body from infection and help fight cancer), rather than directly attacking any tumors. PSK was first isolated in Japan in the late 1960s, while PSP was isolated around 1983 in China. Each compound has shown remarkable anticancer properties.</p>
+        </div>
+      </div>
+    </article>
+
+    <h2 class="glossary-letter" id="letter-t">T</h2>
+
+    <article class="glossary-term">
+      <button class="glossary-term-toggle" aria-expanded="false">
+        <span><span class="num">20</span><h3>Therapeutic</h3></span>
+        <svg class="chev" width="12" height="7" viewBox="0 0 10 6" fill="none"><path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <div class="glossary-term-body">
+        <div class="glossary-term-body-inner">
+          <p>Therapeutic is relating to the treatment of disease or disorders by remedial agents or methods relating to curing of a disease or medical condition.</p>
+        </div>
+      </div>
+    </article>
+
+  </div>
+
+  <p class="glossary-no-results" id="glossaryNoResults">No terms match your search. Try a different word.</p>
+</section>
+
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer class="site-footer">
+  <div class="container footer-top">
+    <div class="footer-col footer-brand">
+      <img src="vanya-logo-black.png" alt="Vanya Global" class="logo-img footer-logo-img">
+      <p>For Family Wellness &amp; Better Living.</p>
+    </div>
+
+    <div class="footer-col">
+      <p class="footer-heading">Quick Links</p>
+      <ul>
+        <li><a href="about.html">About Us</a></li>
+        <li><a href="index.html#kordisure">KordiSure</a></li>
+        <li><a href="index.html#science">Science</a></li>
+        <li><a href="blog.html">Blog</a></li>
+        <li><a href="index.html#contact">Contact Us</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-col">
+      <p class="footer-heading">Customer Care</p>
+      <ul>
+        <li><a href="faq.html">FAQ</a></li>
+        <li><a href="payment-shipping-returns.html#shipping">Shipping &amp; Delivery</a></li>
+        <li><a href="payment-shipping-returns.html#return">Return &amp; Refund</a></li>
+        <li><a href="index.html#track-order">Track Your Order</a></li>
+        <li><a href="index.html#contact-support">Contact Support</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-col">
+      <p class="footer-heading">Follow Us</p>
+      <div class="footer-social">
+        <a href="https://x.com/VanyaGlobal" class="social-icon" aria-label="Twitter / X" target="_blank" rel="noopener noreferrer">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M22 4.5c-.8.35-1.6.6-2.5.7.9-.55 1.6-1.4 1.9-2.4-.85.5-1.8.85-2.8 1.05A4.4 4.4 0 0 0 11.3 7.9c0 .35.04.68.1 1A12.5 12.5 0 0 1 2.3 3.9a4.4 4.4 0 0 0 1.36 5.86c-.72-.02-1.4-.22-2-.55v.06c0 2.14 1.52 3.92 3.54 4.33-.37.1-.76.15-1.16.15-.28 0-.56-.03-.83-.08a4.4 4.4 0 0 0 4.1 3.05A8.83 8.83 0 0 1 2 18.57 12.47 12.47 0 0 0 8.75 20.5c8.1 0 12.53-6.72 12.53-12.55 0-.19 0-.38-.01-.57A9 9 0 0 0 22 4.5Z" fill="currentColor"/></svg>
+        </a>
+        <a href="https://www.linkedin.com/company/vanya-global/about/?viewAsMember=true" class="social-icon" aria-label="LinkedIn" target="_blank" rel="noopener noreferrer">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M4.98 3.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5ZM3 9.98h4v10.52H3V9.98Zm7 0h3.8v1.44h.06c.53-1 1.83-2.06 3.77-2.06 4.03 0 4.77 2.65 4.77 6.1v6.04h-4v-5.36c0-1.28-.02-2.92-1.78-2.92-1.78 0-2.05 1.4-2.05 2.83v5.45h-4V9.98Z" fill="currentColor"/></svg>
+        </a>
+        <a href="https://www.instagram.com/vanyaglobal/" class="social-icon" aria-label="Instagram" target="_blank" rel="noopener noreferrer">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" stroke-width="1.6"/><circle cx="12" cy="12" r="4.2" stroke="currentColor" stroke-width="1.6"/><circle cx="17.4" cy="6.6" r="1.1" fill="currentColor"/></svg>
+        </a>
+        <a href="https://www.facebook.com/people/Vanya-Global/100087552353050/" class="social-icon" aria-label="Facebook" target="_blank" rel="noopener noreferrer">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M14.5 21v-7.2h2.4l.36-2.8h-2.76V9.2c0-.8.22-1.36 1.38-1.36h1.48V5.34C16.9 5.24 16 5.15 14.96 5.15c-2.16 0-3.64 1.32-3.64 3.74v2.1H8.9v2.8h2.42V21h3.18Z" fill="currentColor"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <div class="container footer-bottom-inner">
+      <p class="footer-copy">Copyright © 2026. All rights reserved VanyaGlobal.</p>
+      <nav class="footer-links" aria-label="Legal">
+        <a href="privacy-policy.html">Privacy Policy</a>
+        <span>|</span>
+        <a href="terms-of-use.html">Terms of Use</a>
+        <span>|</span>
+        <a href="payment-shipping-returns.html">Payment, Shipping, Return &amp; Refund</a>
+      </nav>
+    </div>
+  </div>
+</footer>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+
+  /* ---------------------------------------------------------------
+     Helper: close any open dropdown/menu by removing 'open' + resetting
+     aria-expanded on its toggle
+  --------------------------------------------------------------- */
+  function closeAll(except) {
+    document.querySelectorAll('.mega-menu.open, .account-menu.open').forEach(el => {
+      if (el === except) return;
+      el.classList.remove('open');
+      const btn = document.querySelector(`[aria-controls="${el.id}"]`);
+      if (btn) btn.setAttribute('aria-expanded', 'false');
+    });
+  }
+
+  /* ---------------------------------------------------------------
+     Search bar toggle (header)
+  --------------------------------------------------------------- */
+  const searchBtn = document.getElementById('searchBtn');
+  const searchBar = document.getElementById('searchBar');
+  searchBtn.addEventListener('click', () => {
+    const isOpen = searchBar.classList.toggle('open');
+    searchBtn.setAttribute('aria-expanded', String(isOpen));
+    if (isOpen) searchBar.querySelector('input').focus();
+  });
+
+  /* ---------------------------------------------------------------
+     KordiSure mega-menu (desktop dropdown)
+  --------------------------------------------------------------- */
+  const kordisureToggle = document.getElementById('kordisureToggle');
+  const kordisureMenu = document.getElementById('kordisureMenu');
+  kordisureToggle.addEventListener('click', (e) => {
+    e.stopPropagation();
+    const isOpen = kordisureMenu.classList.contains('open');
+    closeAll();
+    kordisureMenu.classList.toggle('open', !isOpen);
+    kordisureToggle.setAttribute('aria-expanded', String(!isOpen));
+  });
+
+  /* ---------------------------------------------------------------
+     Account dropdown
+  --------------------------------------------------------------- */
+  const accountToggle = document.getElementById('accountToggle');
+  const accountMenu = document.getElementById('accountMenu');
+  accountToggle.addEventListener('click', (e) => {
+    e.stopPropagation();
+    const isOpen = accountMenu.classList.contains('open');
+    closeAll();
+    accountMenu.classList.toggle('open', !isOpen);
+    accountToggle.setAttribute('aria-expanded', String(!isOpen));
+  });
+
+  /* Close dropdowns on outside click / Escape */
+  document.addEventListener('click', () => closeAll());
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeAll();
+  });
+  [kordisureMenu, accountMenu].forEach(menu => {
+    menu.addEventListener('click', (e) => e.stopPropagation());
+  });
+
+  /* ---------------------------------------------------------------
+     Mobile slide-out nav
+  --------------------------------------------------------------- */
+  const hamburgerBtn = document.getElementById('hamburgerBtn');
+  const mobileNav = document.getElementById('mobileNav');
+  const mobileScrim = document.getElementById('mobileScrim');
+  const mobileNavClose = document.getElementById('mobileNavClose');
+
+  function openMobileNav() {
+    mobileNav.classList.add('open');
+    mobileScrim.classList.add('open');
+    hamburgerBtn.setAttribute('aria-expanded', 'true');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeMobileNav() {
+    mobileNav.classList.remove('open');
+    mobileScrim.classList.remove('open');
+    hamburgerBtn.setAttribute('aria-expanded', 'false');
+    document.body.style.overflow = '';
+  }
+  hamburgerBtn.addEventListener('click', openMobileNav);
+  mobileNavClose.addEventListener('click', closeMobileNav);
+  mobileScrim.addEventListener('click', closeMobileNav);
+
+  document.querySelectorAll('.mobile-sub-toggle').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const list = btn.nextElementSibling;
+      const isOpen = list.classList.contains('open');
+      list.classList.toggle('open', !isOpen);
+      btn.setAttribute('aria-expanded', String(!isOpen));
+    });
+  });
+
+  window.addEventListener('resize', () => {
+    if (window.innerWidth >= 1024) closeMobileNav();
+  });
+
+  /* ---------------------------------------------------------------
+     Sticky header shadow on scroll
+  --------------------------------------------------------------- */
+  const header = document.getElementById('siteHeader');
+  window.addEventListener('scroll', () => {
+    header.style.boxShadow = window.scrollY > 4 ? '0 4px 16px rgba(0,0,0,.06)' : 'none';
+  }, { passive: true });
+
+  /* ==================================================================
+     AUTH UI — reflects VanyaAuth session state across header, account
+     dropdown, and mobile nav (only runs if auth.js / window.VanyaAuth
+     is present on the page).
+     ================================================================== */
+  function refreshAuthUI() {
+    const auth = window.VanyaAuth;
+    const loggedIn = auth ? auth.isLoggedIn() : false;
+    const session = auth ? auth.getSession() : null;
+
+    document.querySelectorAll('[data-auth="out"]').forEach(el => { el.hidden = loggedIn; });
+    document.querySelectorAll('[data-auth="in"]').forEach(el => { el.hidden = !loggedIn; });
+
+    const nameEl = document.getElementById('accountMenuName');
+    if (nameEl) {
+      nameEl.textContent = loggedIn && session
+        ? `Signed in as ${session.name}`
+        : '';
+    }
+  }
+
+  function handleLogoutClick(e) {
+    e.preventDefault();
+    if (!window.VanyaAuth) return;
+    closeAll();
+    closeMobileNav();
+    window.VanyaAuth.logout({ button: e.currentTarget });
+  }
+
+  document.querySelectorAll('[data-logout]').forEach(btn => {
+    btn.addEventListener('click', handleLogoutClick);
+  });
+
+  document.addEventListener('vanya:authchange', refreshAuthUI);
+  window.addEventListener('pageshow', refreshAuthUI);
+  refreshAuthUI();
+
+  /* ==================================================================
+     GLOSSARY PAGE — accordion + live search
+     ================================================================== */
+  const glossaryTerms = Array.from(document.querySelectorAll('.glossary-term'));
+  const glossaryLetters = Array.from(document.querySelectorAll('.glossary-letter'));
+  const glossaryDiagram = document.querySelector('.glossary-diagram');
+  const noResults = document.getElementById('glossaryNoResults');
+  const searchInput = document.getElementById('glossarySearchInput');
+
+  // Accordion toggle for each term
+  glossaryTerms.forEach(term => {
+    const toggle = term.querySelector('.glossary-term-toggle');
+    const body = term.querySelector('.glossary-term-body');
+    toggle.addEventListener('click', () => {
+      const isOpen = toggle.getAttribute('aria-expanded') === 'true';
+      toggle.setAttribute('aria-expanded', String(!isOpen));
+      body.style.maxHeight = isOpen ? null : body.scrollHeight + 'px';
+    });
+  });
+
+  // Live search / filter
+  if (searchInput) {
+    searchInput.addEventListener('input', () => {
+      const q = searchInput.value.trim().toLowerCase();
+      let anyVisible = false;
+
+      glossaryTerms.forEach(term => {
+        const matches = term.textContent.toLowerCase().includes(q);
+        term.classList.toggle('hidden', !matches);
+        if (matches) anyVisible = true;
+      });
+
+      // Show/hide each letter heading based on whether any term under it is visible
+      glossaryLetters.forEach(letter => {
+        let el = letter.nextElementSibling;
+        let hasVisible = false;
+        while (el && !el.classList.contains('glossary-letter')) {
+          if (el.classList.contains('glossary-term') && !el.classList.contains('hidden')) {
+            hasVisible = true;
+          }
+          el = el.nextElementSibling;
+        }
+        letter.classList.toggle('hidden', !hasVisible);
+      });
+
+      // Tie the circadian diagram's visibility to the Circadian Rhythms term
+      if (glossaryDiagram) {
+        const circadianTerm = glossaryTerms.find(t => t.textContent.includes('Circadian Rhythms'));
+        glossaryDiagram.classList.toggle('hidden', !!(circadianTerm && circadianTerm.classList.contains('hidden')));
+      }
+
+      noResults.classList.toggle('show', !anyVisible);
+    });
+  }
+
+});
+</script>
+</body>
+</html>

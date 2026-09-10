@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact Us | Vanya Global — KordiSure</title>
+<meta name="description" content="Get in touch with Vanya Global. We'd love to hear from you — send us a message or reach out by phone, WhatsApp or email.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,600&family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<style>
+  /* ============ CONTACT PAGE — page-specific styles ============ */
+  :root{
+    --vg-green: #1e3a2f;
+    --vg-green-dark: #16291f;
+    --vg-cream: #f7efe1;
+    --vg-gold: #c9a24a;
+    --vg-text: #3f4a44;
+  }
+
+  /* ---- Contact hero ---- */
+  .contact-hero{
+    background: var(--vg-cream);
+    padding: 72px 0 64px;
+    overflow: hidden;
+  }
+  .contact-hero-inner{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+    align-items: center;
+  }
+  .contact-hero .eyebrow{
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--vg-green);
+    margin: 0 0 14px;
+  }
+  .contact-hero h1{
+    font-family: var(--font-display);
+    font-size: clamp(2.4rem, 4vw, 3.4rem);
+    color: var(--vg-green);
+    margin: 0 0 18px;
+    line-height: 1.1;
+  }
+  .contact-hero .eyebrow-rule{
+    width: 56px;
+    height: 3px;
+    background: var(--vg-gold);
+    border: none;
+    margin: 0 0 22px;
+  }
+  .contact-hero p{
+    color: var(--vg-text);
+    font-size: 15.5px;
+    line-height: 1.75;
+    margin: 0 0 16px;
+    max-width: 46ch;
+  }
+  .contact-hero p strong{ color: var(--vg-green); }
+  .contact-hero-media{
+    border-radius: 14px;
+    overflow: hidden;
+    aspect-ratio: 4 / 3;
+  }
+  .contact-hero-media img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  /* ---- Send message + map ---- */
+  .contact-main{
+    padding: 72px 0;
+  }
+  .contact-main-inner{
+    display: grid;
+    grid-template-columns: 1fr 1.15fr;
+    gap: 48px;
+    align-items: start;
+  }
+  .contact-form-col h2{
+    font-family: var(--font-display);
+    font-size: 1.9rem;
+    color: var(--vg-green);
+    margin: 0 0 14px;
+  }
+  .contact-form-col .eyebrow-rule{
+    width: 56px;
+    height: 3px;
+    background: var(--vg-gold);
+    border: none;
+    margin: 0 0 26px;
+  }
+  .contact-form{
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  .contact-form input,
+  .contact-form textarea{
+    width: 100%;
+    border: 1px solid #d9d3c4;
+    border-radius: 8px;
+    padding: 14px 16px;
+    font-size: 14.5px;
+    font-family: inherit;
+    color: var(--vg-green);
+    background: #fff;
+  }
+  .contact-form input::placeholder,
+  .contact-form textarea::placeholder{
+    color: #9aa39c;
+  }
+  .contact-form textarea{
+    min-height: 130px;
+    resize: vertical;
+  }
+  .contact-form input:focus,
+  .contact-form textarea:focus{
+    outline: none;
+    border-color: var(--vg-green);
+  }
+  .contact-submit{
+    align-self: flex-start;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--vg-green);
+    color: #fff;
+    border: none;
+    border-radius: 999px;
+    padding: 14px 26px;
+    font-size: 14.5px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background .2s ease;
+  }
+  .contact-submit:hover{ background: var(--vg-green-dark); }
+  .contact-submit svg{ width: 16px; height: 16px; }
+
+  .contact-map-col{
+    display: flex;
+    flex-direction: column;
+  }
+  .map-frame-wrap{
+    position: relative;
+    border-radius: 14px;
+    overflow: hidden;
+    border: 1px solid #e5e1d6;
+  }
+  .map-frame-wrap iframe{
+    width: 100%;
+    height: 460px;
+    border: 0;
+    display: block;
+  }
+  .map-card{
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 10px 28px rgba(0,0,0,.18);
+    padding: 16px 18px;
+    max-width: 260px;
+    font-size: 13px;
+    line-height: 1.55;
+    color: var(--vg-text);
+    z-index: 2;
+  }
+  .map-card strong{
+    display: block;
+    color: var(--vg-green);
+    font-family: Georgia, 'Playfair Display', serif;
+    font-size: 15px;
+    margin-bottom: 6px;
+  }
+  .map-card a{
+    color: var(--vg-green);
+    font-weight: 700;
+    text-decoration: none;
+    font-size: 13px;
+  }
+  .map-card a:hover{ text-decoration: underline; }
+  .map-card .map-card-line{ display: block; }
+
+  /* ---- Get in touch band ---- */
+  .get-in-touch{
+    background: var(--vg-green);
+    border-radius: 18px;
+    margin: 0 auto 80px;
+    max-width: 1180px;
+    padding: 48px 52px;
+    position: relative;
+    overflow: hidden;
+    color: #fff;
+  }
+  .get-in-touch-inner{
+    display: grid;
+    grid-template-columns: 1.3fr 1fr;
+    gap: 40px;
+    position: relative;
+    z-index: 1;
+  }
+  .get-in-touch h2{
+    font-family: var(--font-display);
+    font-size: 1.9rem;
+    margin: 0 0 14px;
+  }
+  .get-in-touch .eyebrow-rule{
+    width: 56px;
+    height: 3px;
+    background: var(--vg-gold);
+    border: none;
+    margin: 0 0 20px;
+  }
+  .get-in-touch p{
+    font-size: 14.5px;
+    line-height: 1.7;
+    color: #e7ede9;
+    margin: 0 0 22px;
+    max-width: 40ch;
+  }
+  .get-in-touch-address{
+    display: flex;
+    gap: 10px;
+    font-size: 14px;
+    line-height: 1.6;
+    color: #e7ede9;
+  }
+  .get-in-touch-address svg{ flex-shrink: 0; margin-top: 3px; }
+  .get-in-touch-details{
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    justify-content: center;
+  }
+  .git-row{
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    font-size: 15px;
+  }
+  .git-row .git-icon{
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: rgba(255,255,255,.12);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .git-row a{
+    color: #fff;
+    text-decoration: none;
+  }
+  .git-row a:hover{ text-decoration: underline; }
+  @media (max-width: 900px){
+    .contact-hero-inner,
+    .contact-main-inner,
+    .get-in-touch-inner{
+      grid-template-columns: 1fr;
+    }
+    .contact-hero-media{ order: -1; }
+    .get-in-touch{ padding: 36px 26px; }
+    .map-frame-wrap iframe{ height: 340px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ HEADER ============ -->
+<header class="site-header" id="siteHeader">
+  <div class="header-inner container">
+
+    <button class="hamburger" id="hamburgerBtn" aria-label="Open menu" aria-expanded="false" aria-controls="mobileNav">
+      <span></span><span></span><span></span>
+    </button>
+
+    <a href="index.html" class="logo" aria-label="Vanya Global home">
+      <img src="vanya-logo-black.png" alt="Vanya Global" class="logo-img">
+    </a>
+
+    <!-- Desktop / tablet nav -->
+    <nav class="main-nav" id="mainNav" aria-label="Primary">
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About Us</a></li>
+        <li class="has-dropdown" id="kordisureNavItem">
+          <button class="dropdown-toggle" id="kordisureToggle" aria-expanded="false" aria-controls="kordisureMenu">
+            KordiSure <svg class="chev" width="10" height="6" viewBox="0 0 10 6" fill="none"><path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <div class="mega-menu" id="kordisureMenu">
+            <ul>
+              <li><a href="#overview">KordiSure Overview</a></li>
+              <li>
+  <a href="ingredients.html">Ingredients</a>
+</li>
+              <li><a href="#science">How It Works / Science</a></li>
+              <li><a href="#benefits">Benefits</a></li>
+              <li><a href="#faqs">FAQs</a></li>
+              <li><a href="#order" class="mega-cta">Order KordiSure</a></li>
+            </ul>
+          </div>
+        </li>
+        <li><a href="shop.html">Shop</a></li>
+        <li><a href="index.html#science">Science</a></li>
+        <li><a href="index.html#testimonials">Testimonials</a></li>
+        <li><a href="blog.html">Blog</a></li>
+        <li><a href="contact.html" class="active">Contact</a></li>
+      </ul>
+    </nav>
+
+    <div class="header-actions">
+
+      <div class="has-dropdown" id="accountNavItem">
+        <button class="icon-btn" id="accountToggle" aria-label="My account" aria-expanded="false" aria-controls="accountMenu">
+          <svg width="19" height="19" viewBox="0 0 19 19" fill="none"><circle cx="9.5" cy="5.5" r="3.3" stroke="currentColor" stroke-width="1.4"/><path d="M2.8 17c1-3.6 4-5.4 6.7-5.4S15.2 13.4 16.2 17" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+        </button>
+        <div class="account-menu" id="accountMenu">
+          <p class="account-menu-title">My Account</p>
+          <ul>
+            <li><a href="#login">Login</a></li>
+            <li><a href="#signup">Sign Up</a></li>
+            <li class="divider" role="separator"></li>
+            <li><a href="#profile">My Profile</a></li>
+            <li><a href="#orders">My Orders</a></li>
+            <li><a href="#order-history">Order History</a></li>
+            <li><a href="#addresses">Saved Addresses</a></li>
+            <li class="divider" role="separator"></li>
+            <li><a href="#logout">Logout</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <button class="icon-btn cart-btn" aria-label="Cart, 0 items">
+        <svg width="19" height="19" viewBox="0 0 19 19" fill="none"><path d="M2 2H3.6L5.7 12.4A1.5 1.5 0 0 0 7.2 13.6H14.4A1.5 1.5 0 0 0 15.9 12.4L17.2 5.6H4.3" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/><circle cx="7.5" cy="16.5" r="1.1" fill="currentColor"/><circle cx="14" cy="16.5" r="1.1" fill="currentColor"/></svg>
+        <span class="cart-badge">0</span>
+      </button>
+
+      <a href="#login" class="btn btn-outline btn-sm hide-mobile">Login</a>
+      <a href="#signup" class="btn btn-solid btn-sm hide-mobile">Sign Up</a>
+    </div>
+  </div>
+
+  <!-- inline search bar -->
+
+</header>
+
+<!-- Mobile slide-out nav -->
+<div class="mobile-nav-scrim" id="mobileScrim"></div>
+<nav class="mobile-nav" id="mobileNav" aria-label="Mobile">
+  <div class="mobile-nav-head">
+    <img src="vanya-logo-black.png" alt="Vanya Global" class="logo-img">
+    <button class="icon-btn" id="mobileNavClose" aria-label="Close menu">✕</button>
+  </div>
+  <ul class="mobile-nav-list">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="about.html">About Us</a></li>
+    <li class="mobile-has-sub">
+      <button class="mobile-sub-toggle" aria-expanded="false">KordiSure <svg class="chev" width="10" height="6" viewBox="0 0 10 6" fill="none"><path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+      <ul class="mobile-sub-list">
+        <li><a href="#overview">KordiSure Overview</a></li>
+        <li>
+  <a href="ingredients.html">Ingredients</a>
+</li>
+        <li><a href="#science">How It Works / Science</a></li>
+        <li><a href="#benefits">Benefits</a></li>
+        <li><a href="#faqs">FAQs</a></li>
+        <li><a href="#order">Order KordiSure</a></li>
+      </ul>
+    </li>
+    <li><a href="shop.html">Shop</a></li>
+    <li><a href="index.html#science">Science</a></li>
+    <li><a href="index.html#testimonials">Testimonials</a></li>
+    <li><a href="blog.html">Blog</a></li>
+    <li><a href="contact.html" class="active">Contact</a></li>
+  </ul>
+  <div class="mobile-nav-auth">
+    <a href="#login" class="btn btn-outline btn-sm">Login</a>
+    <a href="#signup" class="btn btn-solid btn-sm">Sign Up</a>
+  </div>
+</nav>
+
+<main>
+
+<!-- ============ CONTACT HERO ============ -->
+<section class="contact-hero" id="contact-hero">
+  <div class="container contact-hero-inner">
+    <div class="contact-hero-copy">
+      <p class="eyebrow">We'd Love to Hear From You</p>
+      <h1>Contact Us</h1>
+      <hr class="eyebrow-rule">
+      <p>Whenever you see a butterfly, think of us.</p>
+      <p>If you're seeing butterflies, it's a sign of positive change.</p>
+      <p>The butterfly might want you to look more within to see if you have a different perspective than you used to. Maybe you have started to become more aware of your thinking patterns and personal beliefs, and have begun to shift internally.</p>
+      <p>That's why we chose Butterfly as our logo to bring you change &amp; transformation in your health and thereby in your life by <strong>active aging!</strong></p>
+    </div>
+    <div class="contact-hero-media">
+      <img src="https://picsum.photos/seed/vanya-butterflies-field/900/700" alt="Butterflies fluttering over golden dried grass at sunset" loading="eager" width="900" height="700">
+    </div>
+  </div>
+</section>
+
+<!-- ============ SEND US A MESSAGE + MAP ============ -->
+<section class="contact-main" id="contact-form">
+  <div class="container contact-main-inner">
+
+    <div class="contact-form-col">
+      <h2>Send Us a Message</h2>
+      <hr class="eyebrow-rule">
+      <form class="contact-form" id="contactForm">
+        <input type="text" name="name" placeholder="Name" aria-label="Name" required>
+        <input type="email" name="email" placeholder="Email" aria-label="Email" required>
+        <input type="tel" name="phone" placeholder="Phone" aria-label="Phone">
+        <textarea name="message" placeholder="Message" aria-label="Message" required></textarea>
+        <button type="submit" class="contact-submit">
+          Send Message
+          <svg viewBox="0 0 16 16" fill="none"><path d="M2 8h11M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+      </form>
+    </div>
+
+    <div class="contact-map-col">
+      <div class="map-frame-wrap">
+        <iframe
+          src="https://maps.google.com/maps?q=11.1017,79.6538&z=14&output=embed"
+          title="Vanya Global location map"
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          allowfullscreen></iframe>
+        <div class="map-card">
+          <strong>Vanya Global</strong>
+          <span class="map-card-line">36, Global Dream Square,</span>
+          <span class="map-card-line">Chinnapanna St, Mayiladuthurai,</span>
+          <span class="map-card-line">Tamil Nadu 609001, India
+            <a href="https://www.google.com/maps/search/?api=1&query=36+Global+Dream+Square+Chinnapanna+St+Mayiladuthurai+Tamil+Nadu+609001+India" target="_blank" rel="noopener noreferrer">View larger map</a>
+          </span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ============ GET IN TOUCH ============ -->
+<section class="get-in-touch-wrap">
+  <div class="get-in-touch">
+    <div class="get-in-touch-inner">
+      <div class="get-in-touch-copy">
+        <p class="eyebrow" style="color:#fff;">Get in Touch</p>
+        <hr class="eyebrow-rule">
+        <p>Have a question? Give us a call or fill out the contact form. We'd love to hear from you.</p>
+        <div class="get-in-touch-address">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M12 21s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12Z" stroke="#fff" stroke-width="1.5"/><circle cx="12" cy="9" r="2.4" stroke="#fff" stroke-width="1.5"/></svg>
+          <span>Associated Inc. (Biotech Division),<br>Mayiladuthurai – 609 001,<br>Tamil Nadu, India</span>
+        </div>
+      </div>
+      <div class="get-in-touch-details">
+        <div class="git-row">
+          <span class="git-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M4 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L14 13l5 2v4a2 2 0 0 1-2 2C9.5 21 3 14.5 3 6a2 2 0 0 1 2-2Z" stroke="#fff" stroke-width="1.5" stroke-linejoin="round"/></svg></span>
+          <a href="tel:+914364229394">+91 4364 22 93 94</a>
+        </div>
+        <div class="git-row">
+          <span class="git-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><rect x="6" y="3" width="12" height="18" rx="1.5" stroke="#fff" stroke-width="1.5"/><path d="M9 7h6M9 11h6" stroke="#fff" stroke-width="1.5" stroke-linecap="round"/></svg></span>
+          <a href="tel:+914364229395">+91 4364 22 93 95</a>
+        </div>
+        <div class="git-row">
+          <span class="git-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M12 3a9 9 0 0 0-7.8 13.5L3 21l4.6-1.2A9 9 0 1 0 12 3Z" stroke="#fff" stroke-width="1.5"/><path d="M8.5 8.6c.2-.6.9-1 1.4-.9.5 0 1 .8 1.3 1.4.2.5-.1.8-.4 1.1-.3.3-.5.5-.3.9.4.8 1.3 1.7 2.1 2.1.4.2.6 0 .9-.3.3-.3.6-.6 1.1-.4.6.3 1.4.8 1.4 1.3.1.5-.3 1.2-.9 1.4-1 .4-2.3.1-3.8-.9-1.4-.9-2.6-2.1-3.5-3.5-1-1.5-1.3-2.8-.9-3.8Z" fill="#fff"/></svg></span>
+          <a href="https://wa.me/919345517887" target="_blank" rel="noopener noreferrer">+91 934 551 7887</a>
+        </div>
+        <div class="git-row">
+          <span class="git-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><rect x="3" y="5" width="18" height="14" rx="2" stroke="#fff" stroke-width="1.5"/><path d="M3.5 6.5 12 13l8.5-6.5" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          <a href="mailto:support@vanyaglobal.com">support@vanyaglobal.com</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer class="site-footer">
+  <div class="container footer-top">
+    <div class="footer-col footer-brand">
+      <img src="vanya-logo-black.png" alt="Vanya Global" class="logo-img footer-logo-img">
+      <p>For Family Wellness &amp; Better Living.</p>
+    </div>
+
+    <div class="footer-col">
+      <p class="footer-heading">Quick Links</p>
+      <ul>
+        <li><a href="about.html">About Us</a></li>
+        <li><a href="index.html#kordisure">KordiSure</a></li>
+        <li><a href="index.html#science">Science</a></li>
+        <li><a href="index.html#blog">Blog</a></li>
+        <li><a href="contact.html">Contact Us</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-col">
+      <p class="footer-heading">Customer Care</p>
+      <ul>
+        <li><a href="faq.html">FAQ</a></li>
+        <li><a href="payment-shipping-returns.html#shipping">Shipping &amp; Delivery</a></li>
+        <li><a href="payment-shipping-returns.html#return">Return &amp; Refund</a></li>
+        <li><a href="index.html#track-order">Track Your Order</a></li>
+        <li><a href="index.html#contact-support">Contact Support</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-col">
+      <p class="footer-heading">Follow Us</p>
+      <div class="footer-social">
+        <a href="https://x.com/VanyaGlobal" class="social-icon" aria-label="Twitter / X" target="_blank" rel="noopener noreferrer">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M22 4.5c-.8.35-1.6.6-2.5.7.9-.55 1.6-1.4 1.9-2.4-.85.5-1.8.85-2.8 1.05A4.4 4.4 0 0 0 11.3 7.9c0 .35.04.68.1 1A12.5 12.5 0 0 1 2.3 3.9a4.4 4.4 0 0 0 1.36 5.86c-.72-.02-1.4-.22-2-.55v.06c0 2.14 1.52 3.92 3.54 4.33-.37.1-.76.15-1.16.15-.28 0-.56-.03-.83-.08a4.4 4.4 0 0 0 4.1 3.05A8.83 8.83 0 0 1 2 18.57 12.47 12.47 0 0 0 8.75 20.5c8.1 0 12.53-6.72 12.53-12.55 0-.19 0-.38-.01-.57A9 9 0 0 0 22 4.5Z" fill="currentColor"/></svg>
+        </a>
+        <a href="https://www.linkedin.com/company/vanya-global/about/?viewAsMember=true" class="social-icon" aria-label="LinkedIn" target="_blank" rel="noopener noreferrer">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M4.98 3.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5ZM3 9.98h4v10.52H3V9.98Zm7 0h3.8v1.44h.06c.53-1 1.83-2.06 3.77-2.06 4.03 0 4.77 2.65 4.77 6.1v6.04h-4v-5.36c0-1.28-.02-2.92-1.78-2.92-1.78 0-2.05 1.4-2.05 2.83v5.45h-4V9.98Z" fill="currentColor"/></svg>
+        </a>
+        <a href="https://www.instagram.com/vanyaglobal/" class="social-icon" aria-label="Instagram" target="_blank" rel="noopener noreferrer">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" stroke-width="1.6"/><circle cx="12" cy="12" r="4.2" stroke="currentColor" stroke-width="1.6"/><circle cx="17.4" cy="6.6" r="1.1" fill="currentColor"/></svg>
+        </a>
+        <a href="https://www.facebook.com/people/Vanya-Global/100087552353050/" class="social-icon" aria-label="Facebook" target="_blank" rel="noopener noreferrer">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M14.5 21v-7.2h2.4l.36-2.8h-2.76V9.2c0-.8.22-1.36 1.38-1.36h1.48V5.34C16.9 5.24 16 5.15 14.96 5.15c-2.16 0-3.64 1.32-3.64 3.74v2.1H8.9v2.8h2.42V21h3.18Z" fill="currentColor"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <div class="container footer-bottom-inner">
+      <p class="footer-copy">Copyright © 2026. All rights reserved VanyaGlobal.</p>
+      <nav class="footer-links" aria-label="Legal">
+        <a href="privacy-policy.html">Privacy Policy</a>
+        <span>|</span>
+        <a href="terms-of-use.html">Terms of Use</a>
+        <span>|</span>
+        <a href="payment-shipping-returns.html">Payment, Shipping, Return &amp; Refund</a>
+      </nav>
+    </div>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+<script>
+  // Simple non-destructive submit handler placeholder — wire to your backend/email service as needed.
+  document.getElementById('contactForm')?.addEventListener('submit', function(e){
+    e.preventDefault();
+    alert('Thanks for reaching out! We will get back to you shortly.');
+    this.reset();
+  });
+</script>
+</body>
+</html>

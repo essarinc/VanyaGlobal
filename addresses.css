@@ -1,0 +1,238 @@
+/* ==========================================================================
+   MY ADDRESSES — extends style.css + profile.css (load both first).
+   Mobile-first, same breakpoints as the rest of the site (≥768 / ≥1024).
+   ========================================================================== */
+
+/* ---------- address grid ---------- */
+.addr-grid{
+  display:flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.addr-card{
+  position: relative;
+  border: 1.5px solid var(--line);
+  border-radius: 14px;
+  padding: 18px 18px 16px;
+  display:flex;
+  flex-direction: column;
+  gap: 8px;
+  transition: border-color .2s ease, box-shadow .2s ease;
+}
+.addr-card:hover{ box-shadow: 0 8px 20px rgba(31,61,43,.07); }
+.addr-card.is-default{
+  border-color: var(--green-dark);
+  background: linear-gradient(180deg, rgba(47,107,69,.05), transparent 40%);
+}
+
+.addr-card-top{
+  display:flex;
+  align-items:center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.addr-type-pill{
+  display:inline-flex;
+  align-items:center;
+  gap: 6px;
+  background: var(--cream-deep);
+  color: var(--green-dark);
+  font-size: .74rem;
+  font-weight: 700;
+  padding: 4px 11px;
+  border-radius: 999px;
+  text-transform: uppercase;
+  letter-spacing: .03em;
+}
+.default-pill{
+  background: var(--green-dark);
+  color: var(--white);
+  font-size: .7rem;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 999px;
+}
+
+.addr-name{
+  font-weight: 700;
+  color: var(--ink);
+  font-size: .96rem;
+  margin-top: 2px;
+}
+.addr-lines{
+  color: var(--ink-soft);
+  font-size: .88rem;
+  line-height: 1.5;
+}
+.addr-phone{
+  color: var(--ink-soft);
+  font-size: .86rem;
+  display:flex;
+  align-items:center;
+  gap: 6px;
+}
+.addr-phone svg{ color: var(--green-dark); flex-shrink: 0; }
+
+.addr-card-actions{
+  display:flex;
+  align-items:center;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 10px;
+  padding-top: 12px;
+  border-top: 1px solid var(--line);
+}
+.addr-action-btn{
+  display:inline-flex;
+  align-items:center;
+  gap: 6px;
+  font-size: .82rem;
+  font-weight: 700;
+  color: var(--ink-soft);
+  padding: 7px 10px;
+  border-radius: 8px;
+  border: 1px solid var(--line);
+  background: var(--white);
+}
+.addr-action-btn:hover{ color: var(--green-dark); border-color: var(--green-dark); }
+.addr-action-btn.danger:hover{ color: #b3392c; border-color: #b3392c; }
+.addr-action-btn.set-default{ margin-right: auto; }
+
+/* empty state reuses .empty-state / .icon-badge from profile.css */
+
+/* ==========================================================================
+   MODAL (shared shell for the add/edit form and the delete confirm)
+   ========================================================================== */
+.addr-modal-scrim{
+  position: fixed;
+  inset: 0;
+  background: rgba(20, 30, 20, .45);
+  display:flex;
+  align-items:flex-end;
+  justify-content:center;
+  z-index: 200;
+  padding: 0;
+}
+.addr-modal-scrim[hidden]{ display:none !important; }
+
+.addr-modal{
+  background: var(--white);
+  width: 100%;
+  max-width: 560px;
+  max-height: 92vh;
+  overflow-y: auto;
+  border-radius: 18px 18px 0 0;
+  padding: 22px 20px calc(20px + env(safe-area-inset-bottom));
+  box-shadow: 0 -10px 40px rgba(0,0,0,.18);
+}
+.addr-modal-sm{ max-width: 440px; }
+
+.addr-modal-head{
+  display:flex;
+  align-items:center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+.addr-modal-head h3{
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  color: var(--ink);
+}
+.addr-modal-copy{
+  color: var(--ink-soft);
+  font-size: .9rem;
+  line-height: 1.55;
+  margin-bottom: 4px;
+}
+
+.addr-field-row{
+  display:flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.addr-field{
+  display:flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 14px;
+}
+.addr-field label{
+  font-size: .8rem;
+  font-weight: 700;
+  color: var(--ink-soft);
+}
+.addr-field label .opt{ font-weight: 500; font-style: italic; }
+.addr-field input,
+.addr-field select{
+  width: 100%;
+  padding: 11px 14px;
+  border-radius: var(--radius);
+  border: 1.5px solid var(--line);
+  background: var(--cream);
+  font-family: inherit;
+  font-size: .92rem;
+  font-weight: 600;
+  color: var(--ink);
+}
+.addr-field input:focus,
+.addr-field select:focus{ outline: 2px solid var(--green); outline-offset: 1px; }
+.addr-field input:invalid:not(:placeholder-shown){ border-color: #d98b7c; }
+
+.addr-checkbox{
+  display:flex;
+  align-items:center;
+  gap: 9px;
+  font-size: .88rem;
+  font-weight: 600;
+  color: var(--ink);
+  margin: 4px 0 18px;
+  cursor: pointer;
+}
+.addr-checkbox input{ width: 16px; height: 16px; accent-color: var(--green-dark); }
+
+.addr-modal-actions{
+  display:flex;
+  justify-content:flex-end;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.edit-pill.danger{
+  background: #fbeae7;
+  color: #b3392c;
+  border-color: #f0c9c2;
+}
+.edit-pill.danger:hover{ background: #f6d9d3; }
+
+/* ==========================================================================
+   TABLET  (≥768px)
+   ========================================================================== */
+@media (min-width: 768px){
+  .addr-grid{
+    display:grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+
+  .addr-field-row{
+    flex-direction: row;
+    gap: 14px;
+  }
+  .addr-field-row .addr-field{ flex: 1; margin-bottom: 0; }
+
+  .addr-modal-scrim{ align-items:center; }
+  .addr-modal{
+    border-radius: 18px;
+    padding: 28px;
+    max-height: 88vh;
+  }
+}
+
+/* ==========================================================================
+   LAPTOP / DESKTOP  (≥1024px)
+   ========================================================================== */
+@media (min-width: 1024px){
+  .addr-grid{ grid-template-columns: repeat(2, 1fr); }
+}

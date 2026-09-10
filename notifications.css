@@ -1,0 +1,167 @@
+/* ==========================================================================
+   NOTIFICATIONS — extends style.css + profile.css.
+   Load style.css, then profile.css (shared account-shell layout),
+   then this file. Mobile-first, same breakpoints as the rest of the site
+   (≥768 / ≥1024).
+   ========================================================================== */
+
+/* ---------- save confirmation toast ---------- */
+.save-toast{
+  display:flex;
+  align-items:center;
+  gap: 8px;
+  background: var(--green-dark);
+  color: var(--white);
+  font-size: .82rem;
+  font-weight: 700;
+  padding: 10px 16px;
+  border-radius: 999px;
+  margin-bottom: 16px;
+  width: fit-content;
+  opacity: 0;
+  transform: translateY(-6px);
+  transition: opacity .2s ease, transform .2s ease;
+}
+.save-toast.show{ opacity: 1; transform: translateY(0); }
+.save-toast svg{ flex-shrink: 0; }
+
+/* ---------- preference rows ---------- */
+.pref-rows{ display:flex; flex-direction: column; }
+.pref-row{
+  display:flex;
+  align-items:center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 16px 0;
+  border-bottom: 1px solid var(--line);
+}
+.pref-row:last-child{ border-bottom: none; padding-bottom: 0; }
+.pref-row:first-child{ padding-top: 0; }
+
+.pref-text h5{
+  margin: 0 0 3px;
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: .92rem;
+  color: var(--ink);
+}
+.pref-text p{
+  margin: 0;
+  font-size: .8rem;
+  color: var(--ink-soft);
+  max-width: 42ch;
+}
+
+/* ---------- toggle switch ---------- */
+.switch{
+  position: relative;
+  display:inline-block;
+  flex-shrink: 0;
+  width: 44px;
+  height: 26px;
+}
+.switch input{
+  position: absolute;
+  opacity: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  cursor: pointer;
+}
+.switch-track{
+  position: absolute;
+  inset: 0;
+  background: var(--line);
+  border-radius: 999px;
+  transition: background .2s ease;
+}
+.switch-thumb{
+  position: absolute;
+  top: 3px; left: 3px;
+  width: 20px; height: 20px;
+  border-radius: 50%;
+  background: var(--white);
+  box-shadow: 0 2px 5px rgba(31,61,43,.25);
+  transition: transform .2s ease;
+}
+.switch input:checked + .switch-track{ background: var(--green-dark); }
+.switch input:checked + .switch-track .switch-thumb{ transform: translateX(18px); }
+.switch input:focus-visible + .switch-track{ outline: 2px solid var(--green); outline-offset: 2px; }
+.switch input:disabled + .switch-track{ opacity: .45; cursor: not-allowed; }
+.switch input:disabled{ cursor: not-allowed; }
+
+/* ---------- notification history ---------- */
+.history-row{
+  display:flex;
+  align-items:flex-start;
+  gap: 14px;
+  padding: 14px 0;
+}
+.history-row + .history-row{ border-top: 1px solid var(--line); }
+
+.history-icon{
+  width: 38px; height: 38px;
+  border-radius: 50%;
+  background: var(--cream-deep);
+  display:flex; align-items:center; justify-content:center;
+  font-size: 1rem;
+  flex-shrink: 0;
+}
+.history-info{ flex: 1; min-width: 0; }
+.history-info h5{
+  margin: 0 0 3px;
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: .9rem;
+  color: var(--ink);
+}
+.history-info p{ margin: 0; font-size: .8rem; color: var(--ink-soft); }
+.history-time{ margin-top: 2px !important; font-size: .74rem !important; }
+
+.history-tag{
+  background: rgba(47,107,69,.12);
+  color: var(--green-dark);
+  font-size: .7rem;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 999px;
+  white-space: nowrap;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.history-row.unread .history-info h5::after{
+  content: "";
+  display: inline-block;
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  background: var(--green-dark);
+  margin-left: 8px;
+  vertical-align: middle;
+}
+
+/* clear-all sits in the acc-card-head like "View All Orders" on Profile,
+   but it's a button, not a link, so it needs the same visual treatment */
+button.acc-link{
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+/* ---------- empty state (reuses .empty-state from profile.css look) ---------- */
+#historyList .empty-state{ padding: 26px 12px 4px; }
+
+/* ==========================================================================
+   TABLET  (≥768px)
+   ========================================================================== */
+@media (min-width: 768px){
+  .pref-row{ padding: 18px 0; }
+}
+
+/* ==========================================================================
+   LAPTOP / DESKTOP  (≥1024px)
+   ========================================================================== */
+@media (min-width: 1024px){
+  .pref-text p{ max-width: 48ch; }
+}

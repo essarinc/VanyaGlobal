@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ingredients & Process | Vanya Global</title>
+<link rel="stylesheet" href="style.css">
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Montserrat:wght@300;400;500;600;700&display=swap');
+
+  :root{
+    --font-display: 'Playfair Display', Georgia, serif;
+    --font-body: 'Montserrat', sans-serif;
+    --cream:#fffdf2;
+    --header-bg:#f5f4f0;
+    --text:#3a3a3a;
+    --muted:#5a5a5a;
+    --accent-orange:#c1622d;
+    --accent-orange-bold:#b5551f;
+    --dark-green:#1e4d3b;
+    --dark-green-2:#173e30;
+    --rule:#e7e3d2;
+  }
+
+  .ingredients-page *{ box-sizing:border-box; }
+
+  .ingredients-page{
+    margin:0;
+    background:var(--cream);
+    font-family: var(--font-body);
+    color:var(--text);
+    line-height:1.7;
+  }
+
+
+  .content{
+    max-width:1000px;
+    margin:0 auto;
+    padding:0 60px 60px 60px;
+  }
+
+  .content h2{
+    font-family: var(--font-display);
+    font-weight:600;
+    font-size:26px;
+    letter-spacing:-0.01em;
+    color:#1a1a1a;
+    margin:44px 0 18px 0;
+  }
+
+  .content h3.sub{
+    font-family: var(--font-display);
+    font-weight:600;
+    font-size:20px;
+    color:#1a1a1a;
+    margin:32px 0 14px 0;
+  }
+
+  .content p{
+    font-size:15px;
+    color:var(--text);
+    margin:0 0 16px 0;
+  }
+
+  .content ul{
+    margin:0 0 20px 0;
+    padding-left:22px;
+  }
+  .content ul li{
+    font-size:15px;
+    margin-bottom:10px;
+  }
+
+  .highlight-orange{
+    color:var(--accent-orange);
+    font-weight:600;
+  }
+  .bold{
+    font-weight:700;
+    color:#1a1a1a;
+  }
+  .italic{
+    font-style:italic;
+  }
+  .orange-italic{
+    color:var(--accent-orange);
+    font-style:italic;
+    font-weight:600;
+  }
+
+  /* two column layout with image */
+  .flex-row{
+    display:flex;
+    gap:40px;
+    align-items:flex-start;
+    margin-bottom:20px;
+  }
+  .flex-row.reverse{
+    flex-direction:row-reverse;
+  }
+  .flex-text{ flex:1; }
+  .flex-image{ flex:1; }
+
+  /* diagram placeholder box */
+  .diagram-placeholder{
+    position:relative;
+    width:100%;
+    min-height:360px;
+    background:
+      linear-gradient(#fdfcf3, #fdfcf3) padding-box,
+      linear-gradient(135deg, #2c6e49, #74c69d, #1e4d3b) border-box;
+    border:3px solid transparent;
+    border-radius:14px;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    color:#3d6b57;
+    font-family: var(--font-body);
+    font-size:14px;
+    padding:24px;
+    box-shadow:
+      0 0 0 4px rgba(46,111,73,0.08),
+      0 8px 24px rgba(30,77,59,0.15);
+    transition:box-shadow 0.25s ease, transform 0.25s ease;
+  }
+  .diagram-placeholder:hover{
+    box-shadow:
+      0 0 0 5px rgba(46,111,73,0.14),
+      0 12px 30px rgba(30,77,59,0.22);
+    transform:translateY(-2px);
+  }
+  .diagram-placeholder .ph-icon{
+    font-size:34px;
+    margin-bottom:10px;
+  }
+  .diagram-placeholder .ph-label{
+    font-weight:700;
+    color:var(--dark-green);
+    letter-spacing:0.2px;
+  }
+  .diagram-placeholder img{
+    max-width:100%;
+    border-radius:10px;
+    border:3px solid #2c6e49;
+    box-shadow:0 8px 24px rgba(30,77,59,0.18);
+  }
+
+  .indent-block{
+    margin-left:32px;
+  }
+
+  hr.divider{
+    border:none;
+    border-top:1px solid var(--rule);
+    margin:50px 0;
+  }
+
+  .caption-note{
+    font-size:14px;
+    color:var(--muted);
+  }
+
+  @media (max-width:700px){
+  .content{ padding:0 24px 40px 24px; }
+  .flex-row, .flex-row.reverse{ flex-direction:column; }
+}
+</style>
+</head>
+<body class="ingredients-page">
+
+<!-- ============ HEADER ============ -->
+<header class="site-header" id="siteHeader">
+  <div class="header-inner container">
+
+    <button class="hamburger" id="hamburgerBtn" aria-label="Open menu" aria-expanded="false" aria-controls="mobileNav">
+      <span></span><span></span><span></span>
+    </button>
+
+    <a href="index.html" class="logo" aria-label="Vanya Global home">
+      <img src="vanya-logo-black.png" alt="Vanya Global" class="logo-img">
+    </a>
+
+    <!-- Desktop / tablet nav -->
+    <nav class="main-nav" id="mainNav" aria-label="Primary">
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About Us</a></li>
+        <li class="has-dropdown" id="kordisureNavItem">
+          <button class="dropdown-toggle" id="kordisureToggle" aria-expanded="false" aria-controls="kordisureMenu">
+            KordiSure <svg class="chev" width="10" height="6" viewBox="0 0 10 6" fill="none"><path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <div class="mega-menu" id="kordisureMenu">
+            <ul>
+              <li><a href="#overview">KordiSure Overview</a></li>
+              <li>
+  <a href="ingredients.html" class="active">Ingredients</a>
+</li>
+              <li><a href="#science">How It Works / Science</a></li>
+              <li><a href="#benefits">Benefits</a></li>
+              <li><a href="#faqs">FAQs</a></li>
+              <li><a href="#order" class="mega-cta">Order KordiSure</a></li>
+            </ul>
+          </div>
+        </li>
+        <li><a href="shop.html">Shop</a></li>
+        <li><a href="#science">Science</a></li>
+        <li><a href="#testimonials">Testimonials</a></li>
+        <li><a href="#blog">Blog</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+
+    <div class="header-actions">
+  
+
+      <div class="has-dropdown" id="accountNavItem">
+        <button class="icon-btn" id="accountToggle" aria-label="My account" aria-expanded="false" aria-controls="accountMenu">
+          <svg width="19" height="19" viewBox="0 0 19 19" fill="none"><circle cx="9.5" cy="5.5" r="3.3" stroke="currentColor" stroke-width="1.4"/><path d="M2.8 17c1-3.6 4-5.4 6.7-5.4S15.2 13.4 16.2 17" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+        </button>
+        <div class="account-menu" id="accountMenu">
+          <p class="account-menu-title">My Account</p>
+          <ul>
+            <li><a href="#login">Login</a></li>
+            <li><a href="#signup">Sign Up</a></li>
+            <li class="divider" role="separator"></li>
+            <li><a href="#profile">My Profile</a></li>
+            <li><a href="#orders">My Orders</a></li>
+            <li><a href="#order-history">Order History</a></li>
+            <li><a href="#addresses">Saved Addresses</a></li>
+            <li class="divider" role="separator"></li>
+            <li><a href="#logout">Logout</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <button class="icon-btn cart-btn" aria-label="Cart, 0 items">
+        <svg width="19" height="19" viewBox="0 0 19 19" fill="none"><path d="M2 2H3.6L5.7 12.4A1.5 1.5 0 0 0 7.2 13.6H14.4A1.5 1.5 0 0 0 15.9 12.4L17.2 5.6H4.3" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/><circle cx="7.5" cy="16.5" r="1.1" fill="currentColor"/><circle cx="14" cy="16.5" r="1.1" fill="currentColor"/></svg>
+        <span class="cart-badge">0</span>
+      </button>
+
+      <a href="#login" class="btn btn-outline btn-sm hide-mobile">Login</a>
+      <a href="#signup" class="btn btn-solid btn-sm hide-mobile">Sign Up</a>
+    </div>
+  </div>
+
+  <!-- inline search bar -->
+
+</header>
+
+<!-- Mobile slide-out nav -->
+<div class="mobile-nav-scrim" id="mobileScrim"></div>
+<nav class="mobile-nav" id="mobileNav" aria-label="Mobile">
+  <div class="mobile-nav-head">
+    <img src="vanya-logo-black.png" alt="Vanya Global" class="logo-img">
+    <button class="icon-btn" id="mobileNavClose" aria-label="Close menu">✕</button>
+  </div>
+  <ul class="mobile-nav-list">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="about.html">About Us</a></li>
+    <li class="mobile-has-sub">
+      <button class="mobile-sub-toggle" aria-expanded="false">KordiSure <svg class="chev" width="10" height="6" viewBox="0 0 10 6" fill="none"><path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+      <ul class="mobile-sub-list">
+        <li><a href="#overview">KordiSure Overview</a></li>
+        <li>
+  <a href="ingredients.html" class="active">Ingredients</a>
+</li>
+        <li><a href="#science">How It Works / Science</a></li>
+        <li><a href="#benefits">Benefits</a></li>
+        <li><a href="#faqs">FAQs</a></li>
+        <li><a href="#order">Order KordiSure</a></li>
+      </ul>
+    </li>
+    <li><a href="shop.html">Shop</a></li>
+    <li><a href="#science">Science</a></li>
+    <li><a href="#testimonials">Testimonials</a></li>
+    <li><a href="#blog">Blog</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <div class="mobile-nav-auth">
+    <a href="#login" class="btn btn-outline btn-sm">Login</a>
+    <a href="#signup" class="btn btn-solid btn-sm">Sign Up</a>
+  </div>
+</nav>
+
+<main>
+
+<section class="policy-hero">
+  <div class="container policy-hero-inner">
+    <div class="policy-hero-copy">
+      <h1>Ingredients &amp; Process</h1>
+      <nav class="policy-breadcrumb" aria-label="Breadcrumb">
+        <a href="index.html">Home</a>
+        <span aria-hidden="true">&gt;</span>
+        <span aria-current="page">Ingredients &amp; Process</span>
+      </nav>
+    </div>
+  </div>
+</section>
+
+<div class="content">
+
+  <!-- ============ PAGE 1 ============ -->
+
+  <h2>Medicinal Mushrooms- Its Properties And Unexplored Potential As Nutraceutical Supplement.</h2>
+  <p>Mushrooms have been consumed since earliest history. From the Greeks to the Chinese, mushroom has made room for itself in all cultures. Ancient Greeks believed that mushrooms provided strength for warriors in battle and the Romans perceived it as &ldquo;Food of God.&rdquo; For centuries, Chinese culture has treasured mushrooms as a healthy food, an &ldquo;elixir of life.&rdquo; They have been part of human culture for thousands of years owing to its nutritional, medicinal and value-added benefits.</p>
+  <p>More than 2,000 species of mushrooms exist in nature but only around 25 are widely accepted as food and few are commercially cultivated. Mushrooms are considered as a delicacy with high nutritional and functional value, and they are also accepted as nutraceutical foods. They are of considerable interest because of their medicinal properties, and economic significance. Let&rsquo;s understand in depth the magical significance of medicinal mushroom Cordyceps in our lives.</p>
+
+  <h2>About Cordyceps</h2>
+  <p>It was first recorded by a Chinese habitant, <span class="italic">Wang Ang</span> in 1694 and the Italian scholar <span class="italic">Saccardo</span> who named the Cordyceps officially as <span class="highlight-orange">Cordyceps Sinensis</span> in 1858, that nomenclature has been used ever since. The name Cordyceps has been derived from two Latin words, i.e., <span class="italic">cord</span> and <span class="italic">ceps</span> meaning club and head, respectively. Of the more than 400 species of Cordyceps discovered, two have become the focus of health research, <span class="highlight-orange">Cordyceps Sinensis</span> and <span class="highlight-orange">Cordyceps Militaris.</span> For centuries supplements and products containing Cordyceps, the most valuable medicinal mushroom are helping in maintaining good health.</p>
+  <p>Both species contain concentrations of 2 compounds-<span class="highlight-orange">adenosine</span> and <span class="highlight-orange">cordycepin</span>. Cordyceps Sinensis contains more adenosine than Cordyceps Militaris, but no cordycepin (a compound known for various nutraceutical and therapeutic potential with numerous health benefits). Cordyceps Militaris contains cordycepin and costs a fraction of Cordyceps Sinensis. Incidentally, since July 2020, world&rsquo;s costliest fungus (sold in International markets for upwards of Rs 20 lakh per kg) is in the red list of International Union for Conservation of Nature (IUCN) due to over harvesting and banned from collecting &amp; sale of Cordyceps Sinensis is to conserve, so that it remains in the wild.</p>
+  <p>Cordyceps Militaris, on the other hand, is grown in labs using mycelia extracts planted on grain. Although it presents many of the same benefits as Cordyceps Sinensis and more in some cases, biotechnology helps to produce it under sterile &amp; controlled environment and is economical to purchase. Cordyceps Militaris is a commercially cultivated species of Cordyceps that is grown in artificial environment. It is said to have even higher concentrations of medical compounds than its wild counterparts.</p>
+
+  <h2>Benefits Of Cordyceps Mushrooms</h2>
+  <div class="flex-row">
+    <div class="flex-text">
+      <p>Cordyceps mushrooms are commonly recommended for a wide range of medical conditions and wellness benefits that include:</p>
+      <ul>
+        <li>Promote increased endurance</li>
+        <li>Has <span class="highlight-orange">immunomodulatory, anti-oxidative,</span> anti-inflammatory, and anti-tumor properties</li>
+        <li>Help manage Type 2 diabetes</li>
+        <li>Support heart health</li>
+        <li>Improve sleep cycles</li>
+        <li>Contains &ldquo;anti-aging&rdquo; benefits, including increased vigour and longevity and improved sexual function</li>
+      </ul>
+    </div>
+    <div class="flex-image">
+      <div class="diagram-placeholder" data-diagram="benefits-of-cordyceps-mushrooms">
+        <div class="ph-icon">🖼️</div>
+        <div class="ph-label">Diagram: Benefits of Cordyceps Mushrooms</div>
+        <div>(circular infographic — replace with uploaded image)</div>
+      </div>
+    </div>
+  </div>
+
+  <h2>Enhance Athletic Activity</h2>
+  <p><span class="highlight-orange">Adenosine triphosphate</span> &ndash; commonly known as &ldquo;ATP&rdquo; &ndash; is a molecule found within our body. The primary function of ATP is to deliver energy to all of our body cells. This includes those that make up our muscles. Cordyceps increases our body&rsquo;s production of ATP. This means it is especially beneficial before exercise or during physical activity, as it helps to increase endurance and prevent fatigue. It also increases lung capacity, thus, an excellent benefit for almost any type of exercise or physical activity.</p>
+  <p>Cordyceps is not only recommended prior to a workout but is a beneficial post-workout supplement, as well. The anti-inflammatory effects can help reduce swelling and muscle fatigue. Plus, it&rsquo;s energy-boosting properties can help fight a post-workout crash so that you can continue your day with less down-time. Cordyceps also supports exercise tolerance and endurance even in as little as one week of regular use.</p>
+
+  <h2>Immunomodulatory Effects</h2>
+  <p>The immune system protects human beings from infection with layered defences of increasing specificity. Many chronic conditions and autoimmune disorders are related to an overactive or hypersensitive immune system. An under-active or overly-fatigued immune system is also problematic, as it may not protect us from infections, a vital part of human wellness. Substances that help regulate the immune system can help us to maintain wellness even in the most precarious environments. The adaptive immune response is activated by the response of the innate immune system. Cordyceps Militaris is a bidirectional modulator with both potentiating and suppressive effects on the immune system through regulating innate and adaptive immunity.</p>
+
+  <h2>Antioxidant, Anti-Inflammatory And Anti-Tumor Benefits</h2>
+  <p>One of the primary components of Cordyceps is cordycepin, as you know by this time. This substance has strong anti-oxidant, anti-inflammatory, and anti-cancer benefits.</p>
+
+  <hr class="divider">
+
+  <!-- ============ PAGE 2 ============ -->
+
+  <h2>Antioxidants</h2>
+  <p><span class="highlight-orange">Oxidative effects</span> are responsible for a range of negative health consequences. This includes damage to cell membranes and <span class="bold">lipoproteins.</span> Oxidative effects are often a typical part of aging. This is due to the body being less able to defend against the damage of free radicals. Free radicals are substances naturally produced by the body in response to environmental stressors, as well as a by-product of metabolic processes. Antioxidant substances help to protect against this type of damage. Consequently it helps the body to avoid these harmful effects and Cordyceps have potent antioxidant properties.</p>
+
+  <h2>Anti-Inflammatory &amp; Anti-Tumor</h2>
+  <p><span class="bold">Inflammation</span> is a normal, healthy biological response to cell or tissue injury caused by physical or chemical stimuli, or by bacteria, viruses, or toxins. This response helps to protect the body and facilitate healing and recovery. However, the same substances that induce an inflammatory response within the body can sometimes become unregulated. This leads to prolonged inflammation that is commonly associated with chronic illness and even cancer. Helping the body to moderate and reduce this inflammatory response is a critical part of both modern and traditional medicine. This is due to effective anti-inflammatories being one of the most sought-after and recommended therapies for a wide range of symptoms and conditions. <span class="bold">Cordyceps</span> helps to reduce this inflammatory response by inhibiting pro-inflammatory <span class="highlight-orange">cytokines</span>. It acts as an effective <span class="highlight-orange">adjunctive therapy</span> in the treatment of certain types of cancer. <span class="bold">Cordycepin</span> inhibits tumor growth, as well as helps to reverse some of the negative effects of chemotherapy.</p>
+
+  <h2>Helps Manage Type 2 Diabetes</h2>
+  <p>Cordycepin helps to treat Type 2 Diabetes, by lowering blood sugar levels, as well as helps regulate glucose metabolism. Additionally, cordycepin helps to protect against kidney and spleen injury, a common concern among patients with diabetes.</p>
+
+  <h2>Supports Heart Health</h2>
+  <p>Cordyceps has long been recommended for its protective effects on many organs, including the heart, liver, lungs, and kidneys. The cardiovascular effects of Cordyceps are probably one of the most highly touted benefits. Cordyceps benefits heart health through a variety of possible ways, by:</p>
+  <ul>
+    <li>lowering blood pressure via direct dilation of blood vessels,</li>
+    <li>improving blood circulation in both the heart and brain</li>
+    <li>help rectify abnormal heart rhythms</li>
+    <li>Increase cardiac output when utilized in addition to conventional treatments for chronic heart failure</li>
+    <li>decrease blood viscosity and <span class="bold">fibrinogen levels</span> which helps to prevent heart attack.</li>
+  </ul>
+
+  <h2>Improves Sleep Cycle</h2>
+  <h3 class="sub">Improves Sleep Cycle</h3>
+  <div class="flex-row">
+    <div class="flex-image">
+      <div class="diagram-placeholder" data-diagram="circadian-rhythms">
+        <div class="ph-icon">🖼️</div>
+        <div class="ph-label">Diagram: Circadian Rhythms</div>
+        <div>(24-hour wheel infographic — replace with uploaded image)</div>
+      </div>
+    </div>
+    <div class="flex-text">
+      <p>It is also proven to help to reset <span class="highlight-orange">circadian rhythms deeper</span> and offer better-quality sleep. Circadian Rhythm means, the natural cycle of physical, mental, and behaviour changes that the body goes through in a 24-hour cycle, such as the sleep-wake cycle, the body-temperature cycle, and the cycles in which a number of hormones are secreted.</p>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- ============ PAGE 3 ============ -->
+
+  <h2>Anti-Aging Benefits &amp; Sexual Health</h2>
+  <p>Cordyceps is often promoted as beneficial for its &ldquo;anti-aging&rdquo; properties, especially in ancient literature. These effects are usually described as &ldquo;increased vigor&rdquo; and &ldquo;longevity&rdquo;. While more recent research explains how Cordyceps work to protect against organ damage, promote energy, and help to fight fatigue, Cordyceps also helpful for improving sexual health. Cordyceps has been shown to increase libido and restore reproductive function. Both of these effects are related to the enhancement of testosterone. As a decrease in sexual vitality is often associated with aging, the ability to potentially reverse these changes is nevertheless exciting and appreciated by many.</p>
+
+  <h2>Understanding The Inside Story Of Ingredients-</h2>
+  <p>To enhance the wellness of Cordyceps Militaris, formulating in right proposition with other organic super-food and <span class="italic">adaptogenic</span> mushrooms, such as Bee Pollen and Trametes Versicolor (Turkey Tail) mushrooms add value. <span class="orange-italic">Be assured, Vanya takes pride to offer these unique combinations that&rsquo;s unmatched by other Brands, both in India &amp; Overseas.</span></p>
+  <p>The quality that goes into the raw materials is the core of every product &ndash; it decides the final quality of the product. We grow virgin Cordyceps Militaris in-house, cultivated under ideal growing conditions in our state of the art tissue culture facility and Bee Pollen grains &amp; Turkey Tail are sourced from Garhwal region of Himalayan range and blended to optimize the health benefits to the consumers. All this goodness is captured uniquely in vegetarian capsules, made out of tasteless &amp; vegan appropriate natural cellulose fibre, which breaks down instantly and acts faster as it gets into the bloodstream, almost immediately.</p>
+
+  <h2>Benefits Of Bee Pollen</h2>
+  <div class="flex-row">
+    <div class="flex-text">
+      <p>Bee pollen is a food that comes from the pollen of flowers. It is collected by the bees and mixed with nectar and salivary substances to obtain the shape of a small granule. The bees carry it on their hind legs and take it back to the hive where the beekeeper collects it by means of a pollen trap. Pollen contains 19 of the 21 essential amino acids in nature, which is why it is attributed with unique properties as a nutrient. Each grain contains 100,000 to 5,000,000 of pollen granules. Nutritional profile of bee pollen has more than 250 active substances including proteins, carbs, lipids, fatty acids, vitamins, minerals, enzymes and antioxidants. Also, due to its high antioxidant content, it protects from free radicals and chronic diseases such as cancer and type 2 diabetes.</p>
+      <p>Additionally, it lowers blood cholesterol levels, especially &ldquo;bad&rdquo; LDL cholesterol and blood lipids and also decreases the risk of heart diseases. It also boosts liver function and protects from toxic substances. It also avoids illness by boosting immunity and killing bacteria. Reduces the activation of mast cells and lowers the severity and onset of allergies. <span class="highlight-orange">It offers an added advantage of reducing stretch marks for women and is also helpful in burning belly fat.</span> One of the significant benefits-it improves nutrient utilization, metabolism and longevity.</p>
+    </div>
+    <div class="flex-image">
+      <div class="diagram-placeholder" data-diagram="benefits-of-bee-pollen">
+        <div class="ph-icon">🖼️</div>
+        <div class="ph-label">Diagram: Benefits of Bee Pollen</div>
+        <div>(hexagon infographic — replace with uploaded image)</div>
+      </div>
+    </div>
+  </div>
+
+  <h2>Benefits Of Trametes Versicolor (Turkey Tail)</h2>
+  <div class="flex-row">
+    <div class="flex-image">
+      <div class="diagram-placeholder" data-diagram="benefits-of-turkeytail-mushroom">
+        <div class="ph-icon">🖼️</div>
+        <div class="ph-label">Diagram: Benefits of Turkeytail Mushroom</div>
+        <div>(circular infographic — replace with uploaded image)</div>
+      </div>
+    </div>
+    <div class="flex-text">
+      <p>Trametes Versicolor gets its name due to the mushroom&rsquo;s striking variety of colours and resemblance to a turkey tail structure. The words turkey tail mushroom and <span class="orange-italic">anti-carcinogenic</span> can often be found in the same sentence with its relevance with monocytes, white blood cells that fight infection. <span class="bold">PSP (polysaccharide peptide)</span> is a property that protects against bacteria. Both <span class="orange-italic">PSP and PSK (polysaccharide krestin)</span> are used in conjunction with other cancer-fighting efforts. But turkey tails produce this naturally and don&rsquo;t attack healthy cells. Over two-third of cancer-related deaths could be prevented or reduced by modifying our diet with mushrooms, as they contain antioxidants. People use turkey tail mushrooms to improve response to cancer medicines and chemotherapy &amp; radiation. It is also full of antioxidants which help reduce the damage that is caused by <span class="highlight-orange">oxidative stress.</span> Additionally, <span class="highlight-orange">probiotics</span> are essential to a healthy <span class="orange-italic">gut biome</span> and the turkey tail mushroom also takes care of that issue.</p>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- ============ PAGE 4 ============ -->
+
+  <h2>Production Facility With Cutting-Edge Technology</h2>
+  <p>Vanya&rsquo;s tissue culture laboratory for Cordyceps Militaris is equipped with state-of-the-art machinery &amp; equipment with automation by microprocessor based PID controller, sequential timer, microclimatic controller, photoperiodic timer and pressure chamber, that precisely controls and monitors both extrinsic and intrinsic factors. Cordyceps Militaris is cultivated under aseptic conditions by micro propagation.</p>
+
+  <h3 class="sub">Extrinsic Factors:</h3>
+  <ul>
+    <li>Temperature</li>
+    <li>Humidity</li>
+    <li>CO2</li>
+    <li>Light</li>
+    <li>Air exchange</li>
+  </ul>
+
+  <h3 class="sub">Intrinsic Factors:</h3>
+  <ul>
+    <li>Nutrient</li>
+    <li>Particle size of the substrate</li>
+    <li>Moisture</li>
+    <li>pH</li>
+    <li>Electrical conductivity</li>
+    <li>O2</li>
+  </ul>
+
+  <p>This ensures practically zero human intervention, leading to optimum sterile conditions to prevent contamination from microorganisms.</p>
+
+  <h2>State-Of-Art Quality Control</h2>
+  <p>Quality is not an act. It&rsquo;s a habit. Vanya&rsquo;s biotech division of Cordyceps Militaris production unit is accredited with ISO 9001-2015. ISO 22000, followed by HACCP, GMP &amp; USDA Organic certifications are under way sequentially, as Quality Management System is an on-going exercise and never ending.</p>
+
+</div>
+
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer class="site-footer">
+  <div class="container footer-top">
+    <div class="footer-col footer-brand">
+      <img src="vanya-logo-black.png" alt="Vanya Global" class="logo-img footer-logo-img">
+      <p>For Family Wellness &amp; Better Living.</p>
+    </div>
+
+    <div class="footer-col">
+      <p class="footer-heading">Quick Links</p>
+      <ul>
+        <li><a href="about.html">About Us</a></li>
+        <li><a href="index.html#kordisure">KordiSure</a></li>
+        <li><a href="index.html#science">Science</a></li>
+        <li><a href="index.html#blog">Blog</a></li>
+        <li><a href="index.html#contact">Contact Us</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-col">
+      <p class="footer-heading">Customer Care</p>
+      <ul>
+        <li><a href="faq.html">FAQ</a></li>
+        <li><a href="payment-shipping-returns.html#shipping">Shipping &amp; Delivery</a></li>
+        <li><a href="payment-shipping-returns.html#return">Return &amp; Refund</a></li>
+        <li><a href="index.html#track-order">Track Your Order</a></li>
+        <li><a href="index.html#contact-support">Contact Support</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-col">
+      <p class="footer-heading">Follow Us</p>
+      <div class="footer-social">
+        <a href="https://x.com/VanyaGlobal" class="social-icon" aria-label="Twitter / X" target="_blank" rel="noopener noreferrer">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M22 4.5c-.8.35-1.6.6-2.5.7.9-.55 1.6-1.4 1.9-2.4-.85.5-1.8.85-2.8 1.05A4.4 4.4 0 0 0 11.3 7.9c0 .35.04.68.1 1A12.5 12.5 0 0 1 2.3 3.9a4.4 4.4 0 0 0 1.36 5.86c-.72-.02-1.4-.22-2-.55v.06c0 2.14 1.52 3.92 3.54 4.33-.37.1-.76.15-1.16.15-.28 0-.56-.03-.83-.08a4.4 4.4 0 0 0 4.1 3.05A8.83 8.83 0 0 1 2 18.57 12.47 12.47 0 0 0 8.75 20.5c8.1 0 12.53-6.72 12.53-12.55 0-.19 0-.38-.01-.57A9 9 0 0 0 22 4.5Z" fill="currentColor"/></svg>
+        </a>
+        <a href="https://www.linkedin.com/company/vanya-global/about/?viewAsMember=true" class="social-icon" aria-label="LinkedIn" target="_blank" rel="noopener noreferrer">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M4.98 3.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5ZM3 9.98h4v10.52H3V9.98Zm7 0h3.8v1.44h.06c.53-1 1.83-2.06 3.77-2.06 4.03 0 4.77 2.65 4.77 6.1v6.04h-4v-5.36c0-1.28-.02-2.92-1.78-2.92-1.78 0-2.05 1.4-2.05 2.83v5.45h-4V9.98Z" fill="currentColor"/></svg>
+        </a>
+        <a href="https://www.instagram.com/vanyaglobal/" class="social-icon" aria-label="Instagram" target="_blank" rel="noopener noreferrer">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" stroke-width="1.6"/><circle cx="12" cy="12" r="4.2" stroke="currentColor" stroke-width="1.6"/><circle cx="17.4" cy="6.6" r="1.1" fill="currentColor"/></svg>
+        </a>
+        <a href="https://www.facebook.com/people/Vanya-Global/100087552353050/" class="social-icon" aria-label="Facebook" target="_blank" rel="noopener noreferrer">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M14.5 21v-7.2h2.4l.36-2.8h-2.76V9.2c0-.8.22-1.36 1.38-1.36h1.48V5.34C16.9 5.24 16 5.15 14.96 5.15c-2.16 0-3.64 1.32-3.64 3.74v2.1H8.9v2.8h2.42V21h3.18Z" fill="currentColor"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <div class="container footer-bottom-inner">
+      <p class="footer-copy">Copyright © 2026. All rights reserved VanyaGlobal.</p>
+      <nav class="footer-links" aria-label="Legal">
+        <a href="privacy-policy.html">Privacy Policy</a>
+        <span>|</span>
+        <a href="terms-of-use.html">Terms of Use</a>
+        <span>|</span>
+        <a href="payment-shipping-returns.html">Payment, Shipping, Return &amp; Refund</a>
+      </nav>
+    </div>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>

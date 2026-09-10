@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KordiSure Overview | Vanya Global — Cordyceps &amp; Bee Pollen</title>
+<meta name="description" content="KordiSure by Vanya Global — the complete family formula. See the science, ingredients, and health benefits of Cordyceps and Bee Pollen.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* ==========================================================================
+   VANYA GLOBAL / KORDISURE — shared tokens (mirrors style.css so this page
+   drops into the existing site without a visual seam)
+   ========================================================================== */
+:root{
+  --green-dark:   #1f3d2b;
+  --green:        #2f6b45;
+  --green-mid:    #3e7d52;
+  --cream:        #faf7f0;
+  --cream-deep:   #f4ecdc;
+  --ink:          #24291f;
+  --ink-soft:     #5b6358;
+  --line:         #e7e1d2;
+  --white:        #ffffff;
+
+  --font-display: 'Playfair Display', 'Georgia', 'Times New Roman', serif;
+  --font-body:    'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+
+  --container-w: 1240px;
+  --radius: 10px;
+  --header-h: 76px;
+}
+
+*, *::before, *::after{ box-sizing: border-box; }
+html{ scroll-behavior: smooth; }
+body{
+  margin:0;
+  font-family: var(--font-body);
+  color: var(--ink);
+  background: var(--white);
+  -webkit-font-smoothing: antialiased;
+  line-height: 1.55;
+}
+img{ max-width:100%; display:block; }
+a{ color: inherit; text-decoration: none; }
+ul{ list-style:none; margin:0; padding:0; }
+h1,h2,h3{ font-family: var(--font-display); font-weight: 700; margin:0; color: var(--ink); }
+p{ margin: 0 0 1em; color: var(--ink-soft); }
+button{ font-family: inherit; cursor:pointer; }
+
+.container{
+  width: 100%;
+  max-width: var(--container-w);
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.eyebrow{
+  text-transform: uppercase;
+  letter-spacing: .12em;
+  font-size: .72rem;
+  font-weight: 700;
+  color: var(--green);
+  margin-bottom: .6em;
+}
+.eyebrow.center{ text-align:center; }
+h2.center{ text-align:center; margin: 0 auto; }
+.accent{ color: var(--green); }
+
+.btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  padding: 14px 26px;
+  border-radius: 999px;
+  font-size: .92rem;
+  font-weight: 600;
+  border: 1.5px solid transparent;
+  transition: transform .15s ease, background .2s ease, color .2s ease, border-color .2s ease;
+  white-space: nowrap;
+}
+.btn:hover{ transform: translateY(-1px); }
+.btn-solid{ background: var(--green-dark); color: var(--white); }
+.btn-solid:hover{ background: var(--green); }
+.btn-outline{ background: transparent; color: var(--green-dark); border-color: var(--green-dark); }
+.btn-outline:hover{ background: var(--green-dark); color: var(--white); }
+.btn-sm{ padding: 9px 18px; font-size: .82rem; }
+
+/* ==========================================================================
+   HEADER (identical to index.html)
+   ========================================================================== */
+.site-header{
+  position: sticky; top: 0; z-index: 100;
+  background: var(--white);
+  border-bottom: 1px solid var(--line);
+}
+.header-inner{ display:flex; align-items:center; gap: 18px; height: var(--header-h); }
+.logo{ display:flex; align-items:center; margin-right: auto; }
+.logo-img{ height: 34px; width: auto; display:block; }
+.hamburger{ background:none; border:none; padding:6px; display:flex; flex-direction:column; gap:5px; order:-1; }
+.hamburger span{ width:22px; height:2px; background: var(--ink); display:block; border-radius:2px; }
+.main-nav{ display:none; }
+.header-actions{ display:flex; align-items:center; gap: 6px; }
+.icon-btn{
+  background:none; border:none; color: var(--ink);
+  width: 38px; height: 38px; display:flex; align-items:center; justify-content:center;
+  border-radius: 50%; position: relative;
+}
+.icon-btn:hover{ background: var(--cream-deep); }
+.cart-btn{ position: relative; }
+.cart-badge{
+  position:absolute; top: 2px; right: 2px; background: var(--green-dark); color:#fff;
+  font-size: .62rem; font-weight:700; min-width: 16px; height:16px; border-radius: 50%;
+  display:flex; align-items:center; justify-content:center; line-height:1;
+}
+.hide-mobile{ display:none; }
+.search-bar{ max-height:0; overflow:hidden; border-top: 0 solid var(--line); transition: max-height .25s ease, padding .25s ease, border-color .25s ease; }
+.search-bar.open{ max-height: 90px; border-top-width: 1px; }
+.search-bar-inner{ display:flex; gap:10px; padding: 14px 20px; }
+.search-bar-inner input{ flex:1; padding: 10px 16px; border-radius: 999px; border: 1px solid var(--line); font-size: .9rem; background: var(--cream); }
+.search-bar-inner input:focus{ outline: 2px solid var(--green); outline-offset: 1px; }
+.has-dropdown{ position: relative; }
+.dropdown-toggle{ background:none; border:none; font: inherit; font-size:.95rem; color: var(--ink); display:flex; align-items:center; gap:5px; padding: 8px 2px; }
+.chev{ transition: transform .2s ease; }
+.dropdown-toggle[aria-expanded="true"] .chev{ transform: rotate(180deg); }
+.mega-menu{
+  position:absolute; top: calc(100% + 10px); left: 50%; transform: translateX(-50%) translateY(6px);
+  background: var(--white); border: 1px solid var(--line); border-radius: var(--radius);
+  box-shadow: 0 18px 40px rgba(20,30,20,.12); min-width: 240px; padding: 10px;
+  opacity:0; visibility:hidden; transition: opacity .18s ease, transform .18s ease, visibility .18s ease; z-index: 50;
+}
+.mega-menu.open{ opacity:1; visibility:visible; transform: translateX(-50%) translateY(0); }
+.mega-menu ul{ display:flex; flex-direction:column; }
+.mega-menu > ul > li > a{ display:block; padding: 10px 12px; border-radius: 8px; font-size: .9rem; color: var(--ink); }
+.mega-menu > ul > li > a:hover{ background: var(--cream-deep); }
+.mega-menu > ul > li > a.active{ color: var(--green-dark); font-weight:700; background: var(--cream-deep); }
+.mega-cta{ color: var(--green-dark) !important; font-weight:700; }
+.account-menu{
+  position:absolute; top: calc(100% + 10px); right: 0; background: var(--white);
+  border: 1px solid var(--line); border-radius: var(--radius); box-shadow: 0 18px 40px rgba(20,30,20,.12);
+  min-width: 210px; padding: 12px; opacity:0; visibility:hidden; transform: translateY(6px);
+  transition: opacity .18s ease, transform .18s ease, visibility .18s ease; z-index: 50;
+}
+.account-menu.open{ opacity:1; visibility:visible; transform: translateY(0); }
+.account-menu-title{ font-size:.7rem; text-transform:uppercase; letter-spacing:.08em; color: var(--ink-soft); margin: 2px 10px 8px; }
+.account-menu a{ display:block; padding: 9px 10px; border-radius:8px; font-size:.9rem; }
+.account-menu a:hover{ background: var(--cream-deep); }
+.account-menu .divider{ height:1px; background: var(--line); margin: 6px 4px; }
+.mobile-nav-scrim{ position: fixed; inset:0; background: rgba(20,25,18,.4); opacity:0; visibility:hidden; transition: opacity .25s ease, visibility .25s ease; z-index: 199; }
+.mobile-nav-scrim.open{ opacity:1; visibility:visible; }
+.mobile-nav{
+  position: fixed; top:0; left:0; bottom:0; width: min(86vw, 340px); background: var(--white);
+  z-index: 200; transform: translateX(-100%); transition: transform .28s ease; overflow-y:auto; padding: 18px 18px 30px;
+}
+.mobile-nav.open{ transform: translateX(0); }
+.mobile-nav-head{ display:flex; align-items:center; justify-content:space-between; padding-bottom: 16px; border-bottom: 1px solid var(--line); margin-bottom: 10px; }
+.mobile-nav-list > li > a, .mobile-sub-toggle{
+  display:flex; align-items:center; justify-content:space-between; width:100%; text-align:left;
+  background:none; border:none; padding: 14px 4px; font-size: 1rem; color: var(--ink); border-bottom: 1px solid var(--line);
+}
+.mobile-nav-list .active{ color: var(--green-dark); font-weight:700; }
+.mobile-sub-toggle .chev{ transition: transform .2s ease; }
+.mobile-sub-toggle[aria-expanded="true"] .chev{ transform: rotate(180deg); }
+.mobile-sub-list{ max-height:0; overflow:hidden; transition: max-height .25s ease; padding-left: 14px; }
+.mobile-sub-list.open{ max-height: 600px; }
+.mobile-sub-list a{ display:block; padding: 12px 4px; font-size:.92rem; color: var(--ink-soft); border-bottom: 1px solid var(--line); }
+.mobile-sub-list a.active{ color: var(--green-dark); font-weight:700; }
+.mobile-nav-auth{ display:flex; gap:10px; margin-top:20px; }
+.mobile-nav-auth .btn{ flex:1; }
+
+/* ==========================================================================
+   KORDISURE OVERVIEW — page-specific
+   ========================================================================== */
+
+/* ---- Hero ---- */
+.ks-hero{
+  background: linear-gradient(180deg, var(--cream) 0%, var(--white) 100%);
+  padding: 40px 0 50px;
+  position: relative;
+  overflow: hidden;
+}
+.ks-hero-inner{
+  display:flex; flex-direction:column; gap: 34px; position:relative; z-index:1;
+}
+.ks-hero-copy h1{
+  font-size: clamp(1.9rem, 6vw, 2.7rem);
+  line-height: 1.12;
+  letter-spacing: -0.015em;
+  margin-bottom: 18px;
+}
+.ks-hero-copy p{ font-size: 1rem; max-width: 52ch; }
+.ks-hero-copy .link-arrow{
+  display:inline-block; color: var(--green-dark); font-weight:700; font-size:.92rem; margin-top:6px;
+}
+.ks-hero-media{
+  position: relative;
+  display:flex; align-items:center; justify-content:center;
+  flex: 0 0 auto;
+}
+.ks-hero-media img{
+  width: min(160px, 40vw);
+  height: auto;
+  border-radius: 14px;
+  margin: 0 auto;
+}
+.ks-hero-actions{
+  display:flex; flex-direction:column; gap: 14px;
+}
+.ks-pill-link{
+  display:flex; align-items:center; gap: 14px;
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 12px 12px 12px 14px;
+  box-shadow: 0 10px 26px rgba(31,61,43,.06);
+  transition: transform .15s ease, box-shadow .2s ease;
+}
+.ks-pill-link:hover{ transform: translateY(-1px); box-shadow: 0 14px 30px rgba(31,61,43,.1); }
+.ks-pill-icon{
+  width: 40px; height: 40px; border-radius: 50%;
+  background: var(--green-dark); color:#fff;
+  display:flex; align-items:center; justify-content:center; flex-shrink:0;
+}
+.ks-pill-label{ flex:1; font-weight:700; font-size: .96rem; color: var(--ink); }
+.ks-pill-arrow{
+  width: 30px; height: 30px; border-radius: 50%;
+  background: var(--cream); display:flex; align-items:center; justify-content:center;
+  color: var(--green-dark); flex-shrink:0;
+}
+
+/* ---- Ingredients strip ---- */
+.ks-ingredients{ text-align:center; padding: 8px 20px 40px; }
+.ks-ingredients h2{ font-size: clamp(1.35rem, 4.6vw, 1.9rem); margin-bottom: 18px; }
+.ks-ingredients-list{
+  font-size: .82rem; color: var(--ink-soft); max-width: 900px; margin: 0 auto; line-height: 1.9;
+}
+.ks-ingredients-list .row{ display:block; }
+.ks-leaf-divider{ display:flex; justify-content:center; margin: 14px 0 0; color: var(--green); opacity:.7; }
+
+/* ---- shared two-col "panel" cards ---- */
+.ks-panels{ padding: 0 0 8px; }
+.ks-panel-row{
+  display:flex; flex-direction:column; gap: 20px; margin-bottom: 20px;
+}
+.ks-panel{
+  background: var(--cream);
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  overflow:hidden;
+  box-shadow: 0 10px 30px rgba(31,61,43,.05);
+}
+.ks-panel.split{ display:flex; flex-direction:column; }
+.ks-panel.split .ks-panel-media img{ width:100%; aspect-ratio: 4/3; object-fit:cover; }
+.ks-panel.split .ks-panel-copy{ padding: 22px 22px 26px; }
+.ks-panel.split .ks-panel-copy h3{ font-size: 1.4rem; margin-bottom: 12px; }
+.ks-panel.split .ks-panel-copy p{ font-size: .9rem; margin-bottom: 0; }
+
+/* ---- Cordyceps wheel diagram (now a real image, not CSS-drawn) ---- */
+.ks-wheel-panel{
+  padding: 26px 18px 30px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+.ks-wheel-panel img{
+  width: 100%;
+  max-width: 480px;
+  border-radius: 12px;
+}
+
+/* ---- Bee Pollen diagram (now a real image, not CSS-drawn hex grid) ---- */
+.ks-hex-panel{ padding: 26px 18px 30px; }
+.ks-hex-title{ text-align:center; font-size: 1.05rem; margin-bottom: 20px; padding: 0 10px; }
+.ks-hex-panel img{
+  width: 100%;
+  max-width: 420px;
+  margin: 0 auto;
+  border-radius: 12px;
+}
+
+/* ==========================================================================
+   FOOTER (identical to index.html)
+   ========================================================================== */
+.site-footer{ background: var(--cream); border-top: 1px solid var(--line); }
+.footer-top{ display:grid; grid-template-columns: 1fr; gap: 32px; padding: 44px 20px 34px; }
+.footer-col{ text-align:left; }
+.footer-brand{ display:flex; flex-direction:column; align-items:flex-start; }
+.footer-logo-img{ height: 40px; width:auto; }
+.footer-brand p{ margin:14px 0 0; font-size:.85rem; color: var(--ink-soft); }
+.footer-heading{ text-transform: uppercase; letter-spacing:.08em; font-size:.74rem; font-weight:700; color: var(--ink); margin: 0 0 14px; }
+.footer-col ul{ display:flex; flex-direction:column; gap:11px; }
+.footer-col ul a{ font-size:.88rem; color: var(--ink-soft); }
+.footer-col ul a:hover{ color: var(--green-dark); }
+.footer-social{ display:flex; gap:10px; }
+.social-icon{ width:36px; height:36px; border-radius:50%; background: var(--white); border:1px solid var(--line); color: var(--ink); display:flex; align-items:center; justify-content:center; }
+.social-icon:hover{ background: var(--green-dark); color:#fff; border-color: var(--green-dark); }
+.footer-bottom{ border-top: 1px solid var(--line); }
+.footer-bottom-inner{ display:flex; flex-direction:column; gap:10px; align-items:center; text-align:center; padding: 18px 20px; }
+.footer-copy{ font-size: .78rem; color: var(--ink-soft); margin:0; }
+.footer-links{ display:flex; flex-wrap:wrap; justify-content:center; gap: 8px; font-size:.78rem; color: var(--ink-soft); }
+.footer-links a:hover{ color: var(--green-dark); }
+
+/* ==========================================================================
+   TABLET (>=768px)
+   ========================================================================== */
+@media (min-width: 768px){
+  .ks-hero-inner{ flex-direction: row; align-items:center; gap: 40px; }
+  .ks-hero-copy{ flex: 1.1; }
+  .ks-hero-media{ flex: 1; }
+  .ks-hero-actions{ flex: 1; }
+
+  .ks-panel-row{ flex-direction: row; align-items: stretch; }
+  .ks-panel{ flex: 1; }
+  .ks-panel.split{ flex-direction: row; }
+  .ks-panel.split .ks-panel-media{ flex: 1; }
+  .ks-panel.split .ks-panel-media img{ height:100%; aspect-ratio: auto; }
+  .ks-panel.split .ks-panel-copy{ flex: 1; align-self:center; }
+
+  .footer-top{ grid-template-columns: 1.3fr 1fr 1fr 1fr; }
+  .footer-bottom-inner{ flex-direction: row; justify-content: space-between; text-align:left; }
+}
+
+/* ==========================================================================
+   DESKTOP (>=1024px)
+   ========================================================================== */
+@media (min-width: 1024px){
+  :root{ --header-h: 84px; }
+  .hamburger{ display:none; }
+  .main-nav{ display:block; margin: 0 8px 0 40px; }
+  .main-nav > ul{ display:flex; align-items:center; gap: 28px; }
+  .main-nav > ul > li > a{ font-size: .95rem; padding: 8px 2px; position:relative; }
+  .main-nav > ul > li > a.active{ color: var(--green-dark); font-weight:700; }
+  .main-nav > ul > li > a:not(.active):hover{ color: var(--green); }
+  .hide-mobile{ display:inline-flex; }
+  .mobile-nav, .mobile-nav-scrim, .mobile-nav-head{ display:none !important; }
+
+  .ks-hero{ padding: 56px 0 64px; }
+  .ks-hero-copy{ flex: 0 0 40%; }
+}
+</style>
+</head>
+<body>
+
+<!-- ============ HEADER ============ -->
+<header class="site-header" id="siteHeader">
+  <div class="header-inner container">
+
+    <button class="hamburger" id="hamburgerBtn" aria-label="Open menu" aria-expanded="false" aria-controls="mobileNav">
+      <span></span><span></span><span></span>
+    </button>
+
+    <a href="index.html" class="logo" aria-label="Vanya Global home">
+      <img src="vanya-logo-black.png" alt="Vanya Global" class="logo-img">
+    </a>
+
+    <!-- Desktop / tablet nav -->
+    <nav class="main-nav" id="mainNav" aria-label="Primary">
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About Us</a></li>
+        <li class="has-dropdown" id="kordisureNavItem">
+          <button class="dropdown-toggle" id="kordisureToggle" aria-expanded="false" aria-controls="kordisureMenu">
+            KordiSure <svg class="chev" width="10" height="6" viewBox="0 0 10 6" fill="none"><path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <div class="mega-menu" id="kordisureMenu">
+            <ul>
+              <li><a href="kordisure.html" class="active">KordiSure Overview</a></li>
+              <li><a href="ingredients.html">Ingredients</a></li>
+              <li><a href="index.html#science">How It Works / Science</a></li>
+              <li><a href="benefits.html">Benefits</a></li>
+              <li><a href="index.html#faqs">FAQs</a></li>
+              <li><a href="index.html#order" class="mega-cta">Order KordiSure</a></li>
+            </ul>
+          </div>
+        </li>
+        <li><a href="shop.html">Shop</a></li>
+        <li><a href="index.html#science">Science</a></li>
+        <li><a href="index.html#testimonials">Testimonials</a></li>
+        <li><a href="blog.html">Blog</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+
+    <div class="header-actions">
+
+      <div class="has-dropdown" id="accountNavItem">
+        <button class="icon-btn" id="accountToggle" aria-label="My account" aria-expanded="false" aria-controls="accountMenu">
+          <svg width="19" height="19" viewBox="0 0 19 19" fill="none"><circle cx="9.5" cy="5.5" r="3.3" stroke="currentColor" stroke-width="1.4"/><path d="M2.8 17c1-3.6 4-5.4 6.7-5.4S15.2 13.4 16.2 17" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+        </button>
+        <div class="account-menu" id="accountMenu">
+          <p class="account-menu-title">My Account</p>
+          <ul>
+            <li><a href="login.html">Login</a></li>
+            <li><a href="#signup">Sign Up</a></li>
+            <li class="divider" role="separator"></li>
+            <li><a href="profile.html">My Profile</a></li>
+            <li><a href="#orders">My Orders</a></li>
+            <li><a href="#order-history">Order History</a></li>
+            <li><a href="#addresses">Saved Addresses</a></li>
+            <li class="divider" role="separator"></li>
+            <li><a href="#logout">Logout</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <button class="icon-btn cart-btn" aria-label="Cart, 0 items">
+        <svg width="19" height="19" viewBox="0 0 19 19" fill="none"><path d="M2 2H3.6L5.7 12.4A1.5 1.5 0 0 0 7.2 13.6H14.4A1.5 1.5 0 0 0 15.9 12.4L17.2 5.6H4.3" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/><circle cx="7.5" cy="16.5" r="1.1" fill="currentColor"/><circle cx="14" cy="16.5" r="1.1" fill="currentColor"/></svg>
+        <span class="cart-badge">0</span>
+      </button>
+
+      <a href="#login" class="btn btn-outline btn-sm hide-mobile">Login</a>
+      <a href="#signup" class="btn btn-solid btn-sm hide-mobile">Sign Up</a>
+    </div>
+  </div>
+
+  <!-- inline search bar -->
+
+</header>
+
+<!-- Mobile slide-out nav -->
+<div class="mobile-nav-scrim" id="mobileScrim"></div>
+<nav class="mobile-nav" id="mobileNav" aria-label="Mobile">
+  <div class="mobile-nav-head">
+    <img src="vanya-logo-black.png" alt="Vanya Global" class="logo-img">
+    <button class="icon-btn" id="mobileNavClose" aria-label="Close menu">✕</button>
+  </div>
+  <ul class="mobile-nav-list">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="about.html">About Us</a></li>
+    <li class="mobile-has-sub">
+      <button class="mobile-sub-toggle" aria-expanded="false">KordiSure <svg class="chev" width="10" height="6" viewBox="0 0 10 6" fill="none"><path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+      <ul class="mobile-sub-list">
+        <li><a href="kordisure.html" class="active">KordiSure Overview</a></li>
+        <li><a href="ingredients.html">Ingredients</a></li>
+        <li><a href="index.html#science">How It Works / Science</a></li>
+        <li><a href="benefits.html">Benefits</a></li>
+        <li><a href="index.html#faqs">FAQs</a></li>
+        <li><a href="index.html#order">Order KordiSure</a></li>
+      </ul>
+    </li>
+    <li><a href="shop.html">Shop</a></li>
+    <li><a href="index.html#science">Science</a></li>
+    <li><a href="index.html#testimonials">Testimonials</a></li>
+    <li><a href="blog.html">Blog</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+  <div class="mobile-nav-auth">
+    <a href="#login" class="btn btn-outline btn-sm">Login</a>
+    <a href="#signup" class="btn btn-solid btn-sm">Sign Up</a>
+  </div>
+</nav>
+
+<main>
+
+<!-- ============ HERO ============ -->
+<section class="ks-hero" id="overview">
+  <div class="container ks-hero-inner">
+
+    <div class="ks-hero-copy">
+      <p class="eyebrow">The Complete Family Formula</p>
+      <h1>Powered by Nature.<br>Supported by <span class="accent">Science</span>.</h1>
+      <p>KordiSure is a 100% natural synergy of Cordyceps, Bee Pollen and other botanical extracts — designed to help enhance physical energy, improve stamina, and support overall wellness. Nature for the best care, made with excellence.</p>
+      <a href="index.html#science" class="link-arrow">Learn More About the Science →</a>
+    </div>
+
+    <div class="ks-hero-media">
+      <!-- REPLACE with your actual KordiSure bottle product photo -->
+      <img src="https://picsum.photos/seed/kordisure-bottle/500/650" alt="KordiSure bottle of 60 capsules, the complete family formula" width="500" height="650">
+    </div>
+
+    <div class="ks-hero-actions">
+      <a href="benefits.html" class="ks-pill-link">
+        <span class="ks-pill-icon">
+          <svg width="18" height="18" viewBox="0 0 32 32" fill="none"><path d="M16 5C9 5 5 10 5 17c8 0 11-4 11-12Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M16 5c7 0 11 5 11 12-8 0-11-4-11-12Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M16 17v10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+        </span>
+        <span class="ks-pill-label">Benefits</span>
+        <span class="ks-pill-arrow">→</span>
+      </a>
+      <a href="glossary.html" class="ks-pill-link">
+        <span class="ks-pill-icon">
+          <svg width="18" height="18" viewBox="0 0 32 32" fill="none"><path d="M16 6C12 6 8 7.4 5 9v18c3-1.6 7-3 11-3s8 1.4 11 3V9c-3-1.6-7-3-11-3Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M16 6v18" stroke="currentColor" stroke-width="1.8"/></svg>
+        </span>
+        <span class="ks-pill-label">Glossary / Overview</span>
+        <span class="ks-pill-arrow">→</span>
+      </a>
+    </div>
+
+  </div>
+</section>
+
+<!-- ============ INGREDIENTS STRIP ============ -->
+<section class="ks-ingredients" id="ingredients">
+  <div class="container">
+    <h2>Ingredients Of KordiSure – Cordyceps &amp; Bee Pollen</h2>
+    <p class="ks-ingredients-list">
+      <span class="row">Cordyceps Militaris &nbsp;·&nbsp; Vitamin B12 &nbsp;·&nbsp; Folic Acid &nbsp;·&nbsp; Zinc &nbsp;·&nbsp; Iron &nbsp;·&nbsp; Vit A &nbsp;·&nbsp; Vit C &nbsp;·&nbsp; Vit D3 &nbsp;·&nbsp; Vitamin – K2 &nbsp;·&nbsp; Purified Water &nbsp;·&nbsp; Microcrystalline Cellulose &nbsp;·&nbsp; Cross Povidone &nbsp;·&nbsp; Talc &nbsp;·&nbsp; Starch &nbsp;·&nbsp; Silicon Dioxide &nbsp;·&nbsp; Bees Wax</span>
+      <span class="row">Coating : Hydroxypropyl Methylcellulose, Titanium Dioxide, Acetylated Monoglycerides &nbsp;·&nbsp; Lactose and Artificial colour (INS 171)</span>
+    </p>
+    <div class="ks-leaf-divider">
+      <svg width="20" height="20" viewBox="0 0 32 32" fill="none"><path d="M16 5C9 5 5 10 5 17c8 0 11-4 11-12Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M16 5c7 0 11 5 11 12-8 0-11-4-11-12Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CORDYCEPS + WHEEL ============ -->
+<section class="ks-panels container">
+
+  <div class="ks-panel-row">
+
+    <div class="ks-panel split">
+      <div class="ks-panel-media">
+        <!-- REPLACE with your actual Cordyceps photo -->
+        <img src="https://picsum.photos/seed/cordyceps-hand/600/500" alt="A gloved hand holding a cluster of freshly harvested Cordyceps mushrooms" width="600" height="500">
+      </div>
+      <div class="ks-panel-copy">
+        <h3>Cordyceps</h3>
+        <p>The most valuable medicinal mushroom nutrition. Boosts stamina, ATP production and resilience. Enhances memory and cognitive function &amp; fights inflammation and oxidative free radicals.</p>
+      </div>
+    </div>
+
+    <!-- Cordyceps benefits wheel: this used to be drawn with CSS/JS.
+         It is now a real <img> — replace the src below with your own
+         Cordyceps benefits-wheel infographic image. -->
+    <div class="ks-panel ks-wheel-panel">
+      <img src="https://picsum.photos/seed/cordyceps-benefits-wheel/600/600" alt="Cordyceps health benefits wheel diagram: anti-inflammatory, anti-fatigue, anti-aging, antioxidant, hepato-protective, anti-bacterial, anti-hyperlipidemic, neuroprotective, immunomodulant, anti-viral, anti-cancer, anti-ulcer" width="600" height="600">
+    </div>
+
+  </div>
+
+  <!-- ============ BEE POLLEN DIAGRAM + PANEL ============ -->
+  <div class="ks-panel-row">
+
+    <!-- Bee Pollen hex grid: this used to be drawn with CSS clip-path
+         hexagons. It is now a real <img> — replace the src below with
+         your own Bee Pollen benefits infographic image. -->
+    <div class="ks-panel ks-hex-panel">
+      <h3 class="ks-hex-title">Bee Pollen – A Power House Of 250 Bioactive Compounds</h3>
+      <img src="https://picsum.photos/seed/bee-pollen-benefits-hex/600/600" alt="Bee Pollen benefits diagram: rich in nutrients, boosts immunity, balances skin health, supports heart health, increases energy, rich in antioxidants, detoxifies the body" width="600" height="600">
+    </div>
+
+    <div class="ks-panel split">
+      <div class="ks-panel-media">
+        <!-- REPLACE with your actual Bee Pollen photo -->
+        <img src="https://picsum.photos/seed/bee-pollen-honeycomb/600/500" alt="Bee pollen granules with honeycomb and honey dipper on a rustic table" width="600" height="500">
+      </div>
+      <div class="ks-panel-copy">
+        <h3>Bee Pollen</h3>
+        <p>A power bank of 250 active substances and bioactive compounds. It is a functional food that has many pharmacological properties, including anti-viral, antioxidative, enzyme, anti-inflammatory and immunomodulating functions, promoting overall health.</p>
+      </div>
+    </div>
+
+  </div>
+
+</section>
+
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer class="site-footer">
+  <div class="container footer-top">
+    <div class="footer-col footer-brand">
+      <img src="vanya-logo-black.png" alt="Vanya Global" class="logo-img footer-logo-img">
+      <p>For Family Wellness &amp; Better Living.</p>
+    </div>
+
+    <div class="footer-col">
+      <p class="footer-heading">Quick Links</p>
+      <ul>
+        <li><a href="about.html">About Us</a></li>
+        <li><a href="kordisure.html">KordiSure</a></li>
+        <li><a href="index.html#science">Science</a></li>
+        <li><a href="blog.html">Blog</a></li>
+        <li><a href="index.html#contact">Contact Us</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-col">
+      <p class="footer-heading">Customer Care</p>
+      <ul>
+        <li><a href="faq.html">FAQ</a></li>
+        <li><a href="payment-shipping-returns.html#shipping">Shipping &amp; Delivery</a></li>
+        <li><a href="payment-shipping-returns.html#return">Return &amp; Refund</a></li>
+        <li><a href="index.html#track-order">Track Your Order</a></li>
+        <li><a href="index.html#contact-support">Contact Support</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-col">
+      <p class="footer-heading">Follow Us</p>
+      <div class="footer-social">
+        <a href="https://x.com/VanyaGlobal" class="social-icon" aria-label="Twitter / X" target="_blank" rel="noopener noreferrer">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M22 4.5c-.8.35-1.6.6-2.5.7.9-.55 1.6-1.4 1.9-2.4-.85.5-1.8.85-2.8 1.05A4.4 4.4 0 0 0 11.3 7.9c0 .35.04.68.1 1A12.5 12.5 0 0 1 2.3 3.9a4.4 4.4 0 0 0 1.36 5.86c-.72-.02-1.4-.22-2-.55v.06c0 2.14 1.52 3.92 3.54 4.33-.37.1-.76.15-1.16.15-.28 0-.56-.03-.83-.08a4.4 4.4 0 0 0 4.1 3.05A8.83 8.83 0 0 1 2 18.57 12.47 12.47 0 0 0 8.75 20.5c8.1 0 12.53-6.72 12.53-12.55 0-.19 0-.38-.01-.57A9 9 0 0 0 22 4.5Z" fill="currentColor"/></svg>
+        </a>
+        <a href="https://www.linkedin.com/company/vanya-global/about/?viewAsMember=true" class="social-icon" aria-label="LinkedIn" target="_blank" rel="noopener noreferrer">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M4.98 3.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5ZM3 9.98h4v10.52H3V9.98Zm7 0h3.8v1.44h.06c.53-1 1.83-2.06 3.77-2.06 4.03 0 4.77 2.65 4.77 6.1v6.04h-4v-5.36c0-1.28-.02-2.92-1.78-2.92-1.78 0-2.05 1.4-2.05 2.83v5.45h-4V9.98Z" fill="currentColor"/></svg>
+        </a>
+        <a href="https://www.instagram.com/vanyaglobal/" class="social-icon" aria-label="Instagram" target="_blank" rel="noopener noreferrer">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" stroke-width="1.6"/><circle cx="12" cy="12" r="4.2" stroke="currentColor" stroke-width="1.6"/><circle cx="17.4" cy="6.6" r="1.1" fill="currentColor"/></svg>
+        </a>
+        <a href="https://www.facebook.com/people/Vanya-Global/100087552353050/" class="social-icon" aria-label="Facebook" target="_blank" rel="noopener noreferrer">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M14.5 21v-7.2h2.4l.36-2.8h-2.76V9.2c0-.8.22-1.36 1.38-1.36h1.48V5.34C16.9 5.24 16 5.15 14.96 5.15c-2.16 0-3.64 1.32-3.64 3.74v2.1H8.9v2.8h2.42V21h3.18Z" fill="currentColor"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <div class="container footer-bottom-inner">
+      <p class="footer-copy">Copyright © 2026. All rights reserved VanyaGlobal.</p>
+      <nav class="footer-links" aria-label="Legal">
+        <a href="privacy-policy.html">Privacy Policy</a>
+        <span>|</span>
+        <a href="terms-of-use.html">Terms of Use</a>
+        <span>|</span>
+        <a href="payment-shipping-returns.html">Payment, Shipping, Return &amp; Refund</a>
+      </nav>
+    </div>
+  </div>
+</footer>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+
+  /* ---------------------------------------------------------------
+     Helper: close any open dropdown/menu
+  --------------------------------------------------------------- */
+  function closeAll(except) {
+    document.querySelectorAll('.mega-menu.open, .account-menu.open').forEach(el => {
+      if (el === except) return;
+      el.classList.remove('open');
+      const btn = document.querySelector(`[aria-controls="${el.id}"]`);
+      if (btn) btn.setAttribute('aria-expanded', 'false');
+    });
+  }
+
+  /* Search bar toggle */
+  const searchBtn = document.getElementById('searchBtn');
+  const searchBar = document.getElementById('searchBar');
+  searchBtn.addEventListener('click', () => {
+    const isOpen = searchBar.classList.toggle('open');
+    searchBtn.setAttribute('aria-expanded', String(isOpen));
+    if (isOpen) searchBar.querySelector('input').focus();
+  });
+
+  /* KordiSure mega-menu */
+  const kordisureToggle = document.getElementById('kordisureToggle');
+  const kordisureMenu = document.getElementById('kordisureMenu');
+  kordisureToggle.addEventListener('click', (e) => {
+    e.stopPropagation();
+    const isOpen = kordisureMenu.classList.contains('open');
+    closeAll();
+    kordisureMenu.classList.toggle('open', !isOpen);
+    kordisureToggle.setAttribute('aria-expanded', String(!isOpen));
+  });
+
+  /* Account dropdown */
+  const accountToggle = document.getElementById('accountToggle');
+  const accountMenu = document.getElementById('accountMenu');
+  accountToggle.addEventListener('click', (e) => {
+    e.stopPropagation();
+    const isOpen = accountMenu.classList.contains('open');
+    closeAll();
+    accountMenu.classList.toggle('open', !isOpen);
+    accountToggle.setAttribute('aria-expanded', String(!isOpen));
+  });
+
+  document.addEventListener('click', () => closeAll());
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeAll(); });
+  [kordisureMenu, accountMenu].forEach(menu => {
+    menu.addEventListener('click', (e) => e.stopPropagation());
+  });
+
+  /* Mobile slide-out nav */
+  const hamburgerBtn = document.getElementById('hamburgerBtn');
+  const mobileNav = document.getElementById('mobileNav');
+  const mobileScrim = document.getElementById('mobileScrim');
+  const mobileNavClose = document.getElementById('mobileNavClose');
+
+  function openMobileNav() {
+    mobileNav.classList.add('open');
+    mobileScrim.classList.add('open');
+    hamburgerBtn.setAttribute('aria-expanded', 'true');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeMobileNav() {
+    mobileNav.classList.remove('open');
+    mobileScrim.classList.remove('open');
+    hamburgerBtn.setAttribute('aria-expanded', 'false');
+    document.body.style.overflow = '';
+  }
+  hamburgerBtn.addEventListener('click', openMobileNav);
+  mobileNavClose.addEventListener('click', closeMobileNav);
+  mobileScrim.addEventListener('click', closeMobileNav);
+
+  document.querySelectorAll('.mobile-sub-toggle').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const list = btn.nextElementSibling;
+      const isOpen = list.classList.contains('open');
+      list.classList.toggle('open', !isOpen);
+      btn.setAttribute('aria-expanded', String(!isOpen));
+    });
+  });
+
+  window.addEventListener('resize', () => {
+    if (window.innerWidth >= 1024) closeMobileNav();
+  });
+
+  /* Sticky header shadow on scroll */
+  const header = document.getElementById('siteHeader');
+  window.addEventListener('scroll', () => {
+    header.style.boxShadow = window.scrollY > 4 ? '0 4px 16px rgba(0,0,0,.06)' : 'none';
+  }, { passive: true });
+
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Visit Tracking Dashboard</title>
+<style>
+  :root { --forest-green: #1E4620; }
+  * { box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+    background: #f6f7f6;
+    color: #1a1a1a;
+    margin: 0;
+    padding: 30px;
+  }
+  h1 { font-size: 1.4rem; margin-bottom: 4px; }
+  .sub { color: #666; font-size: 0.85rem; margin-bottom: 24px; }
+
+  .config {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    margin-bottom: 24px;
+    flex-wrap: wrap;
+  }
+  .config input {
+    padding: 8px 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    min-width: 260px;
+  }
+  .config button {
+    padding: 8px 14px;
+    border: 1px solid var(--forest-green);
+    background: var(--forest-green);
+    color: #fff;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.85rem;
+    font-weight: 600;
+  }
+  .config button:hover { background: #163618; }
+
+  .card {
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+    padding: 20px;
+    margin-bottom: 24px;
+  }
+  .card h2 {
+    font-size: 1rem;
+    margin: 0 0 14px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .card h2 .hint { font-weight: 400; color: #888; font-size: 0.78rem; }
+
+  table { width: 100%; border-collapse: collapse; font-size: 0.83rem; }
+  th, td {
+    text-align: left;
+    padding: 8px 10px;
+    border-bottom: 1px solid #eee;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 260px;
+  }
+  th { color: #666; font-weight: 600; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.03em; }
+  tr:hover td { background: #fafafa; }
+
+  .lookup-row { display: flex; gap: 8px; margin-bottom: 14px; flex-wrap: wrap; }
+  .lookup-row input {
+    flex: 1;
+    min-width: 200px;
+    padding: 7px 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 0.83rem;
+  }
+  .lookup-row button {
+    padding: 7px 12px;
+    border: 1px solid var(--forest-green);
+    background: #fff;
+    color: var(--forest-green);
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.83rem;
+    font-weight: 600;
+  }
+  .lookup-row button:hover { background: rgba(30,70,32,0.06); }
+
+  .empty { color: #999; font-size: 0.83rem; padding: 10px 0; }
+  .error { color: #b00020; font-size: 0.83rem; padding: 10px 0; }
+  .status { font-size: 0.78rem; color: #888; margin-bottom: 10px; }
+</style>
+</head>
+<body>
+
+  <h1>Visit Tracking Dashboard</h1>
+  <div class="sub">Reads live data from your tracking backend's API endpoints.</div>
+
+  <div class="config">
+    <input id="apiBase" placeholder="API base URL, e.g. https://api.vanyaglobal.com" value="http://localhost:4000">
+    <button id="loadBtn">Load data</button>
+    <span class="status" id="status"></span>
+  </div>
+
+  <div class="card">
+    <h2>Summary <span class="hint">views &amp; unique visitors per page</span></h2>
+    <div id="summaryContainer"><div class="empty">Click "Load data" above.</div></div>
+  </div>
+
+  <div class="card">
+    <h2>Recent activity <span class="hint">last 100 page views</span></h2>
+    <div id="recentContainer"><div class="empty">Click "Load data" above.</div></div>
+  </div>
+
+  <div class="card">
+    <h2>Look up by visitor</h2>
+    <div class="lookup-row">
+      <input id="visitorIdInput" placeholder="visitor_id (copy from the tables above)">
+      <button id="visitorBtn">Look up</button>
+    </div>
+    <div id="visitorContainer"><div class="empty">Enter a visitor ID above.</div></div>
+  </div>
+
+  <div class="card">
+    <h2>Look up by page</h2>
+    <div class="lookup-row">
+      <input id="pageInput" placeholder="page path, e.g. /about.html">
+      <button id="pageBtn">Look up</button>
+    </div>
+    <div id="pageContainer"><div class="empty">Enter a page path above.</div></div>
+  </div>
+
+<script>
+  const $ = (id) => document.getElementById(id);
+
+  function apiBase() {
+    return $('apiBase').value.trim().replace(/\/$/, '');
+  }
+
+  function setStatus(msg, isError) {
+    const el = $('status');
+    el.textContent = msg;
+    el.style.color = isError ? '#b00020' : '#888';
+  }
+
+  async function apiGet(pathAndQuery) {
+    const res = await fetch(apiBase() + pathAndQuery);
+    if (!res.ok) throw new Error('Request failed: ' + res.status);
+    return res.json();
+  }
+
+  function renderTable(container, rows, columns) {
+    if (!rows || rows.length === 0) {
+      container.innerHTML = '<div class="empty">No data yet.</div>';
+      return;
+    }
+    let html = '<table><thead><tr>';
+    columns.forEach(c => html += `<th>${c.label}</th>`);
+    html += '</tr></thead><tbody>';
+    rows.forEach(row => {
+      html += '<tr>';
+      columns.forEach(c => {
+        const val = c.format ? c.format(row[c.key]) : (row[c.key] ?? '');
+        html += `<td title="${String(val).replace(/"/g, '&quot;')}">${val}</td>`;
+      });
+      html += '</tr>';
+    });
+    html += '</tbody></table>';
+    container.innerHTML = html;
+  }
+
+  function fmtDate(iso) {
+    if (!iso) return '';
+    return new Date(iso.replace(' ', 'T') + 'Z').toLocaleString();
+  }
+
+  async function loadSummary() {
+    const container = $('summaryContainer');
+    try {
+      const rows = await apiGet('/api/visits/summary');
+      renderTable(container, rows, [
+        { key: 'page', label: 'Page' },
+        { key: 'views', label: 'Views' },
+        { key: 'unique_visitors', label: 'Unique visitors' },
+      ]);
+    } catch (e) {
+      container.innerHTML = `<div class="error">Couldn't load summary: ${e.message}</div>`;
+    }
+  }
+
+  async function loadRecent() {
+    const container = $('recentContainer');
+    try {
+      const rows = await apiGet('/api/visits/recent?limit=100');
+      renderTable(container, rows, [
+        { key: 'created_at', label: 'Time', format: fmtDate },
+        { key: 'page', label: 'Page' },
+        { key: 'title', label: 'Title' },
+        { key: 'referrer', label: 'Referrer' },
+        { key: 'visitor_id', label: 'Visitor ID' },
+      ]);
+    } catch (e) {
+      container.innerHTML = `<div class="error">Couldn't load recent activity: ${e.message}</div>`;
+    }
+  }
+
+  async function loadByVisitor() {
+    const container = $('visitorContainer');
+    const id = $('visitorIdInput').value.trim();
+    if (!id) { container.innerHTML = '<div class="empty">Enter a visitor ID above.</div>'; return; }
+    try {
+      const rows = await apiGet('/api/visits/by-visitor/' + encodeURIComponent(id));
+      renderTable(container, rows, [
+        { key: 'created_at', label: 'Time', format: fmtDate },
+        { key: 'page', label: 'Page' },
+        { key: 'title', label: 'Title' },
+      ]);
+    } catch (e) {
+      container.innerHTML = `<div class="error">Couldn't load visitor history: ${e.message}</div>`;
+    }
+  }
+
+  async function loadByPage() {
+    const container = $('pageContainer');
+    const page = $('pageInput').value.trim();
+    if (!page) { container.innerHTML = '<div class="empty">Enter a page path above.</div>'; return; }
+    try {
+      const rows = await apiGet('/api/visits/by-page?page=' + encodeURIComponent(page));
+      renderTable(container, rows, [
+        { key: 'visitor_id', label: 'Visitor ID' },
+        { key: 'first_seen', label: 'First seen', format: fmtDate },
+      ]);
+    } catch (e) {
+      container.innerHTML = `<div class="error">Couldn't load page visitors: ${e.message}</div>`;
+    }
+  }
+
+  $('loadBtn').addEventListener('click', async () => {
+    setStatus('Loading...');
+    await Promise.all([loadSummary(), loadRecent()]);
+    setStatus('Last loaded: ' + new Date().toLocaleTimeString());
+  });
+  $('visitorBtn').addEventListener('click', loadByVisitor);
+  $('pageBtn').addEventListener('click', loadByPage);
+  $('visitorIdInput').addEventListener('keydown', (e) => { if (e.key === 'Enter') loadByVisitor(); });
+  $('pageInput').addEventListener('keydown', (e) => { if (e.key === 'Enter') loadByPage(); });
+</script>
+
+</body>
+</html>

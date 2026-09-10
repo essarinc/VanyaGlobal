@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Log Out | Vanya Global — KordiSure</title>
+<meta name="description" content="Log out of your Vanya Global account.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    --green-dark:#1f3d2b;
+    --green:#2f6b45;
+    --cream:#f7f2e6;
+    --cream-deep:#eee7d3;
+    --white:#ffffff;
+    --ink:#20291f;
+    --ink-soft:#6c7768;
+    --line:#e4e0d0;
+    --radius:12px;
+    --font-display:'Playfair Display', Georgia, serif;
+    --font-body:'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  }
+
+  *{ box-sizing:border-box; }
+  body{
+    margin:0;
+    font-family:var(--font-body);
+    background:var(--cream);
+    color:var(--ink);
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:24px;
+  }
+
+  .logout-shell{
+    width:100%;
+    max-width:420px;
+    background:var(--white);
+    border:1px solid var(--line);
+    border-radius:18px;
+    box-shadow:0 14px 40px rgba(31,61,43,.10);
+    padding:34px 28px;
+    text-align:center;
+    animation:pop .25s ease;
+  }
+  @keyframes pop{ from{ opacity:0; transform:translateY(8px);} to{ opacity:1; transform:translateY(0);} }
+
+  .logout-icon{
+    width:64px; height:64px;
+    border-radius:50%;
+    background:var(--cream-deep);
+    color:var(--green-dark);
+    display:flex; align-items:center; justify-content:center;
+    margin:0 auto 18px;
+  }
+
+  h1{
+    font-family:var(--font-display);
+    font-size:1.4rem;
+    letter-spacing:-0.01em;
+    margin:0 0 8px;
+    color:var(--ink);
+  }
+  .sub{
+    font-size:.92rem;
+    color:var(--ink-soft);
+    margin:0 0 6px;
+    line-height:1.5;
+  }
+  .who{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    background:var(--cream-deep);
+    border-radius:999px;
+    padding:6px 14px 6px 6px;
+    margin:14px 0 22px;
+    font-weight:700;
+    font-size:.88rem;
+    color:var(--green-dark);
+  }
+  .who .avatar{
+    width:26px; height:26px;
+    border-radius:50%;
+    background:var(--green-dark);
+    color:var(--cream);
+    display:flex; align-items:center; justify-content:center;
+    font-size:.72rem; font-weight:800;
+    flex-shrink:0;
+  }
+
+  .btn-row{ display:flex; flex-direction:column; gap:10px; }
+  .btn{
+    border:none;
+    border-radius:999px;
+    padding:13px 20px;
+    font-family:inherit;
+    font-weight:700;
+    font-size:.92rem;
+    cursor:pointer;
+    transition:background .18s ease, color .18s ease, opacity .18s ease;
+  }
+  .btn-solid{ background:var(--green-dark); color:var(--white); }
+  .btn-solid:hover{ background:var(--green); }
+  .btn-ghost{ background:transparent; color:var(--ink-soft); border:1.5px solid var(--line); }
+  .btn-ghost:hover{ background:var(--cream); color:var(--ink); }
+  .btn[disabled]{ opacity:.6; cursor:default; }
+
+  .status{
+    margin-top:16px;
+    font-size:.85rem;
+    color:var(--green-dark);
+    font-weight:700;
+    min-height:1.2em;
+  }
+
+  .keep-note{
+    margin-top:18px;
+    font-size:.78rem;
+    color:var(--ink-soft);
+    background:var(--cream);
+    border-radius:var(--radius);
+    padding:10px 12px;
+    text-align:left;
+    display:flex;
+    gap:8px;
+  }
+  .keep-note svg{ flex-shrink:0; margin-top:1px; color:var(--green-dark); }
+</style>
+</head>
+<body>
+
+<div class="logout-shell">
+
+  <div class="logout-icon">
+    <svg width="26" height="26" viewBox="0 0 19 19" fill="none">
+      <path d="M8 17H4.6A1.6 1.6 0 0 1 3 15.4V3.6A1.6 1.6 0 0 1 4.6 2H8" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M12.5 13.5 16 10l-3.5-3.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M16 10H7.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+    </svg>
+  </div>
+
+  <h1 id="logoutHeading">Log out of your account?</h1>
+  <p class="sub">You'll need to sign in again to see your orders, addresses and saved details.</p>
+
+  <div class="who" id="whoBadge" hidden>
+    <span class="avatar" id="whoInitial">?</span>
+    <span id="whoName">—</span>
+  </div>
+
+  <div class="btn-row">
+    <button class="btn btn-solid" id="confirmLogoutBtn">Yes, Log Out</button>
+    <button class="btn btn-ghost" id="cancelLogoutBtn">Cancel</button>
+  </div>
+
+  <p class="status" id="statusMsg"></p>
+
+  <div class="keep-note">
+    <svg width="15" height="15" viewBox="0 0 19 19" fill="none"><circle cx="9.5" cy="9.5" r="7.5" stroke="currentColor" stroke-width="1.4"/><path d="M9.5 6.5v4M9.5 12.7v.1" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+    <span>Logging out only ends this session. Your profile, orders and addresses stay saved and will be there when you sign back in.</span>
+  </div>
+</div>
+
+<script>
+(function () {
+  "use strict";
+
+  /* ============================================================
+     Shared per-user account store.
+     Keeps every signed-in user's data isolated from one another.
+
+     Keys used:
+       vanyaGlobal.session        -> { userId } for whoever is currently signed in
+       vanyaGlobal.users          -> { [userId]: { profile, orders, notifications, supportTickets } }
+
+     In production, replace this block with real calls to your
+     backend session/auth endpoints. It's kept here (duplicated in
+     each standalone tab file on purpose) so every tab file works
+     on its own without extra script includes.
+     ============================================================ */
+  const SESSION_KEY = "vanyaGlobal.session";
+  const USERS_KEY    = "vanyaGlobal.users";
+
+  function loadJSON(key, fallback) {
+    try {
+      const raw = localStorage.getItem(key);
+      return raw ? JSON.parse(raw) : fallback;
+    } catch (e) { return fallback; }
+  }
+  function saveJSON(key, val) { localStorage.setItem(key, JSON.stringify(val)); }
+
+  function getSession() { return loadJSON(SESSION_KEY, null); }
+  function getAllUsers() { return loadJSON(USERS_KEY, {}); }
+  function getCurrentUserRecord() {
+    const session = getSession();
+    if (!session || !session.userId) return null;
+    const users = getAllUsers();
+    return users[session.userId] || null;
+  }
+  function endSession() { localStorage.removeItem(SESSION_KEY); }
+
+  function initials(name) {
+    return (name || "?").trim().split(/\s+/).slice(0, 2)
+      .map(w => w[0] ? w[0].toUpperCase() : "").join("") || "?";
+  }
+
+  /* ---------- page logic ---------- */
+
+  const record = getCurrentUserRecord();
+  const whoBadge = document.getElementById("whoBadge");
+  const heading = document.getElementById("logoutHeading");
+
+  if (record && record.profile && record.profile.fullName) {
+    document.getElementById("whoName").textContent = record.profile.fullName;
+    document.getElementById("whoInitial").textContent = initials(record.profile.fullName);
+    whoBadge.hidden = false;
+    heading.textContent = "Log out, " + record.profile.fullName.split(" ")[0] + "?";
+  } else if (!getSession()) {
+    heading.textContent = "You're already signed out";
+    document.getElementById("confirmLogoutBtn").disabled = true;
+    document.getElementById("statusMsg").textContent = "No active session found.";
+  }
+
+  document.getElementById("cancelLogoutBtn").addEventListener("click", () => {
+    // Go back to wherever they came from, falling back to the profile page
+    if (document.referrer) { window.location.href = document.referrer; }
+    else { window.location.href = "profile.html"; }
+  });
+
+  document.getElementById("confirmLogoutBtn").addEventListener("click", (e) => {
+    const btn = e.currentTarget;
+    if (btn.disabled) return;
+    btn.disabled = true;
+    btn.textContent = "Logging out…";
+
+    endSession(); // only clears the session pointer — that user's data (profile/orders/etc.) is untouched
+
+    document.getElementById("statusMsg").textContent = "You've been logged out.";
+    setTimeout(() => { window.location.href = "login.html"; }, 700);
+  });
+})();
+</script>
+
+</body>
+</html>

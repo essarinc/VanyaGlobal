@@ -1,0 +1,204 @@
+/* ==========================================================================
+   HELP & SUPPORT — extends style.css + profile.css (shared account shell,
+   sidenav, .acc-card, .status-pill, .help-card etc. already live there).
+   Load order: style.css, profile.css, help-support.css.
+   Mobile-first, same breakpoints as the rest of the site (≥768 / ≥1024).
+   ========================================================================== */
+
+[hidden]{ display:none !important; }
+
+/* ---------- support hero ---------- */
+.support-hero{
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(135deg, #eef1e6 0%, var(--cream) 60%, var(--cream-deep) 100%);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 26px;
+  margin-bottom: 20px;
+  display:flex;
+  flex-direction: column;
+  align-items:flex-start;
+  gap: 16px;
+}
+.support-hero .leaf-deco{
+  position:absolute; right:-20px; top:-16px; width: 160px; opacity:.5; pointer-events:none;
+}
+.support-hero-icon{
+  position: relative; z-index: 1;
+  width: 46px; height: 46px;
+  border-radius: 50%;
+  background: var(--green-dark);
+  color: var(--white);
+  display:flex; align-items:center; justify-content:center;
+  flex-shrink: 0;
+}
+.support-hero-info{ position: relative; z-index: 1; }
+.support-hero-info h2{
+  font-size: 1.25rem;
+  margin-bottom: .35em;
+  color: var(--ink);
+}
+.support-hero-info p{
+  font-size: .88rem;
+  color: var(--ink-soft);
+  max-width: 46ch;
+}
+.support-hero-stats{
+  position: relative; z-index: 1;
+  display:flex; gap: 22px;
+}
+.support-hero-stats div{ display:flex; flex-direction: column; }
+.support-hero-stats strong{
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  color: var(--green-dark);
+  line-height: 1;
+}
+.support-hero-stats span{
+  font-size: .75rem;
+  color: var(--ink-soft);
+  margin-top: 4px;
+}
+
+/* ---------- ticket form ---------- */
+.ticket-form-grid{
+  display:grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+}
+.form-field{ display:flex; flex-direction: column; gap: 6px; }
+.form-field label{ font-size: .8rem; font-weight: 700; color: var(--ink-soft); }
+.form-field input,
+.form-field select,
+.form-field textarea{
+  width: 100%;
+  padding: 11px 14px;
+  border-radius: var(--radius);
+  border: 1.5px solid var(--line);
+  background: var(--cream);
+  font-family: inherit;
+  font-size: .92rem;
+  font-weight: 600;
+  color: var(--ink);
+  resize: vertical;
+}
+.form-field input:focus,
+.form-field select:focus,
+.form-field textarea:focus{
+  outline: 2px solid var(--green); outline-offset: 1px;
+}
+.form-field-full{ grid-column: 1 / -1; }
+
+.form-feedback{
+  margin: 14px 0 0;
+  padding: 10px 14px;
+  border-radius: var(--radius);
+  font-size: .84rem;
+  font-weight: 600;
+  background: rgba(47,107,69,.12);
+  color: var(--green-dark);
+}
+.form-feedback.error{
+  background: rgba(178,58,58,.1);
+  color: #a33;
+}
+
+.ticket-form-actions{
+  display:flex; justify-content:flex-end;
+  margin-top: 18px;
+}
+
+/* ---------- ticket list (reuses .order-row layout rhythm) ---------- */
+.ticket-row{
+  display:flex;
+  align-items:center;
+  gap: 14px;
+  padding: 14px 0;
+}
+.ticket-row + .ticket-row{ border-top: 1px solid var(--line); }
+.ticket-icon{
+  width: 40px; height: 40px;
+  border-radius: 10px;
+  background: var(--cream-deep);
+  color: var(--green-dark);
+  display:flex; align-items:center; justify-content:center;
+  flex-shrink: 0;
+}
+.ticket-info{ flex: 1; min-width: 0; }
+.ticket-info h5{
+  margin: 0 0 3px;
+  font-weight: 700;
+  font-size: .92rem;
+  color: var(--ink);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.ticket-info p{ margin: 0; font-size: .78rem; color: var(--ink-soft); }
+
+.status-pill.status-open{ background: rgba(47,107,69,.12); color: var(--green-dark); }
+.status-pill.status-progress{ background: rgba(196,140,40,.14); color: #96701f; }
+.status-pill.status-resolved{ background: rgba(90,90,90,.1); color: var(--ink-soft); }
+
+/* ---------- FAQ accordion ---------- */
+.faq-accordion{ display:flex; flex-direction: column; }
+.faq-item{ border-bottom: 1px solid var(--line); }
+.faq-item:last-child{ border-bottom: none; }
+.faq-q{
+  width: 100%;
+  display:flex; align-items:center; justify-content:space-between; gap: 12px;
+  padding: 14px 2px;
+  background: none; border: none;
+  text-align: left;
+  font-weight: 700;
+  font-size: .92rem;
+  color: var(--ink);
+  cursor: pointer;
+}
+.faq-q .chev{
+  color: var(--ink-soft);
+  flex-shrink: 0;
+  transition: transform .2s ease;
+}
+.faq-item.open .faq-q .chev{ transform: rotate(90deg); }
+.faq-a{
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height .25s ease;
+}
+.faq-item.open .faq-a{ max-height: 240px; }
+.faq-a p{
+  margin: 0 0 14px;
+  font-size: .86rem;
+  color: var(--ink-soft);
+  line-height: 1.6;
+}
+
+/* ---------- quick-contact hours note (right rail) ---------- */
+.hours-note{
+  display:flex; align-items:center; gap: 8px;
+  margin-top: 14px;
+  padding-top: 14px;
+  border-top: 1px solid var(--line);
+  font-size: .8rem;
+  color: var(--ink-soft);
+}
+.hours-note svg{ color: var(--green-dark); flex-shrink: 0; }
+
+/* ==========================================================================
+   TABLET  (≥768px)
+   ========================================================================== */
+@media (min-width: 768px){
+  .support-hero{ flex-direction: row; align-items:center; padding: 30px; }
+  .support-hero-stats{ margin-left: auto; }
+
+  .ticket-form-grid{ grid-template-columns: 1fr 1fr; }
+}
+
+/* ==========================================================================
+   LAPTOP / DESKTOP  (≥1024px)
+   ========================================================================== */
+@media (min-width: 1024px){
+  .support-hero{ padding: 34px; }
+}

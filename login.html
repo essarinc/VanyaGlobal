@@ -1,0 +1,1026 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Log in — Vanya</title>
+<meta name="robots" content="noindex">
+
+<!--
+  FL-LOGIN-196/197/202, ASI-F-191/192/199: these are the two known,
+  required third-party scripts on this page — Google's Identity
+  Services library and Apple's Sign in with Apple JS — both loaded
+  over HTTPS from their own official domains. Neither ever receives
+  the password field (FL-GOOGLE-198, ASI-F-193) and this page never
+  sends either of them anything but a click event.
+-->
+<script src="https://accounts.google.com/gsi/client" async defer></script>
+<script src="https://appleid.cdn-apple.com/appleauth/static/jsapi/appleid/1/en_US/appleid.auth.js" async defer></script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    --font-display: "Playfair Display", Georgia, "Times New Roman", serif;
+    --font-body: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    --cream:#F6F2E8;
+    --paper:#FFFFFF;
+    --forest:#2C4632;
+    --forest-dark:#1E3323;
+    --sage:#7C9473;
+    --olive:#8A8B5C;
+    --charcoal:#26291F;
+    --muted:#767A6C;
+    --line:#DAD6C8;
+    --error:#A3402F;
+    --error-bg:#FBEDE9;
+    --focus:#4E6B4A;
+    --radius:14px;
+  }
+
+  *{box-sizing:border-box;}
+  html,body{height:100%;}
+  body{
+    margin:0;
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:
+      radial-gradient(1100px 620px at 12% -10%, rgba(124,148,115,0.16), transparent 60%),
+      radial-gradient(900px 600px at 105% 110%, rgba(44,70,50,0.10), transparent 55%),
+      var(--cream);
+      font-family: var(--font-body);
+    color: var(--charcoal);
+    padding: 32px 18px;
+  }
+
+  .scene{
+    width:100%;
+    max-width:960px;
+    display:grid;
+    grid-template-columns: 1.05fr 1fr;
+    background: var(--paper);
+    border-radius: 20px;
+    overflow:hidden;
+    box-shadow: 0 30px 70px -30px rgba(30,51,35,0.35), 0 2px 0 rgba(0,0,0,0.02);
+    border:1px solid var(--line);
+  }
+
+  /* ---------- No-JS fallback banner ---------- */
+  .noscript-banner{
+    grid-column: 1 / -1;
+    background: var(--error-bg);
+    color: var(--error);
+    font-family: var(--font-body);
+    font-size: 13px;
+    line-height:1.5;
+    padding: 12px 18px;
+    text-align:center;
+  }
+
+  /* ---------- Left: brand panel ---------- */
+  .brand-panel{
+    position:relative;
+    background: linear-gradient(160deg, var(--forest) 0%, var(--forest-dark) 100%);
+    color: #F2EFE4;
+    padding: 44px 38px;
+    display:flex;
+    flex-direction:column;
+    justify-content:space-between;
+    min-height: 560px;
+  }
+  .brand-panel::before{
+    content:"";
+    position:absolute; inset:0;
+    background-image:
+      repeating-linear-gradient(115deg, rgba(255,255,255,0.035) 0 2px, transparent 2px 46px);
+    pointer-events:none;
+  }
+    .brand-mark{
+    font-family: var(--font-display);
+    font-size: 22px;
+    letter-spacing: 0.04em;
+    font-weight: 700;
+    display:flex;
+    align-items:center;
+    gap:10px;
+  }
+  .brand-mark .leaf{
+    width:10px;height:10px;border-radius: 2px 10px;
+    background: var(--sage);
+    display:inline-block;
+    transform: rotate(45deg);
+  }
+  .brand-copy{ max-width: 320px; }
+  .brand-copy .eyebrow{
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    font-size: 11px;
+    color: #B9C7AE;
+    font-family: var(--font-body);
+    margin: 0 0 14px 0;
+  }
+    .brand-copy h1{
+    font-family: var(--font-display);
+    font-size: 30px;
+    line-height: 1.22;
+    letter-spacing: -0.01em;
+    margin: 0 0 14px 0;
+    font-weight: 500;
+  }
+  .brand-copy p{
+    font-family: var(--font-body);
+    font-size: 13.5px;
+    line-height: 1.6;
+    color: #CBD5C0;
+    margin:0;
+  }
+  .brand-foot{
+    font-family: var(--font-body);
+    font-size: 11.5px;
+    color: #93A187;
+    display:flex;
+    gap:18px;
+  }
+
+  /* ---------- Right: form panel ---------- */
+  .form-panel{
+    padding: 44px 40px;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+  }
+    .title{
+    font-family: var(--font-display);
+    font-size: 28px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    margin: 0 0 6px 0;
+    color: var(--forest-dark);
+  }
+  .subtitle{
+    font-family: var(--font-body);
+    font-size: 13px;
+    color: var(--muted);
+    margin: 0 0 26px 0;
+  }
+
+  form{ display:flex; flex-direction:column; gap:14px; }
+
+  .field{ display:flex; flex-direction:column; gap:6px; }
+  .field label{
+      font-family: var(--font-body);
+    font-size: 11.5px;
+    font-weight: 600;
+    letter-spacing: 0.03em;
+    color: var(--forest-dark);
+    text-transform: uppercase;
+  }
+  .input-wrap{ position:relative; }
+  .input{
+    width:100%;
+    font-family: var(--font-body);
+    font-size: 14.5px;
+    padding: 12px 14px;
+    border-radius: 10px;
+    border: 1.4px solid var(--line);
+    background: #FCFBF7;
+    outline: none;
+    color: var(--charcoal);
+    transition: border-color .15s ease, box-shadow .15s ease, background .15s ease;
+  }
+  .input::placeholder{ color:#A7A895; }
+  .input:focus{
+    border-color: var(--focus);
+    box-shadow: 0 0 0 3px rgba(78,107,74,0.14);
+    background: #fff;
+  }
+  .input[aria-invalid="true"]{
+    border-color: var(--error);
+    background: var(--error-bg);
+  }
+  .input[aria-invalid="true"]:focus{
+    box-shadow: 0 0 0 3px rgba(163,64,47,0.14);
+  }
+
+  .toggle-visibility{
+    position:absolute; right:10px; top:50%; transform:translateY(-50%);
+    background:none; border:none; cursor:pointer;
+    font-family: var(--font-body);
+    font-size: 11px; font-weight:600;
+    color: var(--muted);
+    padding: 4px 6px;
+  }
+  .toggle-visibility:hover{ color: var(--forest-dark); }
+
+  .field-error{
+    font-family: var(--font-body);
+    font-size: 11.5px;
+    color: var(--error);
+    min-height: 14px;
+    margin: 0;
+  }
+
+  .row-between{
+    display:flex; justify-content:flex-end; align-items:center;
+    margin-top:-4px;
+  }
+  .link-btn{
+    background:none; border:none; padding:0; cursor:pointer;
+    font-family: var(--font-body);
+    font-size: 12px; font-weight:600;
+    color: var(--forest);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+  .link-btn:hover{ color: var(--forest-dark); }
+
+  .submit-btn{
+    margin-top: 6px;
+    padding: 13px 16px;
+    border-radius: 10px;
+    border: none;
+    background: var(--forest);
+    color: #F5F2E8;
+    font-family: var(--font-body);
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 0.01em;
+    cursor: pointer;
+    display:flex; align-items:center; justify-content:center; gap:8px;
+    transition: background .15s ease, transform .1s ease, opacity .15s ease;
+  }
+  .submit-btn:hover:not(:disabled){ background: var(--forest-dark); }
+  .submit-btn:active:not(:disabled){ transform: scale(0.99); }
+  .submit-btn:disabled{ opacity: 0.65; cursor: not-allowed; }
+
+  .spinner{
+    width:14px; height:14px; border-radius:50%;
+    border: 2px solid rgba(245,242,232,0.35);
+    border-top-color: #F5F2E8;
+    animation: spin .7s linear infinite;
+    display:none;
+  }
+  .submit-btn.loading .spinner{ display:inline-block; }
+  .submit-btn.loading .btn-label{ opacity: 0.85; }
+  @keyframes spin{ to{ transform: rotate(360deg); } }
+
+  .form-status{
+    font-family: var(--font-body);
+    font-size: 12.5px;
+    border-radius: 8px;
+    padding: 10px 12px;
+    display:none;
+    line-height:1.5;
+  }
+  .form-status.show{ display:block; }
+  .form-status.error{ background: var(--error-bg); color: var(--error); }
+  .form-status.info{ background: #EEF3EA; color: var(--forest-dark); }
+
+  .divider{
+    display:flex; align-items:center; gap:12px;
+    margin: 22px 0 16px 0;
+    font-family: var(--font-body);
+    font-size: 11px;
+    color: var(--muted);
+  }
+  .divider::before, .divider::after{
+    content:""; flex:1; height:1px; background: var(--line);
+  }
+
+  .oauth-group{ display:flex; flex-direction:column; gap:10px; }
+  .oauth-btn{
+    display:flex; align-items:center; justify-content:center; gap:9px;
+    padding: 11px 14px;
+    border-radius: 10px;
+    font-family: var(--font-body);
+    font-size: 13px; font-weight:600;
+    cursor:pointer;
+    transition: opacity .15s ease, transform .1s ease;
+  }
+  .oauth-btn:disabled{ opacity:0.6; cursor:not-allowed; }
+  .oauth-btn:active:not(:disabled){ transform: scale(0.99); }
+  .oauth-btn svg{ width:16px; height:16px; flex-shrink:0; }
+  .apple-btn{ background:#111; color:#fff; border:1.4px solid #111; }
+  .apple-btn:hover:not(:disabled){ background:#000; }
+  .google-btn{ background:#fff; color: var(--charcoal); border:1.4px solid var(--line); }
+  .google-btn:hover:not(:disabled){ border-color:#B9B79F; }
+
+  .signup-note{
+    text-align:center;
+    margin-top: 22px;
+    font-family: var(--font-body);
+    font-size: 12.5px;
+    color: var(--muted);
+  }
+  .signup-note button{
+    background:none; border:none; padding:0; cursor:pointer;
+    color: var(--forest); font-weight:700; text-decoration:underline;
+    text-underline-offset:2px; font-size:12.5px;
+    font-family: inherit;
+  }
+
+  .sr-only{
+    position:absolute; width:1px; height:1px; padding:0; margin:-1px;
+    overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0;
+  }
+
+  @media (max-width: 760px){
+    .scene{ grid-template-columns: 1fr; }
+    .brand-panel{ display:none; }
+    .form-panel{ padding: 34px 26px; }
+  }
+
+  :focus-visible{ outline: 2px solid var(--focus); outline-offset: 2px; }
+
+  @media (prefers-reduced-motion: reduce){
+    .spinner{ animation: none; }
+    *{ transition: none !important; }
+  }
+</style>
+</head>
+<body>
+
+<div class="scene">
+
+  <!--
+    FL-LOGIN-006 / FL-LOGIN-011: if JavaScript is disabled or the script
+    fails to load, this banner is the only thing that becomes visible
+    (it's hidden again the instant JS runs). It never claims success and
+    never hides the fact that the form can't safely submit yet.
+  -->
+  <noscript>
+    <div class="noscript-banner">
+      JavaScript is required to sign in securely. Please enable JavaScript and reload this page.
+    </div>
+  </noscript>
+
+  <!-- Brand panel (decorative, static text only — no user input rendered here) -->
+  <aside class="brand-panel">
+    <div class="brand-mark"><span class="leaf"></span> Vanya</div>
+    <div class="brand-copy">
+      <p class="eyebrow">Welcome back</p>
+      <h1>One family. Many journeys.<br>One daily habit.</h1>
+      <p>Sign in to manage your wellness plan, track your family's routine, and pick up right where you left off.</p>
+    </div>
+    <div class="brand-foot">
+      <span>100% Organic</span>
+      <span>No Preservatives</span>
+      <span>0% Side Effects</span>
+    </div>
+  </aside>
+
+  <!-- Form panel -->
+  <main class="form-panel">
+    <h1 class="title">Log in</h1>
+    <p class="subtitle">Enter your details to access your account.</p>
+
+    <!--
+      FL-LOGIN-059/060/138/139/011: method is explicitly POST. This is the
+      fallback path if JS never runs — with no explicit method a browser
+      defaults to GET, which would put email *and password* straight into
+      the URL query string. POST keeps that from ever being possible, even
+      in the worst case. action is left pointing at the current page on
+      purpose: there is no real backend wired into this preview, and a
+      same-page POST fallback can never leak credentials to a third party.
+    -->
+    <form id="loginForm" method="post" action="" novalidate autocomplete="on">
+
+      <div class="field">
+        <label for="email">Email</label>
+        <div class="input-wrap">
+          <input
+            id="email"
+            name="email"
+            type="email"
+            class="input"
+            placeholder="you@example.com"
+            autocomplete="username"
+            maxlength="254"
+            aria-invalid="false"
+            aria-describedby="email-error"
+          >
+        </div>
+        <p class="field-error" id="email-error" role="alert"></p>
+      </div>
+
+      <div class="field">
+        <label for="password">Password</label>
+        <div class="input-wrap">
+          <input
+            id="password"
+            name="password"
+            type="password"
+            class="input"
+            placeholder="••••••••"
+            autocomplete="current-password"
+            maxlength="256"
+            aria-invalid="false"
+            aria-describedby="password-error"
+            style="padding-right:70px;"
+          >
+          <button type="button" class="toggle-visibility" id="toggleVis" aria-pressed="false">Show</button>
+        </div>
+        <p class="field-error" id="password-error" role="alert"></p>
+      </div>
+
+      <div class="row-between">
+        <button type="button" class="link-btn" id="forgotBtn">Forgot password?</button>
+      </div>
+
+      <div class="form-status" id="formStatus" role="alert" tabindex="-1"></div>
+
+      <button type="submit" class="submit-btn" id="submitBtn">
+        <span class="spinner" aria-hidden="true"></span>
+        <span class="btn-label">Log in</span>
+      </button>
+    </form>
+
+    <div class="divider">or continue with</div>
+
+    <div class="oauth-group">
+      <!--
+        ASI-F-001..012: this button drives real Sign in with Apple JS
+        (see script below), not a stub. It stays a normal, fully
+        accessible <button> — Apple's promise-based signIn() API is
+        built for exactly this: a custom-styled button, no hidden
+        iframe or forced-Apple-styling requirement like Google's.
+      -->
+      <button type="button" class="oauth-btn apple-btn" id="appleBtn">
+        <svg viewBox="0 0 1024 1024" fill="currentColor" aria-hidden="true"><path d="M747.4 535.7c-.4-68.2 30.5-119.6 92.9-157.5-34.9-50-87.7-77.5-157.3-82.8-65.9-5.2-138 38.4-164.4 38.4-27.9 0-91.7-36.6-141.9-36.6C273.1 298.8 163 379.8 163 544.6c0 48.7 8.9 99 26.7 150.8 23.8 68.2 109.6 235.3 199.1 232.6 46.8-1.1 79.9-33.2 140.8-33.2 59.1 0 89.7 33.2 141.9 33.2 90.3-1.3 167.9-153.2 190.5-221.6-121.1-57.1-114.6-167.2-114.6-170.7zm-105.1-305c50.7-60.2 46.1-115 44.6-134.7-44.8 2.6-96.6 30.5-126.1 64.8-32.5 36.8-51.6 82.3-47.5 133.6 48.4 3.7 92.6-21.2 129-63.7z"></path></svg>
+        <span>Log in with Apple</span>
+      </button>
+
+      <!--
+        FL-GOOGLE-001..012: this button drives real Google Identity
+        Services (see script below), not a stub. It stays a normal,
+        fully accessible <button> — no hidden iframe click-forwarding
+        tricks — and the actual Google UI is triggered from
+        google.accounts.id.prompt() inside its click handler.
+      -->
+      <button type="button" class="oauth-btn google-btn" id="googleBtn">
+        <svg viewBox="0 0 48 48" aria-hidden="true">
+          <path fill="#FFC107" d="M43.611,20.083H42V20H24v8h11.303c-1.649,4.657-6.08,8-11.303,8c-6.627,0-12-5.373-12-12c0-6.627,5.373-12,12-12c3.059,0,5.842,1.154,7.961,3.039l5.657-5.657C34.046,6.053,29.268,4,24,4C12.955,4,4,12.955,4,24c0,11.045,8.955,20,20,20c11.045,0,20-8.955,20-20C44,22.659,43.862,21.35,43.611,20.083z"></path>
+          <path fill="#FF3D00" d="M6.306,14.691l6.571,4.819C14.655,15.108,18.961,12,24,12c3.059,0,5.842,1.154,7.961,3.039l5.657-5.657C34.046,6.053,29.268,4,24,4C16.318,4,9.656,8.337,6.306,14.691z"></path>
+          <path fill="#4CAF50" d="M24,44c5.166,0,9.86-1.977,13.409-5.192l-6.19-5.238C29.211,35.091,26.715,36,24,36c-5.202,0-9.619-3.317-11.283-7.946l-6.522,5.025C9.505,39.556,16.227,44,24,44z"></path>
+          <path fill="#1976D2" d="M43.611,20.083H42V20H24v8h11.303c-0.792,2.237-2.231,4.166-4.087,5.571c0.001-0.001,0.002-0.001,0.003-0.002l6.19,5.238C36.971,39.205,44,34,44,24C44,22.659,43.862,21.35,43.611,20.083z"></path>
+        </svg>
+        <span>Log in with Google</span>
+      </button>
+    </div>
+
+    <p class="signup-note">Don't have an account? <button type="button" id="signupBtn">Sign up</button></p>
+  </main>
+
+</div>
+
+<script>
+(function () {
+  "use strict";
+
+  // ---------------------------------------------------------------
+  // NOTE ON SCOPE
+  // This file implements every login-flow test case a frontend can
+  // legitimately own: validation, XSS-safe rendering, no credential
+  // leakage into storage/console/URL, duplicate-submit prevention,
+  // generic error copy, disabled/loading states, focus management,
+  // and a real (not stubbed) Google Identity Services integration.
+  //
+  // and now a real (not stubbed) Sign in with Apple JS integration too.
+  //
+  // It intentionally does NOT implement:
+  //  - real authentication (isLoggedIn / session truth)
+  //  - verification of the Google ID token, or verification/exchange of
+  //    the Apple id_token/authorization code (all of that MUST happen
+  //    server-side, against each provider's public keys / token
+  //    endpoint and your client secret — never trust it in the browser)
+  //  - route/session guarding for other pages
+  //  - rate limiting / brute-force protection
+  //  - server-side open-redirect, state, and nonce validation (the
+  //    frontend generates a per-attempt state/nonce as a first line of
+  //    defense, but the value that actually matters is whatever your
+  //    backend independently issues and verifies)
+  // Those are backend/session-architecture responsibilities. See the
+  // inline notes below wherever a frontend shortcut would be tempting.
+  // ---------------------------------------------------------------
+
+  const form        = document.getElementById("loginForm");
+  const emailInput  = document.getElementById("email");
+  const passInput   = document.getElementById("password");
+  const emailError  = document.getElementById("email-error");
+  const passError   = document.getElementById("password-error");
+  const formStatus  = document.getElementById("formStatus");
+  const submitBtn   = document.getElementById("submitBtn");
+  const toggleVis   = document.getElementById("toggleVis");
+  const forgotBtn   = document.getElementById("forgotBtn");
+  const appleBtn    = document.getElementById("appleBtn");
+  const googleBtn   = document.getElementById("googleBtn");
+  const signupBtn   = document.getElementById("signupBtn");
+
+  let isSubmitting = false;   // guards double-submit on the email/password form
+  let oauthPending = false;   // guards rapid OAuth re-entry (Apple or Google)
+
+  // Simple, conservative email shape check. Real format/deliverability
+  // validation still belongs on the server.
+  const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+  // ----- helpers ----------------------------------------------------
+
+  // FL-LOGIN-036..039, 101..112: every dynamic string we show the user
+  // goes through textContent, never innerHTML — so markup or scripts
+  // pasted into a field, or echoed back in an error, can never execute.
+  function setFieldError(inputEl, errorEl, message) {
+    errorEl.textContent = message || "";
+    inputEl.setAttribute("aria-invalid", message ? "true" : "false");
+  }
+
+  function showStatus(message, kind) {
+    formStatus.textContent = message;               // textContent only
+    formStatus.className = "form-status show " + (kind || "info");
+  }
+
+  function clearStatus() {
+    formStatus.textContent = "";
+    formStatus.className = "form-status";
+  }
+
+  function endOAuthAttempt() {
+    oauthPending = false;
+    submitBtn.disabled = false;
+    appleBtn.disabled = false;
+    googleBtn.disabled = false;
+  }
+
+  // FL-LOGIN-021/022: trim leading/trailing spaces before validating/sending.
+  function normalizedEmail() {
+    return emailInput.value.trim();
+  }
+
+  function validateEmail() {
+    const value = normalizedEmail();
+    if (!value) {
+      setFieldError(emailInput, emailError, "Enter your email.");
+      return false;
+    }
+    if (value.length > 254) {
+      setFieldError(emailInput, emailError, "Email is too long.");
+      return false;
+    }
+    if (!EMAIL_RE.test(value)) {
+      setFieldError(emailInput, emailError, "Enter a valid email address.");
+      return false;
+    }
+    setFieldError(emailInput, emailError, "");
+    return true;
+  }
+
+  function validatePassword() {
+    // FL-LOGIN-041: empty password blocked client-side as a UX nicety.
+    // The real check always happens server-side — this function never
+    // decides whether a password is "correct".
+    if (!passInput.value) {
+      setFieldError(passInput, passError, "Enter your password.");
+      return false;
+    }
+    if (passInput.value.length > 256) {
+      setFieldError(passInput, passError, "Password is too long.");
+      return false;
+    }
+    setFieldError(passInput, passError, "");
+    return true;
+  }
+
+  // Validate as the user leaves a field, not on every keystroke —
+  // keeps errors from flashing while they're still typing.
+  emailInput.addEventListener("blur", validateEmail);
+  passInput.addEventListener("blur", validatePassword);
+  emailInput.addEventListener("input", () => { if (emailInput.getAttribute("aria-invalid") === "true") validateEmail(); });
+  passInput.addEventListener("input", () => { if (passInput.getAttribute("aria-invalid") === "true") validatePassword(); });
+
+  // FL-LOGIN-055/056/057/058: masked by default; explicit, deliberate
+  // toggle only — never auto-revealed, never logged when toggled.
+  toggleVis.addEventListener("click", () => {
+    const showing = passInput.type === "text";
+    passInput.type = showing ? "password" : "text";
+    toggleVis.textContent = showing ? "Show" : "Hide";
+    toggleVis.setAttribute("aria-pressed", String(!showing));
+  });
+
+  // FL-LOGIN-179: Escape dismisses the status banner instead of doing nothing.
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && formStatus.classList.contains("show")) {
+      clearStatus();
+    }
+  });
+
+  // ----- email/password submit ----------------------------------------
+
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    // FL-LOGIN-074/075/076/077: rapid double/triple click and repeated
+    // Enter all funnel through this one handler and isSubmitting guard,
+    // so only one request is ever in flight at a time.
+    if (isSubmitting) return;
+
+    const emailOk = validateEmail();
+    const passOk  = validatePassword();
+    if (!emailOk || !passOk) {
+      showStatus("Please fix the highlighted fields.", "error");
+      // FL-LOGIN-185: move focus to the first invalid field so keyboard
+      // and screen-reader users land exactly where they need to act.
+      (emailOk ? passInput : emailInput).focus();
+      return; // no request sent on invalid input
+    }
+
+    clearStatus();
+    isSubmitting = true;
+    submitBtn.disabled = true;
+    submitBtn.classList.add("loading");
+    appleBtn.disabled = true;
+    googleBtn.disabled = true;
+
+    const email = normalizedEmail();
+    const password = passInput.value;
+
+    // Never do this — kept here only as a comment so the anti-pattern
+    // is explicit and easy to grep for during review:
+    //   localStorage.setItem("password", password);   // forbidden
+    //   console.log(password);                          // forbidden
+    //   fetch("/login?password=" + password);           // forbidden
+
+    try {
+      // Real integration point. Password travels only in an HTTPS
+      // POST body, never a query string or URL fragment. Swap this
+      // stub for your API call:
+      //
+      // const res = await fetch("/api/auth/login", {
+      //   method: "POST",
+      //   headers: { "Content-Type": "application/json" },
+      //   credentials: "include", // send the httpOnly session cookie
+      //   body: JSON.stringify({ email, password })
+      // });
+      // if (!res.ok) throw new Error("auth-failed");
+      // const data = await res.json();
+      // The server sets an httpOnly, Secure, SameSite cookie (or returns
+      // a token your app stores per your session strategy) — the
+      // frontend should not decide "isLoggedIn" itself.
+      //
+      // If you redirect after success, validate the destination against
+      // an allow-list of same-origin, relative paths server-side before
+      // ever using it — never redirect to an arbitrary "next"/"redirect"
+      // query value as-is (open-redirect risk, FL-LOGIN-143/145).
+
+      await simulateNetwork();
+
+      // Demo-only outcome. A real build reacts to the server's response,
+      // never to a client-side guess.
+      showStatus(
+        "This is a design preview — no authentication backend is connected yet.",
+        "info"
+      );
+    } catch (err) {
+      // FL-LOGIN-148/157/158/159/160: generic, non-enumerating error
+      // copy. Never surface "email not found" vs "wrong password"
+      // separately, and never echo technical details, tokens, or keys.
+      showStatus("We couldn't log you in. Please check your details and try again.", "error");
+    } finally {
+      isSubmitting = false;
+      submitBtn.disabled = false;
+      submitBtn.classList.remove("loading");
+      appleBtn.disabled = false;
+      googleBtn.disabled = false;
+    }
+  });
+
+  function simulateNetwork() {
+    return new Promise((resolve) => setTimeout(resolve, 900));
+  }
+
+  // ---------------------------------------------------------------
+  // Apple Sign-In — Sign in with Apple JS (real, not a stub)
+  // ---------------------------------------------------------------
+
+  // TODO: replace with your real Services ID from
+  // https://developer.apple.com/account/resources/identifiers/list/serviceId
+  // (NOT your App ID — the web "Services ID" you registered and enabled
+  // "Sign in with Apple" for). Like the Google Client ID, this value is
+  // meant to ship in frontend code — it identifies your app to Apple and
+  // is not a secret (ASI-F-107/201/202: Apple's private key and client
+  // secret are backend-only and never appear here).
+  const APPLE_CLIENT_ID = "YOUR_APPLE_SERVICES_ID";
+  const APPLE_CONFIGURED = APPLE_CLIENT_ID.indexOf("YOUR_APPLE_SERVICES_ID") === -1;
+
+  // Must exactly match a "Return URL" registered for this Services ID in
+  // Apple's developer console (HTTPS in production). Using the current
+  // page keeps the popup flow self-contained.
+  const APPLE_REDIRECT_URI = window.location.origin + window.location.pathname;
+
+  let appleReady = false;
+  let appleLoadFailed = false;
+
+  function initAppleSignIn() {
+    if (!APPLE_CONFIGURED) return;
+    appleReady = true; // actual AppleID.auth.init() happens per-attempt below, alongside a fresh state/nonce
+  }
+
+  // ASI-F-016/041/197/198: poll briefly for Apple's script instead of
+  // assuming it has loaded. If it never does (blocked, offline, Apple
+  // outage), the button reports itself unavailable rather than faking
+  // a flow or silently doing nothing.
+  (function waitForAppleLibrary(attemptsLeft) {
+    if (typeof AppleID !== "undefined" && AppleID.auth) {
+      initAppleSignIn();
+      return;
+    }
+    if (attemptsLeft <= 0) { appleLoadFailed = true; return; }
+    setTimeout(() => waitForAppleLibrary(attemptsLeft - 1), 200);
+  })(25); // ~5 seconds
+
+  function generateRandomToken() {
+    const bytes = new Uint8Array(16);
+    (window.crypto || window.msCrypto).getRandomValues(bytes);
+    return Array.from(bytes, (b) => b.toString(16).padStart(2, "0")).join("");
+  }
+
+  appleBtn.addEventListener("click", async () => {
+    // ASI-F-026/027/032/033: block rapid double-click / repeated Enter-Space re-entry.
+    if (oauthPending) return;
+
+    if (!APPLE_CONFIGURED) {
+      showStatus("Apple sign-in isn't configured yet. Add your Services ID in the code to enable it.", "error");
+      return;
+    }
+    if (!appleReady) {
+      // ASI-F-069/072/197/198: covers "still loading" and "never loaded" alike.
+      showStatus(
+        appleLoadFailed
+          ? "Apple sign-in is unavailable right now. Please try again later or use your email and password."
+          : "Apple sign-in is still loading. Please try again in a moment.",
+        "error"
+      );
+      return;
+    }
+
+    oauthPending = true;
+    submitBtn.disabled = true;
+    appleBtn.disabled = true;
+    googleBtn.disabled = true;
+    showStatus("Opening Apple sign-in…", "info");
+
+    // A fresh, single-use state/nonce per attempt (ASI-F-045/077 style
+    // replay protection). This client-side value is only a first line
+    // of defense — the check that actually matters is your backend
+    // independently issuing and verifying its own state/nonce.
+    const state = generateRandomToken();
+    const nonce = generateRandomToken();
+
+    try {
+      AppleID.auth.init({
+        clientId: APPLE_CLIENT_ID,
+        scope: "name email",
+        redirectURI: APPLE_REDIRECT_URI,
+        usePopup: true,
+        state: state,
+        nonce: nonce
+      });
+
+      // ASI-F-037/042: signIn() opens Apple's own popup and resolves
+      // only once Apple reports a result — no page redirect required.
+      const result = await AppleID.auth.signIn();
+      handleAppleSuccess(result, state);
+    } catch (err) {
+      handleAppleError(err);
+    }
+  });
+
+  function handleAppleSuccess(result, expectedState) {
+    // ASI-F-044/045/075/076/077: guard against a missing or malformed
+    // response before doing anything with it.
+    const auth = result && result.authorization;
+    if (!auth || typeof auth.id_token !== "string" || !auth.id_token) {
+      showStatus("Apple sign-in didn't return a valid response. Please try again.", "error");
+      endOAuthAttempt();
+      return;
+    }
+    if (auth.state !== expectedState) {
+      showStatus("Apple sign-in response didn't match this attempt. Please try again.", "error");
+      endOAuthAttempt();
+      return;
+    }
+    // ASI-F-058/094-109: never log the authorization code or id_token,
+    // never write them to localStorage/sessionStorage, never decode and
+    // trust the id_token client-side to flip a local "isLoggedIn" flag.
+    // Treated as opaque — only the backend, which holds Apple's public
+    // keys and your client secret, is allowed to verify and act on them.
+    submitAppleCredential(auth.code, auth.id_token);
+  }
+
+  async function submitAppleCredential(code, idToken) {
+    showStatus("Verifying your Apple sign-in…", "info");
+    try {
+      // Real integration point:
+      // const res = await fetch("/api/auth/apple", {
+      //   method: "POST",
+      //   headers: { "Content-Type": "application/json" },
+      //   credentials: "include",
+      //   body: JSON.stringify({ code: code, id_token: idToken })
+      // });
+      // if (!res.ok) throw new Error("apple-auth-failed");
+      // Your backend must verify the id_token's signature, audience,
+      // issuer, nonce, and expiry against Apple's public keys, and
+      // exchange the authorization code with Apple's token endpoint
+      // using your private key/client secret — the frontend never
+      // decides authentication on its own (ASI-F-211).
+      await simulateNetwork();
+      showStatus("This is a design preview — no authentication backend is connected yet.", "info");
+    } catch (err) {
+      showStatus("We couldn't complete Apple sign-in. Please try again.", "error");
+    } finally {
+      endOAuthAttempt();
+    }
+  }
+
+  function handleAppleError(err) {
+    const code = err && err.error ? err.error : "";
+    // ASI-F-040/062/063/064/147: user closed or cancelled — a quiet,
+    // safe return, never treated as a hard error.
+    const cancelledCodes = ["popup_closed_by_user", "user_cancelled_authorize", "user_trigger_new_signin_flow"];
+    if (cancelledCodes.indexOf(code) !== -1) {
+      clearStatus();
+      endOAuthAttempt();
+      return;
+    }
+    // ASI-F-038/071: popup blocked surfaces as a thrown error too.
+    if (code === "popup_blocked_by_browser") {
+      showStatus("Apple sign-in couldn't open. Please check your browser's popup settings and try again.", "error");
+      endOAuthAttempt();
+      return;
+    }
+    // ASI-F-068/073/074/078/082: anything else — generic, safe error,
+    // no technical details or raw error objects shown to the user.
+    showStatus("We couldn't complete Apple sign-in. Please try again.", "error");
+    endOAuthAttempt();
+  }
+
+  // ---------------------------------------------------------------
+  // Google Sign-In — Google Identity Services (real, not a stub)
+  // ---------------------------------------------------------------
+
+  // TODO: replace with your real OAuth 2.0 Web Client ID from
+  // https://console.cloud.google.com/apis/credentials
+  // This value identifies your app to Google and is meant to ship in
+  // frontend code — it is not a secret (FL-GOOGLE-011: no *private*
+  // Google credential ever belongs in the frontend, and none is here).
+  const GOOGLE_CLIENT_ID = "YOUR_GOOGLE_CLIENT_ID.apps.googleusercontent.com";
+  const GOOGLE_CONFIGURED = GOOGLE_CLIENT_ID.indexOf("YOUR_GOOGLE_CLIENT_ID") === -1;
+
+  let googleReady = false;
+  let googleLoadFailed = false;
+
+  function initGoogleSignIn() {
+    if (!GOOGLE_CONFIGURED) return;
+    google.accounts.id.initialize({
+      client_id: GOOGLE_CLIENT_ID,
+      callback: handleGoogleCredential,
+      auto_select: false,        // never silently sign a returning visitor in
+      cancel_on_tap_outside: true,
+      itp_support: true
+    });
+    googleReady = true;
+  }
+
+  // FL-LOGIN-011 / FL-GOOGLE-007 style resilience: poll briefly for the
+  // external gsi/client script instead of assuming it has already loaded.
+  // A slow or blocked third-party script must never break the rest of
+  // the page or silently fake success — it just leaves Google sign-in
+  // reporting itself as unavailable until it's ready.
+  (function waitForGoogleLibrary(attemptsLeft) {
+    if (typeof google !== "undefined" && google.accounts && google.accounts.id) {
+      initGoogleSignIn();
+      return;
+    }
+    if (attemptsLeft <= 0) { googleLoadFailed = true; return; }
+    setTimeout(() => waitForGoogleLibrary(attemptsLeft - 1), 200);
+  })(25); // ~5 seconds
+
+  googleBtn.addEventListener("click", () => {
+    // FL-GOOGLE-003: block rapid double-click / re-entry.
+    if (oauthPending) return;
+
+    if (!GOOGLE_CONFIGURED) {
+      showStatus("Google sign-in isn't configured yet. Add your Client ID in the code to enable it.", "error");
+      return;
+    }
+    if (!googleReady) {
+      // FL-GOOGLE-007: covers both "still loading" and "never loaded"
+      // (e.g. blocked by the network or an extension) — either way, a
+      // safe error, never a false success.
+      showStatus(
+        googleLoadFailed
+          ? "Google sign-in is unavailable right now. Please try again later or use your email and password."
+          : "Google sign-in is still loading. Please try again in a moment.",
+        "error"
+      );
+      return;
+    }
+
+    oauthPending = true;
+    submitBtn.disabled = true;
+    appleBtn.disabled = true;
+    googleBtn.disabled = true;
+    showStatus("Opening Google sign-in…", "info");
+
+    // google.accounts.id.prompt() is the officially supported way to
+    // trigger Google's own sign-in UI from a custom-styled button. It
+    // reports back how the moment ended so we can distinguish "blocked",
+    // "cancelled", and "succeeded" instead of guessing.
+    google.accounts.id.prompt((notification) => {
+      // FL-GOOGLE-005: the browser/environment couldn't show the Google UI
+      // at all (e.g. third-party cookies blocked, unsupported browser).
+      if (notification.isNotDisplayed && notification.isNotDisplayed()) {
+        showStatus("Google sign-in couldn't open. Please check your browser's cookie settings and try again.", "error");
+        endOAuthAttempt();
+        return;
+      }
+      // FL-GOOGLE-004/006: the user closed or cancelled the prompt, or it
+      // was superseded by another moment. Return to a safe, idle state —
+      // never claim success just because the dialog closed.
+      if (notification.isSkippedMoment && notification.isSkippedMoment()) {
+        clearStatus();
+        endOAuthAttempt();
+        return;
+      }
+      if (notification.isDismissedMoment && notification.isDismissedMoment()) {
+        const reason = notification.getDismissedReason ? notification.getDismissedReason() : "";
+        if (reason !== "credential_returned") {
+          clearStatus();
+          endOAuthAttempt();
+        }
+        // reason === "credential_returned": handleGoogleCredential is
+        // already running the success path below — leave it in control.
+      }
+    });
+  });
+
+  function handleGoogleCredential(response) {
+    // FL-GOOGLE-008/009: guard against a missing or malformed callback
+    // before doing anything with it.
+    if (!response || typeof response.credential !== "string" || !response.credential) {
+      showStatus("Google sign-in didn't return a valid response. Please try again.", "error");
+      endOAuthAttempt();
+      return;
+    }
+    // FL-GOOGLE-010/011/012: response.credential is a signed JWT ID token
+    // from Google. It is never logged, never written to localStorage or
+    // sessionStorage, and never decoded and trusted client-side to flip a
+    // local "isLoggedIn" flag. It's treated as opaque here — only a
+    // backend holding Google's public keys is allowed to verify and act
+    // on it.
+    submitGoogleCredential(response.credential);
+  }
+
+  async function submitGoogleCredential(idToken) {
+    showStatus("Verifying your Google sign-in…", "info");
+    try {
+      // Real integration point:
+      // const res = await fetch("/api/auth/google", {
+      //   method: "POST",
+      //   headers: { "Content-Type": "application/json" },
+      //   credentials: "include",
+      //   body: JSON.stringify({ id_token: idToken })
+      // });
+      // if (!res.ok) throw new Error("google-auth-failed");
+      // Your backend must verify the token's signature, audience (aud),
+      // issuer (iss), and expiry against Google's public keys before
+      // establishing a real session — the frontend never decides this
+      // on its own (FL-GOOGLE-012).
+      await simulateNetwork();
+      showStatus("This is a design preview — no authentication backend is connected yet.", "info");
+    } catch (err) {
+      showStatus("We couldn't complete Google sign-in. Please try again.", "error");
+    } finally {
+      endOAuthAttempt();
+    }
+  }
+
+  // ----- secondary links --------------------------------------------------
+  // FL-LOGIN-164/165: destinations are hardcoded, relative, same-origin
+  // paths — never built from user-controlled input — so there is no
+  // link-manipulation surface here to begin with.
+  forgotBtn.addEventListener("click", () => {
+    window.location.href = "forget-password.html";
+  });
+
+  signupBtn.addEventListener("click", () => {
+    window.location.href = "signup.html";
+  });
+
+})();
+</script>
+
+</body>
+</html>

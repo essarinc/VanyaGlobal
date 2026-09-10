@@ -1,0 +1,256 @@
+/* ==========================================================================
+   CART PAGE — extends the shared Vanya Global / KordiSure design system
+   defined in style.css (same :root variables, same font families,
+   same 768px / 1024px breakpoints as index.html).
+   ========================================================================== */
+
+/* ---------- breadcrumb / page header ---------- */
+.cart-hero{
+  background: linear-gradient(120deg, var(--cream-deep) 0%, var(--cream) 60%, #eef1e6 100%);
+  padding: 30px 20px 26px;
+}
+.cart-hero .policy-breadcrumb{ margin-bottom: 14px; }
+.cart-title{
+  font-size: clamp(1.7rem, 6vw, 2.3rem);
+  color: var(--ink);
+}
+
+/* ---------- section shell ---------- */
+.cart-section{ padding: 34px 20px 10px; }
+
+/* ---------- empty state ---------- */
+.cart-empty{
+  max-width: 420px;
+  margin: 30px auto 10px;
+  text-align: center;
+  padding: 46px 24px;
+  background: var(--cream);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+}
+.cart-empty-icon{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  width: 66px; height: 66px;
+  border-radius: 50%;
+  background: var(--white);
+  border: 1px solid var(--line);
+  color: var(--green);
+  margin-bottom: 18px;
+}
+.cart-empty h2{ font-size: 1.3rem; margin-bottom: 10px; }
+.cart-empty p{ font-size: .9rem; max-width: 32ch; margin: 0 auto 22px; }
+
+/* ---------- layout: items + summary ---------- */
+.cart-layout{
+  display:flex;
+  flex-direction: column;
+  gap: 26px;
+}
+
+/* ---------- cart items ---------- */
+.cart-items{
+  display:flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.cart-item{
+  display:grid;
+  grid-template-columns: 84px 1fr;
+  grid-template-areas:
+    "img info"
+    "total total";
+  gap: 14px 14px;
+  background: var(--cream);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 14px;
+}
+.cart-item-img{
+  grid-area: img;
+  width: 84px; height: 84px;
+  border-radius: 10px;
+  object-fit: cover;
+}
+.cart-item-info{
+  grid-area: info;
+  min-width: 0;
+}
+.cart-item-name{
+  font-size: 1rem;
+  line-height: 1.3;
+  margin-bottom: 4px;
+  overflow-wrap: anywhere;
+}
+.cart-item-price{
+  font-size: .85rem;
+  color: var(--ink-soft);
+  margin-bottom: 10px;
+}
+.cart-item-controls{
+  display:flex;
+  align-items:center;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.cart-item-total{
+  grid-area: total;
+  margin: 0;
+  padding-top: 10px;
+  border-top: 1px dashed var(--line);
+  font-weight: 700;
+  color: var(--ink);
+  text-align: right;
+  font-size: .95rem;
+}
+
+/* quantity stepper */
+.qty-stepper{
+  display:inline-flex;
+  align-items:center;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  overflow: hidden;
+  background: var(--white);
+  flex-shrink: 0;
+}
+.qty-btn{
+  width: 32px; height: 32px;
+  border: none;
+  background: transparent;
+  color: var(--green-dark);
+  font-size: 1.05rem;
+  font-weight: 700;
+  display:flex; align-items:center; justify-content:center;
+  line-height: 1;
+}
+.qty-btn:hover{ background: var(--cream-deep); }
+.qty-btn:disabled{ color: var(--line); cursor: not-allowed; }
+.qty-input{
+  width: 40px;
+  border: none;
+  border-left: 1px solid var(--line);
+  border-right: 1px solid var(--line);
+  text-align: center;
+  font: inherit;
+  font-size: .88rem;
+  color: var(--ink);
+  padding: 6px 0;
+  background: transparent;
+  -moz-appearance: textfield;
+}
+.qty-input::-webkit-outer-spin-button,
+.qty-input::-webkit-inner-spin-button{ -webkit-appearance: none; margin: 0; }
+
+.remove-btn{
+  background: none;
+  border: none;
+  color: var(--ink-soft);
+  font-size: .82rem;
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  padding: 6px 2px;
+}
+.remove-btn:hover{ color: #b3452f; }
+
+/* ---------- order summary ---------- */
+.cart-summary{
+  background: var(--cream-deep);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 22px 20px;
+}
+.cart-summary h2{ font-size: 1.1rem; margin-bottom: 16px; }
+.summary-row{
+  display:flex;
+  justify-content: space-between;
+  align-items: baseline;
+  font-size: .9rem;
+  color: var(--ink-soft);
+  padding: 9px 0;
+  border-bottom: 1px solid var(--line);
+}
+.summary-row:first-of-type{ padding-top: 0; }
+.summary-total{
+  border-bottom: none;
+  padding-top: 14px;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--ink);
+}
+.checkout-btn{ width: 100%; margin-top: 16px; }
+.continue-shopping{ display:block; text-align:center; margin-top: 14px; }
+
+/* ---------- suggested products ---------- */
+.cart-suggestions{ padding: 40px 0 56px; }
+.suggestions-grid{
+  display:grid;
+  grid-template-columns: 1fr;
+  gap: 18px;
+}
+.suggestion-card{
+  background: var(--cream);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  overflow: hidden;
+  display:flex;
+  flex-direction: column;
+}
+.suggestion-img{ width:100%; aspect-ratio: 4/3; object-fit: cover; }
+.suggestion-body{ padding: 14px 16px 18px; display:flex; flex-direction:column; gap: 8px; }
+.suggestion-name{ font-size: .96rem; line-height:1.3; }
+.suggestion-price{ font-size: .85rem; color: var(--ink-soft); margin: 0; }
+.add-to-cart-btn{ margin-top: 4px; align-self: flex-start; }
+
+/* ==========================================================================
+   TABLET  (≥768px)
+   ========================================================================== */
+@media (min-width: 768px){
+  .cart-hero{ padding: 42px 20px 34px; }
+
+  .cart-item{
+    grid-template-columns: 96px 1fr auto;
+    grid-template-areas: "img info total";
+    align-items: center;
+    gap: 18px;
+  }
+  .cart-item-img{ width: 96px; height: 96px; }
+  .cart-item-total{
+    border-top: none;
+    padding-top: 0;
+    text-align: right;
+    min-width: 90px;
+  }
+
+  .suggestions-grid{ grid-template-columns: repeat(3, 1fr); }
+}
+
+/* ==========================================================================
+   LAPTOP / DESKTOP  (≥1024px)
+   ========================================================================== */
+@media (min-width: 1024px){
+  .cart-section{ padding: 44px 20px 10px; }
+
+  .cart-layout{
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 30px;
+  }
+  .cart-items{ flex: 1 1 62%; }
+  .cart-summary{
+    flex: 0 0 34%;
+    position: sticky;
+    top: calc(var(--header-h) + 20px);
+  }
+
+  .suggestions-grid{ grid-template-columns: repeat(4, 1fr); }
+}
+
+/* ==========================================================================
+   REDUCED MOTION (matches style.css)
+   ========================================================================== */
+@media (prefers-reduced-motion: reduce){
+  *{ transition-duration: .001ms !important; animation-duration: .001ms !important; }
+}
