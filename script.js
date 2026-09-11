@@ -201,3 +201,20 @@ document.addEventListener('DOMContentLoaded', () => {
   refreshAuthUI();
 
 });
+
+
+document.querySelectorAll('.testi-media').forEach(media => {
+  const video = media.querySelector('.testi-video');
+  const btn = media.querySelector('.play-btn');
+  if (!video || !btn) return;
+
+  btn.addEventListener('click', () => {
+    video.muted = false;   // unmute on user interaction
+    video.play();
+    btn.style.display = 'none';
+  });
+
+  video.addEventListener('pause', () => {
+    btn.style.display = 'flex';
+  });
+});
