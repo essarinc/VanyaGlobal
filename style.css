@@ -445,7 +445,7 @@ h2.center{ text-align:center; margin: 0 auto; }
   display:flex;
   flex-direction:column;
 }
-.stage-card img{ width:100%; aspect-ratio: 4/3; object-fit:cover; }
+.stage-card img{ width:100%; aspect-ratio: 1/1; object-fit:cover; }
 .stage-card h3{
   font-size: 1.05rem; margin: 16px 16px 8px; line-height:1.3;
 }
