@@ -548,44 +548,44 @@ h2.center{ text-align:center; margin: 0 auto; }
 
 /* ---- About hero ---- */
 .about-hero{
-  background: linear-gradient(135deg, #eef1e6 0%, var(--cream) 55%, var(--cream-deep) 100%);
-  padding: 8px 0 0;
+  position: relative;
+  overflow: hidden;
+  min-height: 420px;
+  display: flex;
+  align-items: center;
+}
+.about-hero-bg-video{
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+}
+.about-hero-overlay{
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(31,61,43,.6) 0%, rgba(31,61,43,.4) 100%);
+  z-index: 1;
 }
 .about-hero-inner{
-  display:flex;
-  flex-direction: column;
-  gap: 26px;
-  padding: 40px 20px 40px;
-  border-radius: 22px;
+  position: relative;
+  z-index: 2;
+  padding: 60px 20px;
 }
 .about-hero-copy{
-  display:flex;
-  flex-direction: column;
-  justify-content: center;
+  max-width: 640px;
 }
 .about-hero-copy h1{
   font-size: clamp(2rem, 7vw, 2.9rem);
   line-height: 1.1;
-  color: var(--green-dark);
+  color: #ffffff;
   margin-bottom: 16px;
 }
 .about-hero-copy p{
   font-size: .98rem;
   max-width: 52ch;
-  color: var(--ink-soft);
-}
-.about-hero-media{
-  position: relative;
-  border-radius: 16px;
-  overflow: hidden;
-  aspect-ratio: 4 / 3;
-  max-height: 260px;
-  background: var(--cream-deep);
-}
-.about-hero-media img{
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+  color: rgba(255,255,255,.92);
 }
 
 /* ---- Legacy intro paragraphs ---- */
@@ -904,14 +904,9 @@ h2.center{ text-align:center; margin: 0 auto; }
   .footer-bottom-inner{ flex-direction: row; justify-content: space-between; text-align:left; }
 
   /* about page */
-  .about-hero-inner{
-    flex-direction: row;
-    align-items: center;
-    padding: 56px 20px 56px;
-    gap: 40px;
-  }
-  .about-hero-copy{ flex: 1 1 50%; }
-  .about-hero-media{ flex: 1 1 44%; max-height: 320px; }
+  /* about page */
+  .about-hero{ min-height: 480px; }
+  .about-hero-inner{ padding: 80px 20px; }
 
   .quality-cert-img{ max-width: 780px; }
 
@@ -975,9 +970,8 @@ h2.center{ text-align:center; margin: 0 auto; }
   .habit-inner{ gap: 70px; }
 
   /* about page */
-  .about-hero-inner{ padding: 72px 20px 68px; gap: 60px; }
-  .about-hero-copy h1{ margin-bottom: 20px; }
-  .about-hero-media{ max-height: 380px; }
+  .about-hero{ min-height: 560px; }
+  .about-hero-inner{ padding: 100px 20px; }
   .about-legacy{ padding: 60px 20px 10px; }
   .about-quality{ padding: 54px 0 70px; }
   .about-tables{ padding: 20px 20px 76px; }
