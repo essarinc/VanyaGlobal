@@ -498,12 +498,12 @@ h2.center{ text-align:center; margin: 0 auto; }
   width: 100%;
   overflow: hidden;
 }
-.testi-media img{
-  width: 100% !important;
-  height: 100% !important;
-  aspect-ratio: 9/16 !important;
-  object-fit: cover !important;
-  object-position: center !important;
+.testi-video{
+  width: 100%;
+  aspect-ratio: 9/16;
+  object-fit: cover;
+  display: block;
+  background: #000; /* shows while video loads */
 }
 .testi-media{ position:relative; }
 .play-btn{
