@@ -493,7 +493,7 @@ h2.center{ text-align:center; margin: 0 auto; }
   overflow:hidden;
   padding-bottom: 18px;
 }
-.testi-card img{ width:100%; aspect-ratio: 4/3; object-fit:cover; }
+.testi-card img{ width:100%; aspect-ratio: 9/16; object-fit:cover; }
 .testi-media{ position:relative; }
 .play-btn{
   position:absolute; inset:0; margin:auto; width:46px; height:46px;
