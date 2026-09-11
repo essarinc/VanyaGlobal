@@ -88,42 +88,56 @@
   }
   .journal-page .link-arrow:hover{ text-decoration:underline; }
 
-  /* ===== HERO ===== */
+    /* ===== HERO ===== */
   .journal-hero{
-    background:var(--header-bg);
+    position: relative;
+    overflow: hidden;
+    min-height: 420px;
+    display: flex;
+    align-items: center;
     width:100%;
   }
+  .journal-hero-bg-video{
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 0;
+  }
+  .journal-hero-overlay{
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(23,62,48,.62) 0%, rgba(23,62,48,.42) 100%);
+    z-index: 1;
+  }
   .journal-hero-inner{
+    position: relative;
+    z-index: 2;
     display:flex;
     align-items:center;
-    gap:48px;
     padding:64px 24px;
   }
-  .journal-hero-copy{ flex:1; }
+  .journal-hero-copy{ flex:1; max-width: 620px; }
   .journal-hero-copy h1{
     font-weight:700;
     font-size:46px;
     line-height:1.15;
     margin-bottom:18px;
+    color: #ffffff;
   }
   .journal-hero-copy h1 .accent-green{
-    color:var(--dark-green);
+    color:#d7f0e2;
     font-style:italic;
   }
   .journal-hero-desc{
     font-size:16px;
-    color:var(--muted);
+    color: rgba(255,255,255,.9);
     max-width:440px;
     margin-bottom:26px;
   }
-  .journal-hero-media{ flex:0 0 27%; }
-  .journal-hero-media img{
-    width:100%;
-    height:196px;
-    object-fit:cover;
-    border-radius:16px;
-    display:block;
-    box-shadow:0 16px 40px rgba(30,77,59,0.14);
+  .journal-page .eyebrow{
+    color: #f0c9a8;
   }
 
   /* ===== FEATURED ARTICLE ===== */
@@ -293,11 +307,11 @@
   }
 
   @media (max-width:700px){
-    .journal-hero-inner,
     .featured-article,
     .journal-cta-inner{
       flex-direction:column;
     }
+    .journal-hero{ min-height: 360px; }
     .journal-hero-copy h1{ font-size:32px; }
     .insights-grid{ grid-template-columns:1fr; }
     .newsletter-inner{ flex-direction:column; align-items:flex-start; }
@@ -423,16 +437,28 @@
 <main class="journal-page">
 
 <!-- ============ JOURNAL HERO ============ -->
+<!-- ============ JOURNAL HERO ============ -->
 <section class="journal-hero">
+  <video
+    class="journal-hero-bg-video"
+    autoplay
+    muted
+    loop
+    playsinline
+    preload="metadata"
+    poster="journal-hero-poster.jpg"
+    aria-hidden="true">
+    <source media="(min-width: 1024px)" src="journal-hero-desktop.mp4" type="video/mp4">
+    <source media="(min-width: 768px)" src="journal-hero-tablet.mp4" type="video/mp4">
+    <source src="journal-hero-mobile.mp4" type="video/mp4">
+  </video>
+  <div class="journal-hero-overlay"></div>
   <div class="journal-hero-inner container">
     <div class="journal-hero-copy">
       <p class="eyebrow">The Vanya Journal</p>
       <h1>Wellness,<br><span class="accent-green">Naturally.</span></h1>
       <p class="journal-hero-desc">Thoughtful perspectives on nutrition, natural ingredients, active living and everyday wellbeing.</p>
       <a href="#latest" class="btn btn-solid">Explore Articles ↓</a>
-    </div>
-    <div class="journal-hero-media">
-      <img src="https://picsum.photos/seed/vanya-journal-tea/900/700" alt="A cup of tea and an open notebook with a pen, resting on a table in soft natural light" loading="eager" width="900" height="700">
     </div>
   </div>
 </section>
