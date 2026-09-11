@@ -129,14 +129,26 @@
 <main>
 
 <!-- ============ ABOUT HERO ============ -->
+<!-- ============ ABOUT HERO ============ -->
 <section class="about-hero">
+  <video
+    class="about-hero-bg-video"
+    autoplay
+    muted
+    loop
+    playsinline
+    preload="metadata"
+    poster="about-hero-poster.jpg"
+    aria-hidden="true">
+    <source media="(min-width: 1024px)" src="about-hero-desktop.mp4" type="video/mp4">
+    <source media="(min-width: 768px)" src="about-hero-tablet.mp4" type="video/mp4">
+    <source src="about-hero-mobile.mp4" type="video/mp4">
+  </video>
+  <div class="about-hero-overlay"></div>
   <div class="container about-hero-inner">
     <div class="about-hero-copy">
       <h1>About Us</h1>
       <p>With science at our roots, your wellness in our heart — we are re-engineering the process to deliver you unique formulations in healthcare that is unmatched by other brands, both in India &amp; Overseas.</p>
-    </div>
-    <div class="about-hero-media">
-      <img src="https://picsum.photos/seed/vanya-blossom-branch/640/480" alt="A flowering branch with white blossoms and a small butterfly, symbolic of Vanya Global's natural formulations" loading="eager" width="640" height="480">
     </div>
   </div>
 </section>
