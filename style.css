@@ -290,16 +290,7 @@ h2.center{ text-align:center; margin: 0 auto; }
 /* ==========================================================================
    HERO (own section)
    ========================================================================== */
-.hero-section{
-  background: linear-gradient(180deg, var(--cream) 0%, var(--white) 100%);
-  padding-top: 6px;
-}
-.hero{
-  display:flex;
-  flex-direction: column;
-  gap: 30px;
-  padding: 34px 20px 44px;
-}
+
 .hero-copy h1{
   font-size: clamp(1.9rem, 6vw, 2.6rem);
   line-height: 1.15;
@@ -309,21 +300,46 @@ h2.center{ text-align:center; margin: 0 auto; }
 .hero-ctas{ display:flex; flex-direction: column; gap: 12px; margin-top: 22px; }
 
 /* hidden on phone to avoid the empty reserved-space gap */
-.hero-media{ display: none; }
 
-.hero-media video,
-.hero-media img{
-  border-radius: 18px;
-  width: 100%;
-  height: auto;
-  aspect-ratio: 9/7;
-  object-fit: cover;
-  display: block;
+
+.hero-section--video{
+  position: relative;
+  overflow: hidden;
+  min-height: 520px;          /* tune this per breakpoint below */
+  display: flex;
+  align-items: center;
 }
+.hero-bg-video{
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+}
+.hero-overlay{
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(31,61,43,.55) 0%, rgba(31,61,43,.35) 100%);
+  z-index: 1;
+}
+.hero--overlay-content{
+  position: relative;
+  z-index: 2;
+  padding: 60px 20px;
+}
+.hero-copy h1{ color: #fff; }
+.hero-copy h1 .accent{ color: #d9f0c9; }   /* lighten the green accent so it's readable on dark video */
+.hero-desc{ color: rgba(255,255,255,.9); }
 
 @media (min-width: 768px){
-  .hero-media{ display: block; }   /* shown again from tablet up */
+  .hero-section--video{ min-height: 600px; }
 }
+@media (min-width: 1024px){
+  .hero-section--video{ min-height: 680px; }
+  .hero--overlay-content{ padding: 100px 20px; }
+}
+
 
 /* ==========================================================================
    TRUST STRIP (own section — matches reference card w/ icon + divider row)
