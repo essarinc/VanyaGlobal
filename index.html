@@ -128,8 +128,17 @@
 <main>
 
 <!-- ============ HERO (separate section) ============ -->
-<section class="hero-section" id="home">
-  <div class="hero container">
+<section class="hero-section hero-section--video" id="home">
+  <video
+    class="hero-bg-video"
+    autoplay muted loop playsinline preload="metadata"
+    poster="kordisure-hero-poster.jpg"
+    aria-hidden="true">
+    <source src="https://github.com/essarinc/VanyaGlobal/raw/d66c0cadd7998156edbe3db57c27a328c9b67d28/Assets/Hand_reaching_toward_butterfly_20260912183156.mp4" type="video/mp4">
+  </video>
+  <div class="hero-overlay"></div>
+
+  <div class="hero container hero--overlay-content">
     <div class="hero-copy">
       <h1>KordiSure – <span class="accent">For Family Wellness &amp; Better Living</span></h1>
       <p class="hero-desc">A natural daily formulation of <strong>Cordyceps</strong> and <strong>Bee Pollen</strong>, crafted to support <strong>energy, focus,</strong> and <strong>resilience</strong> — for every member of your family, at every stage of life.</p>
@@ -138,22 +147,6 @@
         <a href="#life-stages" class="btn btn-outline">See How KordiSure Fits Your Family</a>
       </div>
     </div>
-    <div class="hero-media">
-  <video
-    autoplay
-    muted
-    loop
-    playsinline
-    preload="metadata"
-    poster="kordisure-hero-poster.jpg"
-    aria-label="Three generations of a family sharing a healthy breakfast together at home">
-    <source media="(min-width: 1024px)" src="https://github.com/essarinc/VanyaGlobal/raw/d66c0cadd7998156edbe3db57c27a328c9b67d28/Assets/Hand_reaching_toward_butterfly_20260912183156.mp4" type="video/mp4">
-    <source media="(min-width: 768px)" src="https://github.com/essarinc/VanyaGlobal/raw/d66c0cadd7998156edbe3db57c27a328c9b67d28/Assets/Hand_reaching_toward_butterfly_20260912183156.mp4" type="video/mp4">
-    <source src="https://github.com/essarinc/VanyaGlobal/raw/d66c0cadd7998156edbe3db57c27a328c9b67d28/Assets/Hand_reaching_toward_butterfly_20260912183156.mp4" type="video/mp4">
-    <!-- fallback for browsers that can't play video -->
-    <img src="kordisure-hero-poster.jpg" alt="Three generations of a family sharing a healthy breakfast together at home, with a bottle of KordiSure on the table">
-  </video>
-</div>
   </div>
 </section>
 
