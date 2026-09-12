@@ -885,7 +885,7 @@ h2.center{ text-align:center; margin: 0 auto; }
    TABLET  (≥768px)
    ========================================================================== */
 @media (min-width: 768px){
-  .hero{ padding: 50px 20px 56px; }
+  .hero-section--video{ min-height: 600px; }
   .hero-ctas{ flex-direction: row; }
 
   .trust-card{
@@ -945,12 +945,8 @@ h2.center{ text-align:center; margin: 0 auto; }
   .hide-mobile{ display:inline-flex; }
   .mobile-nav, .mobile-nav-scrim, .mobile-nav-head{ display:none !important; }
 
-  .hero{
-    flex-direction: row; align-items:center; gap: 60px;
-    padding: 64px 20px 70px;
-  }
-  .hero-copy{ flex: 0 0 46%; }
-  .hero-media{ flex: 1; }
+  .hero-section--video{ min-height: 680px; }
+  .hero--overlay-content{ padding: 100px 20px; }
   .hero-ctas{ margin-top: 30px; }
 
   .trust-card{ padding: 22px 44px; }
